@@ -1,0 +1,125 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,600);
+
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+    font-family: "Open Sans", serif;
+    font-weight: 300;
+}
+
+html, body {
+  background: #141414;
+}
+
+header.main {
+  background: #ffef5e;
+  background: -moz-linear-gradient(top, #FFFDA0 0%, #ffef5e 75%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFFDA0), color-stop(75%,#ffef5e));
+  background: -webkit-linear-gradient(top, #FFFDA0 0%,#ffef5e 75%);
+  background: -o-linear-gradient(top, #FFFDA0 0%,#ffef5e 75%);
+  background: -ms-linear-gradient(top, #FFFDA0 0%,#ffef5e 75%);
+  background: linear-gradient(to bottom, #FFFDA0 0%,#ffef5e 75%);
+}
+
+header.main h1 {
+  font-size: 2.5em;
+  padding: 1em 0 1em 1em;
+  box-sizing: border-box;
+}
+
+header.main h2 {
+  box-sizing: border-box;
+  padding: 1em 2em 0em 2em;
+}
+
+header.main h2 p {
+  margin: 0 0 1em 0;
+  padding: 0;
+}
+
+#interesting {
+  z-index: 1;
+  position: relative;
+}
+
+#boring {
+  z-index: 3;
+  position: relative;
+}
+
+#toc {
+  max-width: 1024px;
+  margin: auto;
+}
+
+#toc table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#toc .toc-group-walkthrough {
+  width: 60%;
+}
+
+#toc .toc-group {
+  width: 20%;
+}
+
+#toc .toc-walkthrough {
+  width: 40%;
+}
+
+#toc .toc-native-support,
+#toc .toc-traceur-support {
+  width: 20%;
+}
+
+#toc thead.fixed {
+  position: fixed;
+  top: 0;
+  z-index: 2;
+}
+
+#toc th,
+#toc td {
+  padding: 4px;
+  border: 1px solid #141414;
+  border-top: 0;
+}
+
+#toc th {
+  background-color: #b1c6cc;
+  font-weight: 600;
+}
+
+#toc td {
+  background-color: white;
+}
+
+#toc td.unsupported {
+  color: #CCC;
+}
+
+#toc td.good,
+#toc td.bad {
+  text-align: center;
+}
+
+#toc td.good {
+  background-color: green;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#toc td.good::before {
+  content: 'Yes';
+}
+
+#toc td.bad {
+  color: red;
+  font-weight: 400;
+}
+
+#toc td.bad::before {
+  content: 'No';
+}
