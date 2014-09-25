@@ -53,6 +53,8 @@ header.main {
   background: -ms-linear-gradient(top, #FFFDA0 0%,#ffef5e 75%);
   background: linear-gradient(to bottom, #FFFDA0 0%,#ffef5e 75%);
   color: #141414;
+  max-width: 1022px;
+  margin: auto;
 }
 
 header.main h1 {
