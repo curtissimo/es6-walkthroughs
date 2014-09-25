@@ -12,6 +12,13 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q;
     document.getElementById('run').click();
   }
 
+  function resizeHandler() {
+    var height = window.innerHeight - document.getElementsByClassName('pure-form')[0].offsetHeight - 10 + 'px'
+    document.getElementById('console').style.height = height;
+    editor.container.style.height = height;
+    editor.resize();
+  }
+
   editor = ace.edit('editor');
   editor.setTheme('ace/theme/twilight');
   editor.getSession().setTabSize(2);
@@ -23,6 +30,7 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q;
   console.error = function (t) {
     var c = document.getElementById('console');
     c.innerHTML += '<pre class="error">[' + prefix + ']&gt; ' + t.toString() + '</pre>';
+    c.scrollTop = c.scrollHeight;
   };
 
   ajax = new XMLHttpRequest();
@@ -53,6 +61,8 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q;
       saveHandler(e);
     }
   });
+  window.addEventListener('resize', resizeHandler);
+  resizeHandler();
 
   log = '';
   _log = console.log;
@@ -78,6 +88,7 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q;
     var c = document.getElementById('console');
     c.innerHTML += log;
     log = '';
+    c.scrollTop = c.scrollHeight;
   };
 
   Mousetrap.bind([ 'ctrl+s', 'command+s' ], saveHandler);
