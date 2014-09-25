@@ -1,0 +1,5 @@
+{
+  "title": "Array.prototype.copyWithin",
+  "description": "Copy elements in an array to other locations in the array.",
+  "code": "// Array manipulation in EMCAscript has always\n// consisted of boilerplate for loops. ES6 provides\n// some new ways to work with arrays and\n// array-like objects. \"copyWithin\" allows us to\n// now copy values in an array to another location\n// in the array.\nvar a;\n\n// \"copyWithin\" expects the target index as the\n// first argument, then the start from where we\n// want to copy, and an optional end argument.\n\n// Copy the first four elements to the last four\n// elements of the array.\na = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];\na.copyWithin(6, 0);\nconsole.log(a);\n\n// We can also specify negative indices to count\n// back from the end.\na = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];\na.copyWithin(-4, 0);\nconsole.log(a);\n\n// Finally, we can also specify an end. Here, we\n// will copy the values 7, 8, and 9 to the front\n// of the array.\na = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];\na.copyWithin(0, -4, -1);\nconsole.log(a);"
+}
