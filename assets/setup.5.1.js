@@ -1,4 +1,4 @@
-var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q;
+var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q, run;
 (function () {
   forms = document.querySelectorAll('form.unsubmitable')
   for (i = 0; i < forms.length; i += 1) {
@@ -94,33 +94,36 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q;
   Mousetrap.bind([ 'ctrl+s', 'command+s' ], saveHandler);
   traceur.options.experimental = true;
 
-  document
-    .getElementById('run')
-    .addEventListener('click', traceurEval = function () {
-      prefix = 'traceur';
-      subprefix = '       ';
-      var c, options;
-      c = editor.getValue();
-      options = {
-        address: 'foo',
-        name: 'foo',
-        referrer: window.location.href,
-        traceurOptions: traceur.options
-      };
-      try {
-        System.module(c, options)
-          .then(function (m) {
-            flush();
-          })
-          .catch(function (e) {
-            log = '';
-            console.error(e.message);
-          });
-      } catch (e) {
-        log = '';
-        console.error(e.message);
-      }
-    });
+  run = document.getElementById('run');
+  run.addEventListener('click', traceurEval = function () {
+    prefix = 'traceur';
+    subprefix = '       ';
+    var c, options;
+    c = editor.getValue();
+    options = {
+      address: 'foo',
+      name: 'foo',
+      referrer: window.location.href,
+      traceurOptions: traceur.options
+    };
+    try {
+      System.module(c, options)
+        .then(function (m) {
+          flush();
+        })
+        .catch(function (e) {
+          log = '';
+          console.error(e.message);
+        });
+    } catch (e) {
+      log = '';
+      console.error(e.message);
+    }
+  });
+
+  if (window.navigator.platform.indexOf('Mac') < 0) {
+    run.innerHTML = '<span class="fa fa-play"></span> Run (Ctrl+S)';
+  }
 
   document
     .getElementById('clear-console')
