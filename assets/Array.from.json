@@ -1,0 +1,5 @@
+{
+  "title": "Array.from",
+  "description": "Creating a proper array from an array-like object.",
+  "code": "function oldWay() {\n  // In the old days, to convert the arguments\n  // pseudo-array into a proper array, we had\n  // to use the Array slice method like this.\n  var a = Array.prototype.slice.call(arguments);\n  console.log(a);\n}\n\nfunction newWay() {\n  // Now, we have a more elegant solution with\n  // Array.from.\n  var a = Array.from(arguments);\n  console.log(a);\n  \n  // We can even provide a mapping function.\n  a = Array.from(arguments, function (x) {\n    return x * x;\n  });\n  console.log(a);\n}\n\noldWay(1, 2, 3, 4, 5);\nnewWay(1, 2, 3, 4, 5);"
+}

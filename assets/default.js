@@ -49,6 +49,9 @@ if (subscribe) {
 
       if (target.className === 'good') {
         href = target.parentNode.getAttribute('data-href');
+        if (href === null) {
+          href = 'example.html?' + target.parentNode.getAttribute('data-test');
+        }
         window.location = href;
       }
     });
@@ -75,13 +78,13 @@ if (subscribe) {
         }
       });
     });
-    
+
     for (i = 0; i < rows.length; i += 1) {
       row = rows[i];
       nativeSupport = true;
       traceurSupport = true;
       data = row.getAttribute('data-test').split(',');
-      
+
       data.forEach(function (value, index) {
         value = value.trim();
         nativeSupport = nativeSupport && tests[value].script;

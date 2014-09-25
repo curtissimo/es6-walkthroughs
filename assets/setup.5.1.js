@@ -1,4 +1,4 @@
-var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix;
+var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q;
 (function () {
   forms = document.getElementsByTagName('form')
   for (i = 0; i < forms.length; i += 1) {
@@ -16,6 +16,37 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix;
   editor.setTheme('ace/theme/twilight');
   editor.getSession().setTabSize(2);
   editor.getSession().setMode('ace/mode/javascript');
+  editor.getSession().setValue('// loading content...');
+
+  q = location.search.substring(1);
+
+  console.error = function (t) {
+    var c = document.getElementById('console');
+    c.innerHTML += '<pre class="error">[' + prefix + ']&gt; ' + t.toString() + '</pre>';
+  };
+
+  ajax = new XMLHttpRequest();
+  ajax.overrideMimeType('application/json');
+  ajax.addEventListener('load', function (e) {
+    var spec = JSON.parse(e.target.response);
+    document.title = spec.title;
+    editor.getSession().setValue(spec.code);
+  });
+  ajax.addEventListener('error', function (e) {
+    editor.getSession().setValue('// :(');
+    console.error('Error loading content for ' + q);
+  });
+  ajax.addEventListener('abort', function (e) {
+    _log.call(console, e);
+    editor.getSession().setValue('// :(');
+    console.error('Error loading content for ' + q);
+  });
+  ajax.open('GET', 'assets/' + q + '.json');
+  try {
+    ajax.send();
+  } catch (e) {
+    console.error(e);
+  }
 
   editor.container.getElementsByTagName('textarea')[0].addEventListener('keydown', function (e) {
     if (e.which === 83 && (e.metaKey || e.ctrlKey)) {
@@ -47,11 +78,6 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix;
     var c = document.getElementById('console');
     c.innerHTML += log;
     log = '';
-  };
-
-  console.error = function (t) {
-    var c = document.getElementById('console');
-    c.innerHTML += '<pre class="error">[' + prefix + ']&gt; ' + t.toString() + '</pre>';
   };
 
   Mousetrap.bind([ 'ctrl+s', 'command+s' ], saveHandler);
