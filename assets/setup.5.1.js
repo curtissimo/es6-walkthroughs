@@ -1,6 +1,6 @@
 var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q;
 (function () {
-  forms = document.getElementsByTagName('form')
+  forms = document.querySelectorAll('form.unsubmitable')
   for (i = 0; i < forms.length; i += 1) {
     forms[i].addEventListener('submit', function (e) {
       e.preventDefault();
@@ -13,8 +13,8 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q;
   }
 
   function resizeHandler() {
-    var height = window.innerHeight - document.getElementsByClassName('pure-form')[0].offsetHeight - 10;
-    document.getElementById('console').style.height = height- 20 + 'px';
+    var height = window.innerHeight - 2 * document.querySelector('form.unsubmitable').offsetHeight - 10;
+    document.getElementById('console').style.height = height - 20 + 'px';
     editor.container.style.height = height + 'px';
     editor.resize();
   }
