@@ -1,84 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>...</title>
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="assets/global.css">
-<style type="text/css" media="screen">
-  .editor-holder {
-    position: relative;
-    height: 600px;
-  }
-  .pure-form label {
-    margin-left: 1em;
-  }
-  #editor {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    font-size: 18px;
-  }
-  #console {
-    color: #2D8730;
-    font-family: "Monaco","Menlo","Ubuntu Mono","Consolas","source-code-pro",monospace;
-    font-size: 18px;
-    overflow: auto;
-    background-color: #232323;
-    padding: 10px;
-  }
-  #console pre {
-    margin: 0 0 3px 0;
-    padding: 0;
-    white-space: pre;
-    word-wrap: inherit;
-  }
-  #console pre.error {
-    color: red;
-  }
-</style>
-</head>
-<body>
-<div class="pure-g">
-  <div class="pure-u-1-2">
-    <form class="pure-form unsubmitable">
-      <fieldset>
-        <button id="run" class="pure-button pure-button-primary"><span class="fa fa-play"></span> Run</button>
-        <label for="use-console">
-          <input id="use-console" type="checkbox" checked> Show in browser console
-        </label>
-        <label for="use-traceur">
-          <input id="use-traceur" type="checkbox" checked disabled=""> Force use of traceur
-        </label>
-      </fieldset>
-    </form>
-    <div class="editor-holder">
-      <div id="editor"></div>
+  <head>
+    <title>...</title>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/global.css">
+  </head>
+  <body>
+    <div class="pure-g">
+      <div class="pure-u-1-2">
+        <form class="pure-form unsubmitable">
+          <fieldset>
+            <button id="run" class="pure-button pure-button-primary"><span class="fa fa-play"></span> Run</button>
+            <label for="use-console">
+              <input id="use-console" type="checkbox" checked> Show in browser console
+            </label>
+            <label for="use-traceur">
+              <input id="use-traceur" type="checkbox" checked disabled=""> Force use of traceur
+            </label>
+          </fieldset>
+        </form>
+        <div class="editor-holder">
+          <div id="editor"></div>
+        </div>
+      </div>
+      <div class="pure-u-1-2">
+        <form class="pure-form unsubmitable">
+          <fieldset>
+            <button id="clear-console" class="pure-button pure-button-primary"><span class="fa fa-circle-o"></span> Clear console</button>
+          </fieldset>
+        </form>
+        <div id="console"></div>
+      </div>
+      <div class="pure-u">
+        <form class="pure-form" method="get" action="./default.html">
+          <fieldset>
+            <button class="pure-button">Back to table of contents</button>
+          </fieldset>
+        </form>
+      </div>
     </div>
-  </div>
-  <div class="pure-u-1-2">
-    <form class="pure-form unsubmitable">
-      <fieldset>
-        <button id="clear-console" class="pure-button pure-button-primary"><span class="fa fa-circle-o"></span> Clear console</button>
-      </fieldset>
-    </form>
-    <div id="console"></div>
-  </div>
-  <div class="pure-u">
-    <form class="pure-form" method="get" action="./default.html">
-      <fieldset>
-        <button class="pure-button">Back to table of contents</button>
-      </fieldset>
-    </form>
-  </div>
-</div>
 
-<script src="https://google.github.io/traceur-compiler/bin/traceur.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js" type="text/javascript" charset="utf-8"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
-<script src="assets/setup.5.1.js"></script>
-<script src="assets/setup.6.0.js" type="application/javascript;version=1.7"></script>
-</body>
+    <script src="https://google.github.io/traceur-compiler/bin/traceur.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+    <script src="assets/setup.5.1.js"></script>
+    <script src="assets/setup.6.0.js" type="application/javascript;version=1.7"></script>
+  </body>
 </html>

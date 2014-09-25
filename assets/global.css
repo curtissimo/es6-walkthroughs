@@ -11,6 +11,39 @@ html, body {
   color: white;
 }
 
+.editor-holder {
+  position: relative;
+  height: 600px;
+}
+.pure-form label {
+  margin-left: 1em;
+}
+#editor {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font-size: 18px;
+}
+#console {
+  color: #2D8730;
+  font-family: "Monaco","Menlo","Ubuntu Mono","Consolas","source-code-pro",monospace;
+  font-size: 18px;
+  overflow: auto;
+  background-color: #232323;
+  padding: 10px;
+}
+#console pre {
+  margin: 0 0 3px 0;
+  padding: 0;
+  white-space: pre;
+  word-wrap: inherit;
+}
+#console pre.error {
+  color: red;
+}
+
 header.main {
   background: #ffef5e;
   background: -moz-linear-gradient(top, #FFFDA0 0%, #ffef5e 75%);
