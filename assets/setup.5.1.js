@@ -108,9 +108,14 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q;
         traceurOptions: traceur.options
       };
       try {
-        System.module(c, options).then(function (m) {
-          flush();
-        });
+        System.module(c, options)
+          .then(function (m) {
+            flush();
+          })
+          .catch(function (e) {
+            log = '';
+            console.error(e.message);
+          });
       } catch (e) {
         log = '';
         console.error(e.message);
