@@ -29,6 +29,8 @@ for (i = 0; i < exports.tests.length; i += 1) {
   tests[test.name].script = tests[test.name].script.toString().replace('/*', '').replace('*/', '');
   if (test.name === 'let') {
     tests[test.name].script = tests[test.name].script.replace('test', 'return ');
+  } else if (test.name === 'Array.prototype.entries') {
+    tests[test.name].script = 'function(){return [].entries && [].entries().next;}';
   }
 
   try {
