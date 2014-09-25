@@ -26,6 +26,8 @@
     font-family: "Monaco","Menlo","Ubuntu Mono","Consolas","source-code-pro",monospace;
     font-size: 18px;
     overflow: auto;
+    background-color: #232323;
+    padding: 10px;
   }
   #console pre {
     margin: 0 0 3px 0;
@@ -55,6 +57,11 @@
     </div>
   </div>
   <div class="pure-u-1-2">
+    <form class="pure-form">
+      <fieldset>
+        <button id="clear-console" class="pure-button pure-button-primary"><span class="fa fa-circle-o"></span> Clear console</button>
+      </fieldset>
+    </form>
     <div id="console"></div>
   </div>
 </div>

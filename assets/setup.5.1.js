@@ -13,9 +13,9 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q;
   }
 
   function resizeHandler() {
-    var height = window.innerHeight - document.getElementsByClassName('pure-form')[0].offsetHeight - 10 + 'px'
-    document.getElementById('console').style.height = height;
-    editor.container.style.height = height;
+    var height = window.innerHeight - document.getElementsByClassName('pure-form')[0].offsetHeight - 10;
+    document.getElementById('console').style.height = height- 20 + 'px';
+    editor.container.style.height = height + 'px';
     editor.resize();
   }
 
@@ -115,5 +115,11 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q;
         log = '';
         console.error(e.message);
       }
+    });
+
+  document
+    .getElementById('clear-console')
+    .addEventListener('click', function () {
+      document.querySelector('#console').innerHTML = '';
     });
 }());
