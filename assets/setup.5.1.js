@@ -12,6 +12,11 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q,
     document.getElementById('run').click();
   }
 
+  function clearHandler(e) {
+    e.preventDefault();
+    document.getElementById('clear-console').click();
+  }
+
   function resizeHandler() {
     var height = window.innerHeight - 2 * document.querySelector('form.unsubmitable').offsetHeight - 10;
     document.getElementById('console').style.height = height - 20 + 'px';
@@ -59,6 +64,8 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q,
   editor.container.getElementsByTagName('textarea')[0].addEventListener('keydown', function (e) {
     if (e.which === 83 && (e.metaKey || e.ctrlKey)) {
       saveHandler(e);
+    } else if (e.which === 27) {
+      clearHandler(e);
     }
   });
   window.addEventListener('resize', resizeHandler);
@@ -92,6 +99,7 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q,
   };
 
   Mousetrap.bind([ 'ctrl+s', 'command+s' ], saveHandler);
+  Mousetrap.bind('esc', clearHandler);
   traceur.options.experimental = true;
 
   run = document.getElementById('run');
