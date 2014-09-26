@@ -55,6 +55,26 @@ html, body {
   margin: auto;
   background-color: #FFC75E;
   color: #141414;
+  position: relative;
+  height: 2.4em;
+  line-height: 2.4em;
+}
+
+#tools form > * {
+  margin-right: 1em;
+}
+
+#tools button {
+  position: absolute;
+  right: 0;
+}
+
+#tools img {
+  float: left;
+  height: 22px;
+  width: 22px;
+  vertical-align: middle;
+  margin-right: 8px;
 }
 
 header.main {
@@ -146,7 +166,7 @@ header.main h2 p {
 }
 
 #toc th {
-  background-color: #b1c6cc;
+  background-color: #FF9F5E;
   font-weight: 600;
 }
 
@@ -164,14 +184,14 @@ header.main h2 p {
 }
 
 #toc td.good {
-  background-color: green;
+  background-color: #8FBF46;
   color: white;
   font-weight: 600;
   cursor: pointer;
 }
 
 #toc .not-ready td.good {
-  color: green;
+  color: #8FBF46;
   background-color: white;
   cursor: default;
 }
