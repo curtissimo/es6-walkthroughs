@@ -15,9 +15,11 @@ html, body {
   position: relative;
   height: 600px;
 }
+
 .pure-form label {
   margin-left: 1em;
 }
+
 #editor {
   position: absolute;
   top: 0;
@@ -26,6 +28,7 @@ html, body {
   left: 0;
   font-size: 18px;
 }
+
 #console {
   color: #2D8730;
   font-size: 18px;
@@ -33,6 +36,7 @@ html, body {
   background-color: #232323;
   padding: 10px;
 }
+
 #console pre {
   font-family: "Monaco","Menlo","Ubuntu Mono","Consolas","source-code-pro",monospace;
   margin: 0 0 3px 0;
@@ -40,8 +44,17 @@ html, body {
   white-space: pre;
   word-wrap: inherit;
 }
+
 #console pre.error {
   color: red;
+}
+
+#tools {
+  padding: 10px;
+  max-width: 1002px;
+  margin: auto;
+  background-color: #FFC75E;
+  color: #141414;
 }
 
 header.main {
@@ -109,6 +122,14 @@ header.main h2 p {
 #toc .toc-native-support,
 #toc .toc-traceur-support {
   width: 20%;
+}
+
+#toc .not-ready {
+  display: none;
+}
+
+#toc.show-not-ready .not-ready {
+  display: table-row;
 }
 
 #toc thead.fixed {

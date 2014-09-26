@@ -58,6 +58,17 @@ if (subscribe) {
       }
     });
 
+    document.getElementById('hide-not-ready').addEventListener('change', function (e) {
+      var checkbox, toc;
+      checkbox = e.target;
+      toc = document.getElementById('toc');
+      if (checkbox.checked) {
+        toc.className = '';
+      } else {
+        toc.className = 'show-not-ready';
+      }
+    });
+
     document.addEventListener('scroll', function () {
       var i, header, headers, scrollTop, tables;
       tables = [
