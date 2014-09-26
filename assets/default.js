@@ -17,7 +17,8 @@ for (i = 0; i < exports.tests.length; i += 1) {
 
   tests[test.name] = {
     script: function () { return false; },
-    tr: test.res.tr
+    tr: test.res.tr,
+    link: test.link
   }
 
   if (typeof test.exec !== 'function') {
@@ -42,7 +43,7 @@ for (i = 0; i < exports.tests.length; i += 1) {
 
 if (subscribe) {
   document.addEventListener('DOMContentLoaded', function () {
-    var i, cells, data, nativeCell, traceurCell, row, rows, nativeSupport, traceurSupport, toc;
+    var i, cells, contentCell, data, nativeCell, traceurCell, row, rows, nativeSupport, traceurSupport, toc;
     toc = document.getElementById('toc');
     rows = toc.querySelectorAll('tbody tr');
     toc.addEventListener('click', function (e) {
@@ -68,6 +69,7 @@ if (subscribe) {
         toc.className = 'show-not-ready';
       }
     });
+    document.getElementById('hide-not-ready').checked = true;
 
     document.addEventListener('scroll', function () {
       var i, header, headers, scrollTop, tables;
@@ -105,11 +107,16 @@ if (subscribe) {
       });
 
       cells = row.querySelectorAll('td');
+      contentCell = cells[0];
       nativeCell = cells[cells.length - 2];
       traceurCell = cells[cells.length - 1];
 
       nativeCell.className = nativeSupport ? 'good' : 'bad';
       traceurCell.className = traceurSupport ? 'good' : 'bad';
+
+      if (data.length === 1) {
+        contentCell.innerHTML = '<a class="fa fa-external-link" target="_blank" href="' + tests[data[0]].link + '"></a>' + contentCell.innerHTML;
+      }
 
       if (!nativeSupport && !traceurSupport) {
         cells[cells.length - 3].className = 'unsupported';
