@@ -170,6 +170,12 @@ header.main h2 p {
   cursor: pointer;
 }
 
+#toc .not-ready td.good {
+  color: green;
+  background-color: white;
+  cursor: default;
+}
+
 #toc td.good::before {
   content: 'Yes';
 }

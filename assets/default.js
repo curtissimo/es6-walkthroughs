@@ -49,7 +49,7 @@ if (subscribe) {
       var target, href;
       target = e.target;
 
-      if (target.className === 'good') {
+      if (target.className === 'good' && target.parentNode.className !== 'not-ready') {
         href = target.parentNode.getAttribute('data-href');
         if (href === null) {
           href = 'example.html?' + target.parentNode.getAttribute('data-test');
