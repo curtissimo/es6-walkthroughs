@@ -1,7 +1,8 @@
 (function () {
-  var run = document.getElementById('run');
-  run.removeEventListener('click', traceurEval);
-  run.addEventListener('click', () => {
+  var run, evaller;
+  run = document.getElementById('run');
+
+  nativeEval = () => {
     prefix = 'native';
     subprefix = '      ';
     try {
@@ -11,7 +12,17 @@
       log = '';
       console.error(e.message);
     }
+  };
+  evaluator = nativeEval;
+
+  evaller = document.getElementById('use-traceur');
+  evaller.checked = false;
+  evaller.disabled = false;
+  evaller.addEventListener('change', function () {
+    if (this.checked) {
+      evaluator = traceurEval;
+    } else {
+      evaluator = nativeEval;
+    }
   });
-  document.getElementById('use-traceur').checked = false;
-  document.getElementById('use-traceur').disabled = false;
 }());

@@ -1,4 +1,4 @@
-var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q, run;
+var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, forms, subprefix, ajax, q, run;
 (function () {
   forms = document.querySelectorAll('form.unsubmitable')
   for (i = 0; i < forms.length; i += 1) {
@@ -23,6 +23,33 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q,
     editor.container.style.height = height + 'px';
     editor.resize();
   }
+
+  traceurEval = function () {
+    prefix = 'traceur';
+    subprefix = '       ';
+    var c, options;
+    c = editor.getValue();
+    options = {
+      address: 'foo',
+      name: 'foo',
+      referrer: window.location.href,
+      traceurOptions: traceur.options
+    };
+    try {
+      System.module(c, options)
+        .then(function (m) {
+          flush();
+        })
+        .catch(function (e) {
+          log = '';
+          console.error(e.message);
+        });
+    } catch (e) {
+      log = '';
+      console.error(e.message);
+    }
+  }
+  evaluator = traceurEval;
 
   editor = ace.edit('editor');
   editor.setTheme('ace/theme/twilight');
@@ -107,30 +134,8 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q,
   traceur.options.experimental = true;
 
   run = document.getElementById('run');
-  run.addEventListener('click', traceurEval = function () {
-    prefix = 'traceur';
-    subprefix = '       ';
-    var c, options;
-    c = editor.getValue();
-    options = {
-      address: 'foo',
-      name: 'foo',
-      referrer: window.location.href,
-      traceurOptions: traceur.options
-    };
-    try {
-      System.module(c, options)
-        .then(function (m) {
-          flush();
-        })
-        .catch(function (e) {
-          log = '';
-          console.error(e.message);
-        });
-    } catch (e) {
-      log = '';
-      console.error(e.message);
-    }
+  run.addEventListener('click', function () {
+    evaluator();
   });
 
   if (window.navigator.platform.indexOf('Mac') < 0) {
