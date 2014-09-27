@@ -81,7 +81,11 @@ var i, editor, log, flush, prefix, traceurEval, _log, forms, subprefix, ajax, q,
     if (arguments.length >= 1) {
       t = Array.prototype.slice.apply(arguments);
       for (i = 0; i < t.length; i += 1) {
-        if (typeof t[i] === 'function') {
+        if (t[i] === undefined) {
+          a.push('<i>undefined</i>');
+        } else if (t[i] === null) {
+          a.push('<i>null</i>');
+        } else if (typeof t[i] === 'function') {
           a.push(t[i].toString());
         } else {
           a.push(JSON.stringify(t[i]));
