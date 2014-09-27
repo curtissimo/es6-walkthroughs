@@ -117,7 +117,7 @@ var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, for
           a.push('<i>positive infinity</i>');
         } else if(t[i] === Number.NEGATIVE_INFINITY) {
           a.push('<i>negative infinity</i>');
-        } else if (isNaN(t[i])) {
+        } else if (typeof t[i] === 'number' && isNaN(t[i])) {
           a.push('<i>not a number</i>');
         } else if (t[i] === undefined) {
           a.push('<i>undefined</i>');
