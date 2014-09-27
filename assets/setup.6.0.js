@@ -1,6 +1,8 @@
-(function () {
-  var run, evaller;
-  run = document.getElementById('run');
+(function (test) {
+  var evaller;
+  if (!test.script) {
+    return;
+  }
 
   nativeEval = () => {
     prefix = 'native';
@@ -25,4 +27,4 @@
       evaluator = nativeEval;
     }
   });
-}());
+}(tests[q]));
