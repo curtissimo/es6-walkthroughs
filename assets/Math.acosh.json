@@ -1,0 +1,5 @@
+{
+  "title": "Math.acosh (inverse hyperbolic cosine)",
+  "description": "It's inverse hyperbolic cosine...",
+  "code": "// It's the inverse hyperbolic cosine.\nconsole.log(Math.acosh(-1));\nconsole.log(Math.acosh(0));\nconsole.log(Math.acosh(1));\nconsole.log(Math.acosh(2));"
+}
