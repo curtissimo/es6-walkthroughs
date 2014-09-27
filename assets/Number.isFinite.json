@@ -1,0 +1,5 @@
+{
+  "title": "Number.isFinite",
+  "description": "Check to ensure that a number does not represent a kind of infinity.",
+  "code": "// This one is pretty straight forward.\n// I feel confident that you can figure it out.\nvar posInfinity = Number.POSITIVE_INFINITY;\nvar negInfinity = Number.NEGATIVE_INFINITY;\n\nconsole.log(Number.isFinite(0));\nconsole.log(Number.isFinite(1));\n\nconsole.log(Number.isFinite(1/0));\nconsole.log(Number.isFinite(posInfinity));\nconsole.log(Number.isFinite(negInfinity));"
+}
