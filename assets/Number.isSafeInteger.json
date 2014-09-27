@@ -1,0 +1,5 @@
+{
+  "title": "Number.isSafeInteger",
+  "description": "Check to ensure that a number represents a safe integer.",
+  "code": "var max = Number.MAX_SAFE_INTEGER;\nvar min = Number.MIN_SAFE_INTEGER;\n\nconsole.log(Number.isSafeInteger(max));\nconsole.log(Number.isSafeInteger(max + 1));\nconsole.log(Number.isSafeInteger(max + 2));\n\nconsole.log(Number.isSafeInteger(min));\nconsole.log(Number.isSafeInteger(min - 1));\nconsole.log(Number.isSafeInteger(min - 2));"
+}
