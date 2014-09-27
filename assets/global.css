@@ -39,8 +39,9 @@ html, body {
 
 #console pre {
   font-family: "Monaco","Menlo","Ubuntu Mono","Consolas","source-code-pro",monospace;
-  margin: 0 0 3px 0;
-  padding: 0;
+  padding: 8px 0;
+  margin: 0;
+  border-bottom: 1px solid #164116;
   white-space: pre;
   word-wrap: inherit;
 }
