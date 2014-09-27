@@ -107,6 +107,7 @@ var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, for
   _log = console.log;
   console.log = function (t) {
     var a = [], i;
+    t = t || '';
     if (document.getElementById('use-console').checked) {
       _log.apply(console, arguments);
     }
