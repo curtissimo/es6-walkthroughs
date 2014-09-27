@@ -1,0 +1,5 @@
+{
+  "title": "Math.trunc",
+  "description": "Get just the integer portion of a number without rounding.",
+  "code": "// Previous to ECMAscript 6, the language provided\n// Math.floor which rounded a number down to the\n// maximum integer less than or equal to the\n// argument. Now, ECMAscript has the Math.trunc\n// method that seemingly does the same thing.\nconsole.log(Math.floor(0.9), Math.trunc(0.9));\nconsole.log(Math.floor(1.0), Math.trunc(1.0));\nconsole.log(Math.floor(1.1), Math.trunc(1.1));\n\n// So, the differnce comes when we get to negative\n// numbers. Here we see that Math.floor(-0.9)\n// gets the next integer down, namely -1. On the\n// other hand, Math.trunc just gets rid of the .9\n// part which leaves -0 which is equal to 0.\nconsole.log(Math.floor(-0.9), Math.trunc(-0.9));\nconsole.log(Math.floor(-1.0), Math.trunc(-1.0));\nconsole.log(Math.floor(-1.1), Math.trunc(-1.1));\n"
+}
