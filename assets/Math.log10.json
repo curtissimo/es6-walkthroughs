@@ -1,0 +1,5 @@
+{
+  "title": "Math.log10 (base-10 logarithm)",
+  "description": "It's just the base-10 logarithm...",
+  "code": "// It's just the base-10 logarithm.\n// What else is there to say?\nconsole.log(Math.log10(-1));\nconsole.log(Math.log10(0));\nconsole.log(Math.log10(1));\nconsole.log(Math.log10(2));\nconsole.log(Math.log10(10));\nconsole.log(Math.log10(75));\nconsole.log(Math.log10(100));\nconsole.log(Math.log10(Number.POSITIVE_INFINITY));"
+}
