@@ -113,7 +113,9 @@ var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, for
     if (arguments.length >= 1) {
       t = Array.prototype.slice.apply(arguments);
       for (i = 0; i < t.length; i += 1) {
-        if (t[i] === undefined) {
+        if (isNaN(t[i])) {
+          a.push('<i>not a number</i>');
+        } else if (t[i] === undefined) {
           a.push('<i>undefined</i>');
         } else if (t[i] === null) {
           a.push('<i>null</i>');
