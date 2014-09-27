@@ -19,7 +19,9 @@
 
   evaller = document.getElementById('use-traceur');
   evaller.checked = false;
-  evaller.disabled = false;
+  if (test.tr) {
+    evaller.disabled = false;
+  }
   evaller.addEventListener('change', function () {
     if (this.checked) {
       evaluator = traceurEval;
