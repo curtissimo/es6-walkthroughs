@@ -1,0 +1,5 @@
+{
+  "title": "Math.fround",
+  "description": "Returns the nearest IEEE 754 single-precision floating-point number.",
+  "code": "// Ok, so \"fround\" gives you the closest proper\n// single-precision floating-point number. I'm\n// not going to teach you about the IEEE 754\n// specification for that. If you want to know more,\n// then head over to:\n//   http://bit.ly/1vmnBck\n// which will take you to:\n//   http://en.wikipedia.org/wiki/Single-precision_floating-point_format\nconsole.log(Math.fround(1.1));\nconsole.log(Math.fround(1.375));"
+}
