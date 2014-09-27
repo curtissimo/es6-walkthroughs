@@ -1,0 +1,5 @@
+{
+  "title": "Math.sinh (hyperbolic sine)",
+  "description": "It's hyperbolic sine...",
+  "code": "// It's the hyperbolic sine.\n// What else it there to say?\nconsole.log(Math.sinh(-1));\nconsole.log(Math.sinh(0));\nconsole.log(Math.sinh(1));\nconsole.log(Math.sinh(2));"
+}
