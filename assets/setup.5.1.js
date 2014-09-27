@@ -1,7 +1,7 @@
 var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, forms, subprefix, ajax, q, run;
 (function (tests) {
   var evaller = document.getElementById('use-traceur').parentNode;
-  q = location.search.substring(1);
+  q = decodeURIComponent(location.search.substring(1));
 
   if (!tests[q].tr) {
     evaller.parentNode.removeChild(evaller);
