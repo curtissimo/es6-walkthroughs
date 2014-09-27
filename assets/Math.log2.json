@@ -1,0 +1,5 @@
+{
+  "title": "Math.log2 (base-2 logarithm)",
+  "description": "It's just the base-2 logarithm...",
+  "code": "// It's just the base-2 logarithm.\n// What else is there to say?\nconsole.log(Math.log2(-1));\nconsole.log(Math.log2(0));\nconsole.log(Math.log2(1));\nconsole.log(Math.log2(2));\nconsole.log(Math.log2(3));\nconsole.log(Math.log2(4));\nconsole.log(Math.log2(5));\nconsole.log(Math.log2(Number.POSITIVE_INFINITY));"
+}
