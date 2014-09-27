@@ -1,0 +1,5 @@
+{
+  "title": "Array.prototype.find",
+  "description": "A method to fill the entries in an array (or part of an array) with a value.",
+  "code": "// The new find method of proper Array instances\n// allows you to provide a comparator function to\n// find the first value that matches the\n// comparator.\nvar a = [ 1, 'two', new Date(), null, {} ];\n\n// Always return the second index, if the array\n// is that long.\nfunction secondIndex(value, index) {\n  return index === 1;\n}\n\n// Never match anything. This will return\n// undefined.\nfunction nothing() {\n  return false;\n}\n\n// Always match. This will return the first entry.\nfunction always() {\n  return true;\n}\n\n// Find a Date object.\nfunction dateish(value) {\n  var s = Object.prototype.toString.call(value);\n  return s === '[object Date]';\n}\n\nconsole.log(a.find(secondIndex));\nconsole.log(a.find(nothing));\nconsole.log(a.find(always));\nconsole.log(a.find(dateish));"
+}
