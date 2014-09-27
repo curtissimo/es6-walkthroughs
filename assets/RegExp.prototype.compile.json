@@ -1,0 +1,5 @@
+{
+  "title": "RegExp.prototype.compile",
+  "description": "Providing an implementation of ECMAscript little hints to go faster.",
+  "code": "// Why does RegExp.prototype.compile exist in\n// ECMAscript 6?\n\n// I think the standards committee put it in\n// the language spec because all of the browsers\n// support it. They've supported it for a while.\n// Microsoft Internet Explorer 6 introduced it\n// and all the other browsers over the past\n// decade have copied it as an informal standard.\n\n// Now TC39 put it in the language spec. If you\n// have used regular expressions in JavaScript,\n// then you've probably already run across this.\n\n// RegExp.prototype.compile just replaces the\n// current representation of the regular\n// expression with a new one.\nvar re = /abc/;\nre.compile('xyz', 'i');\n\nconsole.log('123abc456'.match(re));\nconsole.log('123XYZ456'.match(re));"
+}
