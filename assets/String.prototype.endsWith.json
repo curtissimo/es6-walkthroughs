@@ -1,0 +1,5 @@
+{
+  "title": "String.prototype.endsWith",
+  "description": "Determine if a string ends with another string.",
+  "code": "// We often want to know if a string ends with\n// a substring. In older versions of\n// ECMAscript, we could use the \"lastIndexOf\"\n// method. So, to figure out if a string ended\n// with another string, we had to do some math.\nvar s = 'There is nothing to fear but me.';\nvar search = {\n  good: 'me.',\n  bad: 'you.'\n};\n\nfunction endsWith(str, search) {\n  var strLen = str.length;\n  var searchLen = search.length;\n  var index = str.lastIndexOf(search);\n  return index === strLen - searchLen;\n}\n\nconsole.log(endsWith(s, search.good));\nconsole.log(endsWith(s, search.bad));\n\n// A more convenient way was to use regular\n// expressions and the \"$\" terminal symbol.\nfunction endsWith(str, search) {\n  search = new RegExp(search + '$');\n  return str.search(search) > -1;\n}\n\nconsole.log(endsWith(s, search.good));\nconsole.log(endsWith(s, search.bad));\n\n// ECMAscript 6 now offers a convenience method\n// to do the same thing.\nconsole.log(s.endsWith(search.good));\nconsole.log(s.endsWith(search.bad));"
+}
