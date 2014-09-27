@@ -1,0 +1,5 @@
+{
+  "title": "Number.isInteger",
+  "description": "Check to ensure that a number represents an integer.",
+  "code": "// This one is pretty straight forward.\n// I feel confident that you can figure it out.\n// As long as you know what an integer is...\nvar posInfinity = Number.POSITIVE_INFINITY;\nvar negInfinity = Number.NEGATIVE_INFINITY;\n\nconsole.log(Number.isInteger(1));\nconsole.log(Number.isInteger(1.1));\nconsole.log(Number.isInteger(1.0));\n\nconsole.log(Number.isInteger(posInfinity));\nconsole.log(Number.isInteger(negInfinity));"
+}
