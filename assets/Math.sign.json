@@ -1,0 +1,5 @@
+{
+  "title": "Math.sign",
+  "description": "Get the sign of a number.",
+  "code": "// Get a -1 for a negative number.\n// Get a 0 for 0.\n// Get a 1 for a positive number.\nconsole.log(Math.sign(Number.NEGATIVE_INFINITY));\nconsole.log(Math.sign(0));\nconsole.log(Math.sign(1));"
+}
