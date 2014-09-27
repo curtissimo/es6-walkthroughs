@@ -1,5 +1,12 @@
 var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, forms, subprefix, ajax, q, run;
-(function () {
+(function (tests) {
+  var evaller = document.getElementById('use-traceur').parentNode;
+  q = location.search.substring(1);
+
+  if (!tests[q].tr) {
+    evaller.parentNode.removeChild(evaller);
+  }
+
   forms = document.querySelectorAll('form.unsubmitable')
   for (i = 0; i < forms.length; i += 1) {
     forms[i].addEventListener('submit', function (e) {
@@ -56,8 +63,6 @@ var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, for
   editor.getSession().setTabSize(2);
   editor.getSession().setMode('ace/mode/javascript');
   editor.getSession().setValue('// loading content...');
-
-  q = location.search.substring(1);
 
   console.error = function (t) {
     var c = document.getElementById('console');
@@ -147,4 +152,4 @@ var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, for
     .addEventListener('click', function () {
       document.querySelector('#console').innerHTML = '';
     });
-}());
+}(tests));

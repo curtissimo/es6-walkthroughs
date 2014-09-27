@@ -18,15 +18,15 @@
   evaluator = nativeEval;
 
   evaller = document.getElementById('use-traceur');
-  evaller.checked = false;
-  if (test.tr) {
+  if (evaller) {
+    evaller.checked = false;
     evaller.disabled = false;
+    evaller.addEventListener('change', function () {
+      if (this.checked) {
+        evaluator = traceurEval;
+      } else {
+        evaluator = nativeEval;
+      }
+    });
   }
-  evaller.addEventListener('change', function () {
-    if (this.checked) {
-      evaluator = traceurEval;
-    } else {
-      evaluator = nativeEval;
-    }
-  });
 }(tests[q]));
