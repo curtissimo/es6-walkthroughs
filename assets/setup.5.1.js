@@ -107,11 +107,10 @@ var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, for
   _log = console.log;
   console.log = function (t) {
     var a = [], i;
-    t = t || '';
     if (document.getElementById('use-console').checked) {
       _log.apply(console, arguments);
     }
-    if (arguments.length >= 1) {
+    if (arguments.length >= 1 && t !== undefined) {
       t = Array.prototype.slice.apply(arguments);
       for (i = 0; i < t.length; i += 1) {
         if (t[i] === Number.POSITIVE_INFINITY) {
@@ -131,6 +130,8 @@ var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, for
         }
       }
       t = a.join('<br> ' + subprefix + ' > ');
+    } else {
+      t = '';
     }
     log += '<pre>[' + prefix + ']&gt; ' + t.toString() + '</pre>';
   };
