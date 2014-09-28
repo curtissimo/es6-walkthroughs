@@ -145,14 +145,6 @@ header.main h2 p {
   width: 20%;
 }
 
-#toc .not-ready {
-  display: none;
-}
-
-#toc.show-not-ready .not-ready {
-  display: table-row;
-}
-
 #toc thead.fixed {
   position: fixed;
   top: 0;
