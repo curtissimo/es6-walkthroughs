@@ -43,7 +43,7 @@ for (i = 0; i < exports.tests.length; i += 1) {
 
 if (subscribe) {
   document.addEventListener('DOMContentLoaded', function () {
-    var i, cells, contentCell, data, nativeCell, traceurCell, row, rows, nativeSupport, traceurSupport, toc;
+    var i, cells, contentCell, data, multiRef, multiRefs, nativeCell, traceurCell, row, rows, nativeSupport, traceurSupport, toc;
     toc = document.getElementById('toc');
     rows = toc.querySelectorAll('tbody tr');
     toc.addEventListener('click', function (e) {
@@ -116,11 +116,25 @@ if (subscribe) {
 
       if (data.length === 1) {
         contentCell.innerHTML = '<a class="fa fa-external-link" target="_blank" href="' + tests[data[0]].link + '"></a>' + contentCell.innerHTML;
+      } else if (data.length > 1) {
+        contentCell.innerHTML = '<a class="fa fa-external-link-square" target="_blank" href="#"></a>' + contentCell.innerHTML;
       }
 
       if (!nativeSupport && !traceurSupport) {
         cells[cells.length - 3].className = 'unsupported';
       }
+    }
+
+    multiRefs = document.querySelectorAll('a.fa.fa-external-link-square');
+    for(i = 0; i < multiRefs.length; i += 1) {
+      multiRef = multiRefs[i];
+      multiRef.addEventListener('click', function (e) {
+        var data = e.target.parentNode.parentNode.getAttribute('data-test').split(',');
+        e.preventDefault();
+        data.forEach(function (key) {
+          window.open(tests[key.trim()].link, '_blank');
+        });
+      });
     }
   });
 }
