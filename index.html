@@ -31,14 +31,28 @@
         </p>
       </h2>
     </header>
-    <section id="tools">
-      <form class="pure-form" method="get" action="https://github.com/realistschuckle/es6-walkthroughs">
-        <button class="pure-button pure-button-primary">
-          <img src="assets/GitHub-Mark-Light-32px.png">
-          View me on GitHub
-        </button>
-      </form>
+    <section id="tools" class="pure-g">
+      <div class="pure-u-3-4">
+        <div class="pure-menu pure-menu-open pure-menu-horizontal">
+          <ul>
+            <li><a href="#why">Why?</a></li>
+            <li><a href="#thanks">Thanks to...</a></li>
+            <li><a href="#contributors">Contributors</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pure-u-1-4 tool-button">
+        <form class="pure-form" method="get" action="https://github.com/realistschuckle/es6-walkthroughs">
+          <button class="pure-button pure-button-primary">
+            <img src="assets/GitHub-Mark-Light-32px.png">
+            View me on GitHub
+          </button>
+        </form>
+      </div>
     </section>
+    <section id="why">Why?</section>
+    <section id="thanks">Thanks!</section>
+    <section id="contributors">Made possible by...</section>
     <section id="toc">
       <table id="interesting">
         <colgroup>
@@ -260,7 +274,7 @@
           </tr>
         </tbody>
       </table>
-      <table id="boring">
+      <table id="boring" data-href="./example.html">
         <colgroup>
           <col class="toc-group">
           <col class="toc-walkthrough">

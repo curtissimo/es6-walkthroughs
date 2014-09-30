@@ -56,18 +56,12 @@ html, body {
   margin: auto;
   background-color: #FFC75E;
   color: #141414;
-  position: relative;
   height: 2.4em;
-  line-height: 2.4em;
+  line-height: 2.1em;
 }
 
 #tools form > * {
   margin-right: 1em;
-}
-
-#tools button {
-  position: absolute;
-  right: 0;
 }
 
 #tools img {
@@ -76,6 +70,24 @@ html, body {
   width: 22px;
   vertical-align: middle;
   margin-right: 8px;
+}
+
+#why, #thanks, #contributors {
+  display: none;
+}
+
+.tool-button {
+  text-align: right;
+}
+
+.pure-menu.pure-menu-open {
+  background-color: transparent;
+}
+
+.pure-menu li a:hover,
+.pure-menu li a:focus {
+  background-color: inherit;
+  font-weight: 600;
 }
 
 header.main {

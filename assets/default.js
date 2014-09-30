@@ -43,17 +43,20 @@ for (i = 0; i < exports.tests.length; i += 1) {
 
 if (subscribe) {
   document.addEventListener('DOMContentLoaded', function () {
-    var i, cells, contentCell, data, multiRef, multiRefs, nativeCell, traceurCell, row, rows, nativeSupport, traceurSupport, toc;
+    var links, i, cells, contentCell, data, multiRef, multiRefs, nativeCell, traceurCell, row, rows, nativeSupport, traceurSupport, toc;
     toc = document.getElementById('toc');
     rows = toc.querySelectorAll('tbody tr');
     toc.addEventListener('click', function (e) {
-      var target, href;
+      var target, href, table;
       target = e.target;
-
+      table = target;
+      while (table.tagName.toLowerCase() !== 'table') {
+        table = table.parentNode;
+      }
       if (target.className === 'good' && target.parentNode.className !== 'not-ready') {
         href = target.parentNode.getAttribute('data-href');
         if (href === null) {
-          href = 'example.html?' + target.parentNode.getAttribute('data-test');
+          href = table.getAttribute('data-href') + '?' + target.parentNode.getAttribute('data-test');
         }
         window.location = href;
       }
@@ -111,6 +114,32 @@ if (subscribe) {
       if (!nativeSupport && !traceurSupport) {
         cells[cells.length - 3].className = 'unsupported';
       }
+    }
+
+    links = document.querySelectorAll('#tools a');
+    for(i = 0; i < links.length; i += 1) {
+      links[i].addEventListener('click', function (e) {
+        var height, href, i, target, targets;
+        e.preventDefault();
+        window.focus();
+        targets = [
+          document.getElementById('why'),
+          document.getElementById('thanks'),
+          document.getElementById('contributors')
+        ];
+        href = this.href;
+        href = href.substring(href.lastIndexOf('#') + 1);
+        for(i = 0; i < targets.length; i += 1) {
+          target = targets[i];
+          target.style.display = 'none';
+        }
+        for(i = 0; i < targets.length; i += 1) {
+          target = targets[i];
+          if (target.id === href) {
+            target.style.display = 'block';
+          }
+        }
+      });
     }
 
     multiRefs = document.querySelectorAll('a.fa.fa-external-link-square');
