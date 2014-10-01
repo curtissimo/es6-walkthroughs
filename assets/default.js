@@ -119,22 +119,25 @@ if (subscribe) {
     links = document.querySelectorAll('#tools a');
     for(i = 0; i < links.length; i += 1) {
       links[i].addEventListener('click', function (e) {
-        var height, href, i, target, targets;
+        var height, href, i, link, links, target, targets;
         e.preventDefault();
-        window.focus();
         targets = [
-          document.getElementById('why'),
-          document.getElementById('thanks'),
+          document.getElementById('browser'),
           document.getElementById('contributors'),
-          document.getElementById('browser')
+          document.getElementById('why'),
+          document.getElementById('thanks')
         ];
+        links = document.querySelectorAll('#tools a');
         href = this.href;
         href = href.substring(href.lastIndexOf('#') + 1);
         for(i = 0; i < targets.length; i += 1) {
           target = targets[i];
+          link = links[i];
           if (target.id === href && target.className !== 'show') {
+            link.parentNode.className = 'pure-menu-selected';
             target.className = 'show';
           } else {
+            link.parentNode.className = '';
             target.className = '';
           }
         }

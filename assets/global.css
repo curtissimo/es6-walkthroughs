@@ -128,7 +128,8 @@ html, body {
 }
 
 .ignore {
-  text-decoration: strikethrough;
+  text-decoration: line-through;
+  color: #7F7F7F;
 }
 
 #why.show, #thanks.show, #contributors.show, #browser.show {
@@ -180,6 +181,11 @@ html, body {
   background-color: inherit;
   font-weight: 600;
   color: #141414;
+}
+
+.pure-menu li.pure-menu-selected a {
+  background-color: #141414;
+  color: #FFC75E;
 }
 
 .three-column {
