@@ -13,7 +13,6 @@ html, body {
 
 .editor-holder {
   position: relative;
-  height: 600px;
 }
 
 .pure-form label {
@@ -328,4 +327,30 @@ header.main h2 p {
 
 #toc td.bad::before {
   content: 'No';
+}
+
+footer {
+  font-size: 78%;
+  text-align: center;
+  background-color: #FFC75E;
+  color: #141414;
+  padding: .5em;
+  line-height: 2.5em;
+}
+
+footer button {
+  float: left;
+}
+
+footer:after {
+  content: '';
+  clear: both;
+  display: block;
+}
+
+form footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
 }

@@ -26,8 +26,8 @@ var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, for
 
   function resizeHandler() {
     var height = window.innerHeight - 2 * document.querySelector('form.unsubmitable').offsetHeight - 10;
-    document.getElementById('console').style.height = height - 20 + 'px';
-    editor.container.style.height = height + 'px';
+    document.getElementById('console').style.height = height + 'px';
+    editor.container.style.height = height + 20 + 'px';
     editor.resize();
   }
 
