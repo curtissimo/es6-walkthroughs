@@ -125,18 +125,17 @@ if (subscribe) {
         targets = [
           document.getElementById('why'),
           document.getElementById('thanks'),
-          document.getElementById('contributors')
+          document.getElementById('contributors'),
+          document.getElementById('browser')
         ];
         href = this.href;
         href = href.substring(href.lastIndexOf('#') + 1);
         for(i = 0; i < targets.length; i += 1) {
           target = targets[i];
-          target.style.display = 'none';
-        }
-        for(i = 0; i < targets.length; i += 1) {
-          target = targets[i];
-          if (target.id === href) {
-            target.style.display = 'block';
+          if (target.id === href && target.className !== 'show') {
+            target.className = 'show';
+          } else {
+            target.className = '';
           }
         }
       });

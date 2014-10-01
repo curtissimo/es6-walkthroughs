@@ -52,8 +52,6 @@ html, body {
 
 #tools {
   padding: 10px;
-  max-width: 1002px;
-  margin: auto;
   background-color: #FFC75E;
   color: #141414;
   height: 2.4em;
@@ -72,8 +70,100 @@ html, body {
   margin-right: 8px;
 }
 
-#why, #thanks, #contributors {
-  display: none;
+#explanations {
+  background: #FFFDA0;
+  background: -moz-linear-gradient(top, #ffef5e 0%, #FFFDA0 75%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffef5e), color-stop(75%,#FFFDA0));
+  background: -webkit-linear-gradient(top, #ffef5e 0%,#FFFDA0 75%);
+  background: -o-linear-gradient(top, #ffef5e 0%,#FFFDA0 75%);
+  background: -ms-linear-gradient(top, #ffef5e 0%,#FFFDA0 75%);
+  background: linear-gradient(to bottom, #ffef5e 0%,#FFFDA0 75%);
+  color: #141414;
+}
+
+#why, #thanks, #contributors, #browser {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  transition: all 1s;
+  padding: 0 1em;
+}
+
+#why .three-column,
+#thanks > div,
+#browser > div,
+#contributors > div {
+  padding: 1em 0;
+}
+
+#why p {
+  margin: 0;
+  padding: .25em;
+  text-indent: 2em;
+}
+
+#thanks p,
+#thanks dl {
+  margin: 0;
+}
+
+#thanks h2 {
+  margin-top: 0;
+}
+
+#browser h2 {
+  margin: 0;
+}
+
+#browser p,
+#thanks dd {
+  padding: 0 1em 0 0;
+}
+
+.signature {
+  font-variant: small-caps;
+  font-style: italic;
+}
+
+.ignore {
+  text-decoration: strikethrough;
+}
+
+#why.show, #thanks.show, #contributors.show, #browser.show {
+  opacity: 1;
+}
+
+#why.show,
+#browser.show,
+#contributors.show {
+  max-height: 20em;
+}
+
+#thanks.show {
+  max-height: 32em;
+}
+
+#contributors img {
+  width: 200px;
+  margin: auto;
+  display: block;
+}
+
+#contributors h2 {
+  text-align: center;
+}
+
+#contributors a {
+  text-decoration: none;
+  color: #0074DF;
+}
+
+.constrainer {
+  max-width: 1024px;
+  min-width: 900px;
+  margin: auto;
 }
 
 .tool-button {
@@ -84,10 +174,18 @@ html, body {
   background-color: transparent;
 }
 
+.pure-menu li a,
 .pure-menu li a:hover,
 .pure-menu li a:focus {
   background-color: inherit;
   font-weight: 600;
+  color: #141414;
+}
+
+.three-column {
+  -webkit-column-count: 3;
+  -moz-column-count: 3;
+  column-count: 3;
 }
 
 header.main {
@@ -99,8 +197,6 @@ header.main {
   background: -ms-linear-gradient(top, #FFFDA0 0%,#ffef5e 75%);
   background: linear-gradient(to bottom, #FFFDA0 0%,#ffef5e 75%);
   color: #141414;
-  max-width: 1022px;
-  margin: auto;
 }
 
 header.main h1 {
@@ -130,8 +226,6 @@ header.main h2 p {
 }
 
 #toc {
-  max-width: 1024px;
-  margin: auto;
   color: #141414;
 }
 
@@ -168,6 +262,16 @@ header.main h2 p {
   padding: 4px;
   border: 1px solid #141414;
   border-top: 0;
+}
+
+#toc th:first-child,
+#toc td:first-child {
+  border-left: 0;
+}
+
+#toc th:last-child,
+#toc td:last-child {
+  border-right: 0;
 }
 
 #toc th {

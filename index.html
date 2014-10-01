@@ -12,528 +12,688 @@
     <script type="application/javascript;version=1.7" src="assets/default.js"></script>
   </head>
   <body>
-    <header class="pure-g main">
-      <h1 class="pure-u-1-3">ES6 Walkthroughs</h1>
-      <h2 class="pure-u-2-3">
-        <p>
-          We dedicate this site to all the hardworking Web application
-          developers trying to stay ahead of the game in an ever-changing
-          landscape of chaos and fun.
-        </p>
-        <p>
-          Click a solid lime green "Yes" box below to learn about and try out a
-          new feature in ECMAScript.
-        </p>
-        <p>
-          Click the <span class="fa fa-external-link"></span> or the
-          <span class="fa fa-external-link-square"></span> next to the
-          walkthrough name to view the specification documentation.
-        </p>
-      </h2>
-    </header>
-    <section id="tools" class="pure-g">
-      <div class="pure-u-3-4">
-        <div class="pure-menu pure-menu-open pure-menu-horizontal">
-          <ul>
-            <li><a href="#why">Why?</a></li>
-            <li><a href="#thanks">Thanks to...</a></li>
-            <li><a href="#contributors">Contributors</a></li>
-          </ul>
+    <div class="constrainer">
+      <header class="pure-g main">
+        <h1 class="pure-u-1-3">ES6 Walkthroughs</h1>
+        <h2 class="pure-u-2-3">
+          <p>
+            We dedicate this site to all the hardworking Web application
+            developers trying to stay ahead of the game in an ever-changing
+            landscape of chaos and fun.
+          </p>
+          <p>
+            Click a solid lime green "Yes" box below to learn about and try out a
+            new feature in ECMAScript.
+          </p>
+          <p>
+            Click the <span class="fa fa-external-link"></span> or the
+            <span class="fa fa-external-link-square"></span> next to the
+            walkthrough name to view the specification documentation.
+          </p>
+        </h2>
+      </header>
+      <section id="tools" class="pure-g">
+        <div class="pure-u-3-4">
+          <div class="pure-menu pure-menu-open pure-menu-horizontal">
+            <ul>
+              <li><a href="#browser">What browser?</a></li>
+              <li><a href="#contributors">Contributors</a></li>
+              <li><a href="#why">Why did you make this?</a></li>
+              <li><a href="#thanks">Thanks to...</a></li>
+            </ul>
+          </div>
         </div>
+        <div class="pure-u-1-4 tool-button">
+          <form class="pure-form" method="get" action="https://github.com/realistschuckle/es6-walkthroughs">
+            <button class="pure-button pure-button-primary">
+              <img src="assets/GitHub-Mark-Light-32px.png">
+              View me on GitHub
+            </button>
+          </form>
+        </div>
+      </section>
+      <div id="explanations">
+        <section id="browser" class="show">
+          <div>
+            <div class="pure-g">
+              <div class="pure-u-1-4">
+                <h2>Firefox Nightly</h2>
+                <p>
+                  At the moment,
+                  <a href="https://nightly.mozilla.org">Firefox Nightly</a> has
+                  the best support for ES6 with <strong>75%</strong> of the ES6
+                  features implemented. Go get it.
+                </p>
+              </div>
+              <div class="pure-u-1-4">
+                <h2>Chrome Canary</h2>
+                <p>
+                  The next best recommendation is
+                  <a href="http://www.google.com/intl/en/chrome/browser/canary.html">Chrome Canary</a>
+                  with <strong>65%</strong> of ES6 features implemented.
+                </p>
+              </div>
+              <div class="pure-u-1-4">
+                <h2>Firefox and Chrome</h2>
+                <p>
+                  Right behind the bleeding edge options are
+                  <a target="_blank" href="http://getfirefox.com">Firefox Stable</a>
+                  at <strong>64%</strong> and
+                  <a target="_blank" href="http://getfirefox.com">Chrome Stable</a>
+                  at <strong>59%</strong> of ES6 features implemented.
+                </p>
+              </div>
+              <div class="pure-u-1-4">
+                <h2 class="ignore">IE 11</h2>
+                <p>
+                  Not worth your time with only <strong>11%</strong> of ES6
+                  features implemented. Maybe IE 12 in Windows
+                  <span class="ignore">9</span> 10 will have better support.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="why">
+          <div class="three-column">
+            <p>
+              I recently gave a talk to some fine developers at the Houston
+              TechFest 2014. I did not know that I had time allotted to me to
+              talk and, therefore, had not prepared any material.
+            </p>
+            <p>
+              When I arrived at the lectern, I looked out over the room and
+              mentioned my unpreparedness. While I plugged in my laptop to the
+              projector, I thought about all the cool stuff I had learned and
+              used recently. When I said that I did not
+              know what to talk about, someone called out "JavaScript"! I asked
+              why I should talk about that; the audience member replied,
+              "Because we're in the JavaScript room!"
+            </p>
+            <p>
+              Being no stranger to JavaScript, I asked how many people had heard
+              of ECMAscript 6, ECMAscript Harmony, or the like. Only one person
+              raised their hand! I talked about the features in the
+              upcoming version of ES and saw that a lot of the audience appeared
+              interested in the topic. The following week, I started asking some
+              of my coworkers if they knew about ES6 and the cool stuff in it. I
+              found very few that did.
+            </p>
+            <p>
+              I searched around the World Wide Web to find some tutorials from
+              which my friends and coworkers could learn. I found a few,
+              sprinkled around the Internet, containing some pretty dated
+              material. So, I have tried to bring it all together in one place.
+              I hope you get some use out of it.
+            </p>
+            <p class="signature">Curtis Schlak</p>
+          </div>
+        </section>
+        <section id="thanks">
+          <div>
+            <div class="pure-g">
+              <div class="pure-u-1-4">
+                I want to thank others that have put together resources that this
+                site uses.
+              </div>
+              <div class="pure-u-3-8">
+                <h2>ECMAscript support</h2>
+                <dl>
+                  <dt>
+                    <a target="_blank" href="https://github.com/kangax/compat-table">@kangax</a>
+                  </dt>
+                  <dd>
+                    kangax maintains the ECMAscript compatibility tables over on
+                    GitHub. This site specifically uses the
+                    <code>data-es6.js</code> for information about ES6 features
+                    and the tests that demonstrate that.
+                  </dd>
+                  <dt>
+                    <a target="_blank" href="http://ace.c9.io">Ace code editor</a>
+                  </dt>
+                  <dd>
+                    Used in all of the example pages. Thanks, Ace guys.
+                  </dd>
+                  <dt>
+                    <a target="_blank" href="https://github.com/google/traceur-compiler/wiki/GettingStarted">traceur</a>
+                  </dt>
+                  <dd>
+                    For those browsers that do not support some of the ES6
+                    features, traceur allows you to polyfill some of the
+                    upcoming functionality. You can see the support in the
+                    right-most column.
+                  </dd>
+                  <dt>
+                    <a target="_blank" href="http://craig.is/killing/mice">Mousetrap</a>
+                  </dt>
+                  <dd>
+                    Used for keybindings on the editor pages.
+                  </dd>
+                </dl>
+              </div>
+              <div class="pure-u-3-8">
+                <h2>CSS support</h2>
+                <dl>
+                  <dt>
+                    <a target="_blank" href="http://purecss.io">Pure CSS</a>
+                  </dt>
+                  <dd>
+                    A lightweight CSS library. Lightweight as in it does very
+                    little for you and, in as much, has few opinions about
+                    things.
+                  </dd>
+                  <dt>
+                    <a target="_blank" href="http://fontawesome.io">Font Awesome</a>
+                  </dt>
+                  <dd>
+                    Awesome font glyphs.
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="contributors">
+          <div>
+            <div class="pure-g">
+              <div class="pure-u-1-3">
+                <img src="http://www.gravatar.com/avatar/7b6c3840cd471a49351ac1f4e189a6be?s=200">
+                <h2><a href="http://github.com/realistschuckle" target="_blank">@realistschuckle</a></h2>
+              </div>
+              <div class="pure-u-1-3">
+                <img src="http://www.gravatar.com/avatar/0cfd7d1dcae7c63f063a08dbae0e154f?s=200">
+                <h2><a href="http://github.com/bryansray" target="_blank">@bryansray</a></h2>
+              </div>
+              <div class="pure-u-1-3">
+                <img src="http://www.gravatar.com/avatar/7869dd725d1584ef1d6f0d2c84d2ac41?s=200">
+                <h2><a href="http://github.com/davehimself" target="_blank">@davehimself</a></h2>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
-      <div class="pure-u-1-4 tool-button">
-        <form class="pure-form" method="get" action="https://github.com/realistschuckle/es6-walkthroughs">
-          <button class="pure-button pure-button-primary">
-            <img src="assets/GitHub-Mark-Light-32px.png">
-            View me on GitHub
-          </button>
-        </form>
-      </div>
-    </section>
-    <section id="why">Why?</section>
-    <section id="thanks">Thanks!</section>
-    <section id="contributors">Made possible by...</section>
-    <section id="toc">
-      <table id="interesting">
-        <colgroup>
-          <col class="toc-group">
-          <col class="toc-walkthrough">
-          <col class="toc-native-support">
-          <col class="toc-traceur-support">
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="2" class="toc-group-walkthrough">Interesting narrated walkthroughs</th>
-            <th class="toc-native-support">Native in your browser?</th>
-            <th class="toc-traceur-support">Supported by traceur?</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr class="not-ready" data-test="let, const" data-href="let-and-const/default.html">
-            <td colspan="2"><code>let</code> and <code>const</code></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="class, super">
-            <td colspan="2"><code>class</code> and <code>super</code></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="shorthand methods, shorthand properties">
-            <td colspan="2">Syntactic sugar for property and method declarations</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="arrow functions">
-            <td colspan="2">Arrow functions</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="Promise">
-            <td colspan="2">Promises</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="Proxy">
-            <td colspan="2">Proxy objects</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Reflect">
-            <td colspan="2">Reflection methods</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="spread array (...) operator, spread call (...) operator, string spreading">
-            <td colspan="2">"Spreading" - splicing array- and string-parameters into other arrays and function calls</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="RegExp &quot;y&quot; flag">
-            <td colspan="2">Sticky regular expressions</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="Map, Set">
-            <th rowspan="4">Collections</th>
-            <td>Native non-Array collections</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="WeakMap, WeakSet">
-            <td>Weak native non-Array collections</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="typed arrays">
-            <td>Strongly-typed arrays</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="typed arrays (DataView)">
-            <td>Views into strongly-typed arrays</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="destructuring">
-            <th rowspan="4">Destructuring</th>
-            <td>Complex direct assignments</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="destructuring defaults">
-            <td>Complex assignments of default parameter values</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="destructuring parameters">
-            <td>Complex assignments of parameter values</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="destructuring rest">
-            <td>Complex assignment to a spread</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="for..of loops">
-            <th rowspan="2">Flow control</th>
-            <td><code>for..of</code> loops (instead of <code>for..in</code>)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="generators (yield)">
-            <td>Generator functions (and the yield keyword)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Function.prototype.toMethod">
-            <th rowspan="6">Functions</th>
-            <td>Turning functions into methods</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="default function parameters">
-            <td>Default function parameters</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="rest parameters">
-            <td>Binding the remaining parameters of a function to a single variable</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="function &quot;name&quot; property">
-            <td>Name property of functions</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="proper tail calls (tail call optimisation)">
-            <td>Tail-call recursion</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="block-level function declaration">
-            <td>Block-level scoping of function declarations</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="computed properties">
-            <th rowspan="4">Metaprogramming</th>
-            <td>Computed properties</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="Object.prototype.__proto__, __proto__ in object literals">
-            <td>Getter and setter prototype property</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="Object.assign">
-            <td>Mixin properties of other objects</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="Object.setPrototypeOf">
-            <td>Use a function to set the prototype of an object</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="modules">
-            <th rowspan="2">Modules</th>
-            <td><code>export</code> keyword</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Reflect.Loader">
-            <td>Module loader</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="Unicode code point escapes">
-            <th rowspan="6">String handling</th>
-            <td>Unicode code point escapes</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="template strings">
-            <td>Template strings</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="tagged template strings">
-            <td>Destructuring template strings</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="String.prototype HTML methods">
-            <td>HTML generation methods</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="String.prototype.repeat">
-            <td>New string from repeating a single string</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="String.raw">
-            <td>Programmatic substitution in template strings</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="not-ready" data-test="Global symbol registry, Symbol, Object.getOwnPropertySymbols">
-            <th rowspan="2">Symbols</th>
-            <td>Simple symbols as properties</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Symbol.create, Symbol.hasInstance, Symbol.isConcatSpreadable, Symbol.isRegExp, Symbol.iterator, Symbol.toPrimitive, Symbol.toStringTag, Symbol.unscopables">
-            <td>Advanced symbols for conversion</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-      <table id="boring" data-href="./example.html">
-        <colgroup>
-          <col class="toc-group">
-          <col class="toc-walkthrough">
-          <col class="toc-native-support">
-          <col class="toc-traceur-support">
-        </colgroup>
-        <thead>
-          <tr>
-            <th colspan="2">Boring text-only experiences</th>
-            <th>Native in your browser?</th>
-            <th>Supported by traceur?</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr data-test="Array.from">
-            <th rowspan="10">Array extensions</th>
-            <td>Array.from</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Array.of">
-            <td>Array.of</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Array.prototype.copyWithin">
-            <td>Array.prototype.copyWithin</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Array.prototype.entries">
-            <td>Array.prototype.entries</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Array.prototype.fill">
-            <td>Array.prototype.fill</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Array.prototype.find">
-            <td>Array.prototype.find</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Array.prototype.findIndex">
-            <td>Array.prototype.findIndex</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Array.prototype.keys">
-            <td>Array.prototype.keys</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Array.prototype.values">
-            <td>Array.prototype.values</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Array.prototype[Symbol.unscopables]">
-            <td>Array.prototype[Symbol.unscopables]</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr data-test="Math.acosh">
-            <th rowspan="17">Math extensions</th>
-            <td>Math.acosh (inverse hyperbolic cosine)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.asinh">
-            <td>Math.asinh (inverse hyperbolic sine)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.atanh">
-            <td>Math.atanh (inverse hyperbolic tangent)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.cbrt">
-            <td>Math.cbrt (cube root)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.clz32">
-            <td>Math.clz32 (count leading zero bits in the 32-bit binary representation of its argument)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.cosh">
-            <td>Math.cosh (hyperbolic cosine)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.expm1">
-            <td>Math.expm1 (e<sup>x</sup> - 1)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.fround">
-            <td>Math.fround (float round)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.hypot">
-            <td>Math.hypot (square root of the sum of squares)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.imul">
-            <td>Math.imul (integer multiplication)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.log10">
-            <td>Math.log10 (base 10 logarithm)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.log1p">
-            <td>Math.log1p (natural logarithm of 1 + x)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.log2">
-            <td>Math.log2 (base 2 logarithm)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.sign">
-            <td>Math.sign (the sign of the number)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.sinh">
-            <td>Math.sinh (hyperbolic sine)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.tanh">
-            <td>Math.tanh (hyperbolic tangent)</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Math.trunc">
-            <td>Math.trunc (truncation of the fraction part of a number)</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr data-test="Number.EPSILON">
-            <th rowspan="7">Number extensions</th>
-            <td>Number.EPSILSON</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Number.MAX_SAFE_INTEGER">
-            <td>Number.MAX_SAFE_INTEGER</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Number.MIN_SAFE_INTEGER">
-            <td>Number.MIN_SAFE_INTEGER</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Number.isFinite">
-            <td>Number.isFinite</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Number.isInteger">
-            <td>Number.isInteger</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Number.isNaN">
-            <td>Number.isNaN</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="Number.isSafeInteger">
-            <td>Number.isSafeInteger</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr data-test="RegExp &quot;u&quot; flag">
-            <th rowspan="6">Regular expression extensions</th>
-            <td>Unicode regular expression flag</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="RegExp.prototype.compile">
-            <td>Compile regular expressions</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="RegExp.prototype.match">
-            <td>Matching a string from a regular expression</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="RegExp.prototype.replace">
-            <td>Replace a match in a string from a regular expression</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="RegExp.prototype.search">
-            <td>Search for a substring in a string from a regular expression</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="RegExp.prototype.split">
-            <td>Split a string from a regular expression</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-        <tbody>
-          <tr data-test="String.fromCodePoint">
-            <th rowspan="6">String handling</th>
-            <td>Create a string from a Unicode code point</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="String.prototype.codePointAt">
-            <td>Get the code point of a character in a string</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="String.prototype.contains">
-            <td>Check to see if a string contains a substring</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="String.prototype.endsWith">
-            <td>Check to see if a string ends with another string</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="String.prototype.normalize">
-            <td>Normalize a string to one of the Unicode normalized forms</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr data-test="String.prototype.startsWith">
-            <td>Check to see if a string begins with another string</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+      <section id="toc">
+        <table id="interesting">
+          <colgroup>
+            <col class="toc-group">
+            <col class="toc-walkthrough">
+            <col class="toc-native-support">
+            <col class="toc-traceur-support">
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="2" class="toc-group-walkthrough">Interesting narrated walkthroughs</th>
+              <th class="toc-native-support">Native in your browser?</th>
+              <th class="toc-traceur-support">Supported by traceur?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="not-ready" data-test="let, const" data-href="let-and-const/default.html">
+              <td colspan="2"><code>let</code> and <code>const</code></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="class, super">
+              <td colspan="2"><code>class</code> and <code>super</code></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="shorthand methods, shorthand properties">
+              <td colspan="2">Syntactic sugar for property and method declarations</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="arrow functions">
+              <td colspan="2">Arrow functions</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="Promise">
+              <td colspan="2">Promises</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="Proxy">
+              <td colspan="2">Proxy objects</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Reflect">
+              <td colspan="2">Reflection methods</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="spread array (...) operator, spread call (...) operator, string spreading">
+              <td colspan="2">"Spreading" - splicing array- and string-parameters into other arrays and function calls</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="RegExp &quot;y&quot; flag">
+              <td colspan="2">Sticky regular expressions</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="Map, Set">
+              <th rowspan="4">Collections</th>
+              <td>Native non-Array collections</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="WeakMap, WeakSet">
+              <td>Weak native non-Array collections</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="typed arrays">
+              <td>Strongly-typed arrays</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="typed arrays (DataView)">
+              <td>Views into strongly-typed arrays</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="destructuring">
+              <th rowspan="4">Destructuring</th>
+              <td>Complex direct assignments</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="destructuring defaults">
+              <td>Complex assignments of default parameter values</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="destructuring parameters">
+              <td>Complex assignments of parameter values</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="destructuring rest">
+              <td>Complex assignment to a spread</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="for..of loops">
+              <th rowspan="2">Flow control</th>
+              <td><code>for..of</code> loops (instead of <code>for..in</code>)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="generators (yield)">
+              <td>Generator functions (and the yield keyword)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Function.prototype.toMethod">
+              <th rowspan="6">Functions</th>
+              <td>Turning functions into methods</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="default function parameters">
+              <td>Default function parameters</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="rest parameters">
+              <td>Binding the remaining parameters of a function to a single variable</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="function &quot;name&quot; property">
+              <td>Name property of functions</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="proper tail calls (tail call optimisation)">
+              <td>Tail-call recursion</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="block-level function declaration">
+              <td>Block-level scoping of function declarations</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="computed properties">
+              <th rowspan="4">Metaprogramming</th>
+              <td>Computed properties</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="Object.prototype.__proto__, __proto__ in object literals">
+              <td>Getter and setter prototype property</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="Object.assign">
+              <td>Mixin properties of other objects</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="Object.setPrototypeOf">
+              <td>Use a function to set the prototype of an object</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="modules">
+              <th rowspan="2">Modules</th>
+              <td><code>export</code> keyword</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Reflect.Loader">
+              <td>Module loader</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="Unicode code point escapes">
+              <th rowspan="6">String handling</th>
+              <td>Unicode code point escapes</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="template strings">
+              <td>Template strings</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="tagged template strings">
+              <td>Destructuring template strings</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="String.prototype HTML methods">
+              <td>HTML generation methods</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="String.prototype.repeat">
+              <td>New string from repeating a single string</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="String.raw">
+              <td>Programmatic substitution in template strings</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr class="not-ready" data-test="Global symbol registry, Symbol, Object.getOwnPropertySymbols">
+              <th rowspan="2">Symbols</th>
+              <td>Simple symbols as properties</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Symbol.create, Symbol.hasInstance, Symbol.isConcatSpreadable, Symbol.isRegExp, Symbol.iterator, Symbol.toPrimitive, Symbol.toStringTag, Symbol.unscopables">
+              <td>Advanced symbols for conversion</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <table id="boring" data-href="./example.html">
+          <colgroup>
+            <col class="toc-group">
+            <col class="toc-walkthrough">
+            <col class="toc-native-support">
+            <col class="toc-traceur-support">
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="2">Boring text-only experiences</th>
+              <th>Native in your browser?</th>
+              <th>Supported by traceur?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr data-test="Array.from">
+              <th rowspan="10">Array extensions</th>
+              <td>Array.from</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Array.of">
+              <td>Array.of</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Array.prototype.copyWithin">
+              <td>Array.prototype.copyWithin</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Array.prototype.entries">
+              <td>Array.prototype.entries</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Array.prototype.fill">
+              <td>Array.prototype.fill</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Array.prototype.find">
+              <td>Array.prototype.find</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Array.prototype.findIndex">
+              <td>Array.prototype.findIndex</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Array.prototype.keys">
+              <td>Array.prototype.keys</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Array.prototype.values">
+              <td>Array.prototype.values</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Array.prototype[Symbol.unscopables]">
+              <td>Array.prototype[Symbol.unscopables]</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr data-test="Math.acosh">
+              <th rowspan="17">Math extensions</th>
+              <td>Math.acosh (inverse hyperbolic cosine)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.asinh">
+              <td>Math.asinh (inverse hyperbolic sine)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.atanh">
+              <td>Math.atanh (inverse hyperbolic tangent)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.cbrt">
+              <td>Math.cbrt (cube root)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.clz32">
+              <td>Math.clz32 (count leading zero bits in the 32-bit binary representation of its argument)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.cosh">
+              <td>Math.cosh (hyperbolic cosine)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.expm1">
+              <td>Math.expm1 (e<sup>x</sup> - 1)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.fround">
+              <td>Math.fround (float round)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.hypot">
+              <td>Math.hypot (square root of the sum of squares)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.imul">
+              <td>Math.imul (integer multiplication)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.log10">
+              <td>Math.log10 (base 10 logarithm)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.log1p">
+              <td>Math.log1p (natural logarithm of 1 + x)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.log2">
+              <td>Math.log2 (base 2 logarithm)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.sign">
+              <td>Math.sign (the sign of the number)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.sinh">
+              <td>Math.sinh (hyperbolic sine)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.tanh">
+              <td>Math.tanh (hyperbolic tangent)</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Math.trunc">
+              <td>Math.trunc (truncation of the fraction part of a number)</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr data-test="Number.EPSILON">
+              <th rowspan="7">Number extensions</th>
+              <td>Number.EPSILSON</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Number.MAX_SAFE_INTEGER">
+              <td>Number.MAX_SAFE_INTEGER</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Number.MIN_SAFE_INTEGER">
+              <td>Number.MIN_SAFE_INTEGER</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Number.isFinite">
+              <td>Number.isFinite</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Number.isInteger">
+              <td>Number.isInteger</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Number.isNaN">
+              <td>Number.isNaN</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="Number.isSafeInteger">
+              <td>Number.isSafeInteger</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr data-test="RegExp &quot;u&quot; flag">
+              <th rowspan="6">Regular expression extensions</th>
+              <td>Unicode regular expression flag</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="RegExp.prototype.compile">
+              <td>Compile regular expressions</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="RegExp.prototype.match">
+              <td>Matching a string from a regular expression</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="RegExp.prototype.replace">
+              <td>Replace a match in a string from a regular expression</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="RegExp.prototype.search">
+              <td>Search for a substring in a string from a regular expression</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="RegExp.prototype.split">
+              <td>Split a string from a regular expression</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+          <tbody>
+            <tr data-test="String.fromCodePoint">
+              <th rowspan="6">String handling</th>
+              <td>Create a string from a Unicode code point</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="String.prototype.codePointAt">
+              <td>Get the code point of a character in a string</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="String.prototype.contains">
+              <td>Check to see if a string contains a substring</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="String.prototype.endsWith">
+              <td>Check to see if a string ends with another string</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="String.prototype.normalize">
+              <td>Normalize a string to one of the Unicode normalized forms</td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr data-test="String.prototype.startsWith">
+              <td>Check to see if a string begins with another string</td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
   </body>
 </html>
