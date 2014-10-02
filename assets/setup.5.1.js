@@ -1,7 +1,9 @@
 var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, forms, subprefix, ajax, q, run;
 (function (tests) {
-  var evaller = document.getElementById('use-traceur').parentNode;
+  var assetLocation, evaller;
+  evaller  = document.getElementById('use-traceur').parentNode;
   q = decodeURIComponent(location.search.substring(1));
+  assetLocation = document.body.getAttribute('data-asset-location');
 
   if (!tests[q].tr) {
     evaller.parentNode.removeChild(evaller);
@@ -88,7 +90,7 @@ var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, for
     editor.getSession().setValue('// :(');
     console.error('Error loading content for ' + q);
   });
-  ajax.open('GET', 'assets/' + q + '.json');
+  ajax.open('GET', assetLocation + q + '.json');
   try {
     ajax.send();
   } catch (e) {
