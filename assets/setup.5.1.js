@@ -71,7 +71,9 @@ var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, for
   };
 
   ajax = new XMLHttpRequest();
-  ajax.overrideMimeType('application/json');
+  if (ajax.overrideMimeType) {
+    ajax.overrideMimeType('application/json');
+  }
   ajax.addEventListener('load', function (e) {
     var spec = JSON.parse(e.target.response);
     document.title = spec.title;
