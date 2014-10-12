@@ -1,0 +1,5 @@
+{
+  "title": "Unicode code point escapes",
+  "description": "Shorter, easier-to-type escape sequences for Unicode.",
+  "code": "// In Unicode, some characters live in the big\n// number area that requires more than one\n// escape sequence to describe it.\n\n// You ask, \"Why so much typing? Isn't there a\n// better, shorter way to type that?\"\n\n// Yes, there now is with ES6 and the Unicode\n// code point escape sequence enables this.\nconsole.log('\\uD83D\\uDCA9', '\\u{1F4A9}');"
+}
