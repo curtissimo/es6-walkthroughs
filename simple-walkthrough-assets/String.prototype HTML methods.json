@@ -1,0 +1,5 @@
+{
+  "title": "String.prototype HTML methods",
+  "description": "Silly methods to generate HTML that no one will ever use.",
+  "code": "// Back in the days of Netscape Navigator, savvy\n// Web programmers would use the most evil method\n//   document.write\n// to inject dynamic HTML into the loading HTML\n// stream or replace the entire document. To make\n// HTML generation easier, the browser guys made\n// some convenience methods that, finally, just\n// made it into the spec. And, look! The methods\n// generate deprecated tags, too! Thank you, TC39!\n\nvar s = 'some text';\nconsole.logHTML(s.big());\nconsole.logHTML(s.blink());\nconsole.logHTML(s.bold());\nconsole.logHTML(s.fixed());\nconsole.logHTML(s.fontcolor('red'));\nconsole.logHTML(s.fontsize(10));\nconsole.logHTML(s.italics());\nconsole.logHTML(s.link('http://curtis.schlak.com'));\nconsole.logHTML(s.small());\nconsole.logHTML(s.strike());\nconsole.logHTML(s.sub());\nconsole.logHTML(s.sup());"
+}
