@@ -139,6 +139,9 @@ var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, for
     }
     log += '<pre>[' + prefix + ']&gt; ' + t.toString() + '</pre>';
   };
+  console.logHTML = function (s) {
+    console.log(s.replace(/</g, '&lt;'));
+  };
   flush = function () {
     var c = document.getElementById('console');
     c.innerHTML += log;
