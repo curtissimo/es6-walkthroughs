@@ -77,9 +77,14 @@ var i, editor, log, flush, prefix, evaluator, nativeEval, traceurEval, _log, for
     ajax.overrideMimeType('application/json');
   }
   ajax.addEventListener('load', function (e) {
-    var spec = JSON.parse(e.target.response);
-    document.title = spec.title;
-    editor.getSession().setValue(spec.code);
+    try {
+      var spec = JSON.parse(e.target.response);
+      document.title = spec.title;
+      editor.getSession().setValue(spec.code);
+    } catch (e) {
+      editor.getSession().setValue('// :(');
+      console.error('Error loading content for ' + q);
+    }
   });
   ajax.addEventListener('error', function (e) {
     editor.getSession().setValue('// :(');
