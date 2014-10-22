@@ -316,8 +316,8 @@ header.main h2 p {
   cursor: default;
 }
 
-#toc td.good::before {
-  content: 'Yes';
+#toc td.native::before {
+  content: 'your browser';
 }
 
 #toc td.bad {
@@ -325,8 +325,12 @@ header.main h2 p {
   font-weight: 400;
 }
 
+#toc td.traceur::before {
+  content: 'traceur';
+}
+
 #toc td.bad::before {
-  content: 'No';
+  content: 'none';
 }
 
 footer {

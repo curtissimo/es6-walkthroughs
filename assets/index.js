@@ -14,7 +14,7 @@ System.register("index", ["tests"], function($__export) {
       while (table.tagName.toLowerCase() !== 'table') {
         table = table.parentNode;
       }
-      if (target.className === 'good' && target.parentNode.className !== 'not-ready') {
+      if (target.className.indexOf('good') > -1 && target.parentNode.className !== 'not-ready') {
         href = target.parentNode.getAttribute('data-href');
         if (href === null) {
           href = table.getAttribute('data-href') + '?' + target.parentNode.getAttribute('data-test');
@@ -47,52 +47,49 @@ System.register("index", ["tests"], function($__export) {
     for (var i = 0; i < rows.length; i += 1) {
       try {
         throw undefined;
-      } catch (traceurCell) {
+      } catch (nativeCell) {
         try {
           throw undefined;
-        } catch (nativeCell) {
+        } catch (contentCell) {
           try {
             throw undefined;
-          } catch (contentCell) {
+          } catch (cells) {
             try {
               throw undefined;
-            } catch (cells) {
+            } catch (data) {
               try {
                 throw undefined;
-              } catch (data) {
+              } catch (traceurSupport) {
                 try {
                   throw undefined;
-                } catch (traceurSupport) {
+                } catch (nativeSupport) {
                   try {
                     throw undefined;
-                  } catch (nativeSupport) {
-                    try {
-                      throw undefined;
-                    } catch (row) {
-                      {
-                        row = rows[$traceurRuntime.toProperty(i)];
-                        nativeSupport = true;
-                        traceurSupport = true;
-                        data = row.getAttribute('data-test').split(',');
-                        data.forEach(function(value, index) {
-                          value = value.trim();
-                          nativeSupport = nativeSupport && tests[$traceurRuntime.toProperty(value)].nativeSupport;
-                          traceurSupport = traceurSupport && tests[$traceurRuntime.toProperty(value)].traceurSupport;
-                        });
-                        cells = row.querySelectorAll('td');
-                        contentCell = cells[0];
-                        nativeCell = cells[$traceurRuntime.toProperty(cells.length - 2)];
-                        traceurCell = cells[$traceurRuntime.toProperty(cells.length - 1)];
-                        nativeCell.className = nativeSupport ? 'good' : 'bad';
-                        traceurCell.className = traceurSupport ? 'good' : 'bad';
-                        if (data.length === 1) {
-                          contentCell.innerHTML = '<a class="fa fa-external-link" target="_blank" href="' + tests[$traceurRuntime.toProperty(data[0])].link + '"></a>' + contentCell.innerHTML;
-                        } else if (data.length > 1) {
-                          contentCell.innerHTML = '<a class="fa fa-external-link-square" target="_blank" href="#"></a>' + contentCell.innerHTML;
-                        }
-                        if (!nativeSupport && !traceurSupport) {
-                          cells[$traceurRuntime.toProperty(cells.length - 3)].className = 'unsupported';
-                        }
+                  } catch (row) {
+                    {
+                      row = rows[$traceurRuntime.toProperty(i)];
+                      nativeSupport = true;
+                      traceurSupport = true;
+                      data = row.getAttribute('data-test').split(',');
+                      data.forEach(function(value, index) {
+                        value = value.trim();
+                        nativeSupport = nativeSupport && tests[$traceurRuntime.toProperty(value)].nativeSupport;
+                        traceurSupport = traceurSupport && tests[$traceurRuntime.toProperty(value)].traceurSupport;
+                      });
+                      cells = row.querySelectorAll('td');
+                      contentCell = cells[0];
+                      nativeCell = cells[$traceurRuntime.toProperty(cells.length - 1)];
+                      if (nativeSupport) {
+                        nativeCell.className = 'good native';
+                      } else if (traceurSupport) {
+                        nativeCell.className = 'good traceur';
+                      } else {
+                        nativeCell.className = 'bad';
+                      }
+                      if (data.length === 1) {
+                        contentCell.innerHTML = '<a class="fa fa-external-link" target="_blank" href="' + tests[$traceurRuntime.toProperty(data[0])].link + '"></a>' + contentCell.innerHTML;
+                      } else if (data.length > 1) {
+                        contentCell.innerHTML = '<a class="fa fa-external-link-square" target="_blank" href="#"></a>' + contentCell.innerHTML;
                       }
                     }
                   }
@@ -154,9 +151,10 @@ System.register("index", ["tests"], function($__export) {
       tests = m.tests;
     }],
     execute: function() {
-      document.addEventListener('DOMContentLoaded', wirePage);
       if (document.readyState !== 'loading') {
         wirePage();
+      } else {
+        document.addEventListener('DOMContentLoaded', wirePage);
       }
     }
   };

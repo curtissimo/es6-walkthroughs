@@ -11,7 +11,7 @@ function wirePage () {
     while (table.tagName.toLowerCase() !== 'table') {
       table = table.parentNode;
     }
-    if (target.className === 'good' && target.parentNode.className !== 'not-ready') {
+    if (target.className.indexOf('good') > -1 && target.parentNode.className !== 'not-ready') {
       href = target.parentNode.getAttribute('data-href');
       if (href === null) {
         href = table.getAttribute('data-href') + '?' + target.parentNode.getAttribute('data-test');
@@ -57,20 +57,20 @@ function wirePage () {
 
     let cells = row.querySelectorAll('td');
     let contentCell = cells[0];
-    let nativeCell = cells[cells.length - 2];
-    let traceurCell = cells[cells.length - 1];
+    let nativeCell = cells[cells.length - 1];
 
-    nativeCell.className = nativeSupport ? 'good' : 'bad';
-    traceurCell.className = traceurSupport ? 'good' : 'bad';
+    if (nativeSupport) {
+      nativeCell.className = 'good native';
+    } else if(traceurSupport) {
+      nativeCell.className = 'good traceur';
+    } else {
+      nativeCell.className = 'bad';
+    }
 
     if (data.length === 1) {
       contentCell.innerHTML = '<a class="fa fa-external-link" target="_blank" href="' + tests[data[0]].link + '"></a>' + contentCell.innerHTML;
     } else if (data.length > 1) {
       contentCell.innerHTML = '<a class="fa fa-external-link-square" target="_blank" href="#"></a>' + contentCell.innerHTML;
-    }
-
-    if (!nativeSupport && !traceurSupport) {
-      cells[cells.length - 3].className = 'unsupported';
     }
   }
 
@@ -115,7 +115,8 @@ function wirePage () {
   }
 }
 
-document.addEventListener('DOMContentLoaded', wirePage);
 if (document.readyState !== 'loading') {
   wirePage();
+} else {
+  document.addEventListener('DOMContentLoaded', wirePage);
 }
