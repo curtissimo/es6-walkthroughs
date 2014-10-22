@@ -6,10 +6,14 @@
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
     <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/global.css">
-    <script>var exports = {};</script>
-    <script src="https://kangax.github.io/compat-table/data-es6.js"></script>
-    <script src="assets/default.js"></script>
-    <script type="application/javascript;version=1.7" src="assets/default.js"></script>
+
+    <script src="./assets/traceur.js"></script>
+    <script src="https://cdn.rawgit.com/ModuleLoader/es6-module-loader/v0.9.4/dist/es6-module-loader.js"></script>
+    <script src="https://cdn.rawgit.com/systemjs/systemjs/0.9.3/dist/system.js"></script>
+    <script src="/assets/system.config.js"></script>
+
+    <script type="application/javascript;version=1.7" src="/assets/tests.js"></script>
+    <script>System.import('index');</script>
   </head>
   <body>
     <div class="constrainer">
