@@ -16,7 +16,13 @@ gulp.task('clean', function (cb) {
   del(targets, cb);
 });
 
-gulp.task('default', [ 'tests', 'index', 'setup', 'dom-console', 'repl' ]);
+gulp.task('default', [
+  'tests',
+  'index',
+  'simple-walkthrough-setup',
+  'dom-console',
+  'repl'
+]);
 
 gulp.task('dev', [ 'default' ], function () {
   gulp.watch('_assets/*', [ 'default' ]);
@@ -43,8 +49,8 @@ gulp.task('index', function () {
     .pipe(gulp.dest('./assets'));
 });
 
-gulp.task('setup', function () {
-  return gulp.src('_assets/setup.js')
+gulp.task('simple-walkthrough-setup', function () {
+  return gulp.src('_assets/simple-walkthrough-setup.js')
     .pipe(traceur({
       experimental: true,
       modules: 'instantiate',

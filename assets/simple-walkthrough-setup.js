@@ -1,6 +1,6 @@
-System.register("setup", ["repl", "dom-console"], function($__export) {
+System.register("simple-walkthrough-setup", ["repl", "dom-console"], function($__export) {
   "use strict";
-  var __moduleName = "setup";
+  var __moduleName = "simple-walkthrough-setup";
   var factory,
       cons,
       q,
