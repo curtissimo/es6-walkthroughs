@@ -1,4 +1,4 @@
 System.config({
-  baseURL: '/assets'
+  baseURL: './assets'
 });
 System.meta['data-es6'] = { format: 'cjs' };
