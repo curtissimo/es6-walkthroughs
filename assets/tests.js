@@ -31,14 +31,14 @@ System.register("tests", ["data-es6"], function($__export) {
         };
         return ($traceurRuntime.createClass)(Test, {}, {});
       }());
-      for (var $__1 = data.tests[$traceurRuntime.toProperty(Symbol.iterator)](),
+      for (var $__1 = data.tests[Symbol.iterator](),
           $__2; !($__2 = $__1.next()).done; ) {
         test = $__2.value;
         {
           if (test.exec === undefined) {
             continue;
           }
-          $traceurRuntime.setProperty(tests, test.name, new Test(test.name, test.link, test.exec, test.res.tr));
+          tests[test.name] = new Test(test.name, test.link, test.exec, test.res.tr);
         }
       }
     }
