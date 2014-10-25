@@ -27,7 +27,7 @@ gulp.task('tests', function () {
     .pipe(traceur({
       experimental: true,
       modules: 'instantiate',
-      moduleName: 'tests'
+      moduleName: true
     }))
     .pipe(rename('tests.js'))
     .pipe(gulp.dest('./assets'));
@@ -38,7 +38,7 @@ gulp.task('index', function () {
     .pipe(traceur({
       experimental: true,
       modules: 'instantiate',
-      moduleName: 'index'
+      moduleName: true
     }))
     .pipe(gulp.dest('./assets'));
 });
@@ -48,7 +48,7 @@ gulp.task('setup', function () {
     .pipe(traceur({
       experimental: true,
       modules: 'instantiate',
-      moduleName: 'setup'
+      moduleName: true
     }))
     .pipe(gulp.dest('./assets'));
 });
@@ -58,7 +58,7 @@ gulp.task('dom-console', function () {
     .pipe(traceur({
       experimental: true,
       modules: 'instantiate',
-      moduleName: 'dom-console'
+      moduleName: true
     }))
     .pipe(gulp.dest('./assets'));
 });
@@ -68,7 +68,7 @@ gulp.task('repl', function () {
     .pipe(traceur({
       experimental: true,
       modules: 'instantiate',
-      moduleName: 'repl'
+      moduleName: true
     }))
     .pipe(gulp.dest('./assets'));
 });
