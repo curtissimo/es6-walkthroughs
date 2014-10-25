@@ -1,0 +1,367 @@
+{
+  "interesting": [{
+    "title": "<code>let</code> and <code>const</code>",
+    "keys": [ "let", "const" ]
+  }, {
+    "title": "<code>class</code> and <code>super</code>",
+    "keys": [ "class", "super" ]
+  }, {
+    "title": "Syntactic sugar for property and method declarations",
+    "keys": [ "shorthand methods", "shorthand properties" ]
+  }, {
+    "title": "Arrow functions",
+    "keys": [ "arrow functions" ]
+  }, {
+    "title": "Promises",
+    "keys": [ "Promise" ]
+  }, {
+    "title": "Proxy objects",
+    "keys": [ "Proxy" ]
+  }, {
+    "title": "Reflection methods",
+    "keys": [ "Reflect" ]
+  }, {
+    "title": "\"Spreading\", otherwise known as splicing, arrays and strings into other arrays and function calls",
+    "keys": [ "spread array (...) operator", "spread call (...) operator", "string spreading" ]
+  }, {
+    "title": "Sticky regular expressions",
+    "keys": [ "RegExp \"y\" flag" ]
+  }, {
+    "section": "Collections",
+    "features": [{
+      "title": "Native non-Array collections",
+      "keys": [ "Map", "Set" ]
+    }, {
+      "title": "Weak native non-Array collections",
+      "keys": [ "WeakMap", "WeakSet" ]
+    }, {
+      "title": "Strongly-typed Arrays",
+      "keys": [ "typed arrays" ]
+    }, {
+      "title": "Views into strongly-typed Arrays",
+      "keys": [ "typed arrays (DataView)" ]
+    }]
+  }, {
+    "section": "Destructuring",
+    "features": [{
+      "title": "Complex direct assignments",
+      "keys": [ "destructuring" ]
+    }, {
+      "title": "Complex assignments of default parameters",
+      "keys": [ "destructuring defaults" ]
+    }, {
+      "title": "Complex assignments of parameter values",
+      "keys": [ "destructuring parameters" ]
+    }, {
+      "title": "Complex assignment to a spread",
+      "keys": [ "destructuring rest" ]
+    }]
+  }, {
+    "section": "Flow control",
+    "features": [{
+      "title": "<code>for..of</code> loops (instead of <code>for..in</code>)",
+      "keys": [ "for..of loops" ]
+    }, {
+      "title": "Generator functions (and the <code>yield</code> keyword)",
+      "keys": [ "generators (yield)" ]
+    }]
+  }, {
+    "section": "Functions",
+    "features": [{
+      "title": "Turning functions into methods",
+      "keys": [ "Function.prototype.toMethod" ]
+    }, {
+      "title": "Default function parameters",
+      "keys": [ "default function parameters" ]
+    }, {
+      "title": "Binding the remaining parameters of a function to a single variable",
+      "keys": [ "rest parameters" ]
+    }, {
+      "title": "Name property of functions",
+      "keys": [ "function \"name\" property" ]
+    }, {
+      "title": "Tail-call recursion",
+      "keys": [ "proper tail calls (tail call optimisation)" ]
+    }, {
+      "title": "Block-level scoping of function declarations",
+      "keys": [ "block-level function declaration" ]
+    }]
+  }, {
+    "section": "Metaprogramming",
+    "features": [{
+      "title": "Computed properties",
+      "keys": [ "computed properties" ]
+    }, {
+      "title": "Getter and setter prototype property",
+      "keys": [ "Object.prototype.__proto__", "__proto__ in object literals" ]
+    }, {
+      "title": "Mixin properties of other objects",
+      "keys": [ "Object.assign" ]
+    }, {
+      "title": "Use a function to set the prototype of an object",
+      "keys": [ "Object.setPrototypeOf" ]
+    }]
+  }, {
+    "section": "Modules",
+    "features": [{
+      "title": "<code>export</code> keyword",
+      "keys": [ "modules" ]
+    }, {
+      "title": "Module loader",
+      "keys": [ "Reflect.Loader" ]
+    }]
+  }, {
+    "section": "String handling",
+    "features": [{
+      "title": "Template strings",
+      "keys": [ "template strings" ]
+    }, {
+      "title": "Destructuring template strings",
+      "keys": [ "tagged template strings" ]
+    }, {
+      "title": "New string from repeating a single string",
+      "keys": [ "String.prototype.repeat" ]
+    }, {
+      "title": "Programmatic substitution in template strings",
+      "keys": [ "String.raw" ]
+    }]
+  }, {
+    "section": "Symbols",
+    "features": [{
+      "title": "Simple symbols as properties",
+      "keys": [ "Global symbol registry", "Symbol", "Object.getOwnPropertySymbols" ]
+    }, {
+      "title": "Advanced symbols for conversion",
+      "keys": [ "Symbol.hasInstance", "Symbol.isConcatSpreadable", "Symbol.isRegExp", "Symbol.iterator", "Symbol.toPrimitive", "Symbol.toStringTag", "Symbol.unscopables" ]
+    }]
+  }],
+  "boring": [{
+    "section": "Array extensions",
+    "features": [{
+      "title": "Array.from",
+      "description": "Creating a proper array from an array-like object.",
+      "code": "function old_way() {\n  // In the old days, to convert the arguments\n  // pseudo-array into a proper array, we had\n  // to use the Array slice method like this.\n  var a = Array.prototype.slice.call(arguments);\n  console.log(a);\n}\n\nfunction new_way() {\n  // Now, we have a more elegant solution with\n  // Array.from.\n  var a = Array.from(arguments);\n  console.log(a);\n  \n  // We can even provide a mapping function.\n  a = Array.from(arguments, function (x) {\n    return x * x;\n  });\n  console.log(a);\n}\n\nold_way(1, 2, 3, 4, 5);\nnew_way(1, 2, 3, 4, 5);"
+    }, {
+      "title": "Array.of",
+      "description": "A generic factory method for creating array-like objects.",
+      "code": "// Array.of will create an array from a list of\n// items, like a literal.\nvar a1 = [ 'a', 'b', 'c', 'd' ];\nvar a2 = Array.of('a', 'b', 'c', 'd');\nconsole.log(a1, a2);\n\n// That doesn't really buy us much. The cool part\n// is that the \"of\" method is bindable to any\n// \"this\" that can be constructed. Now we can\n// create our own array-like objects!\n\n// Define a constructable thing.\nfunction FakeArray(len) {\n  this.constructionLength = len;\n  return this;\n}\n\n// Bind the \"of\" method to the FakeArray\nFakeArray.of = Array.of;\n\n// Use the factory method to create the object\nvar fake = FakeArray.of('a', 'b', 'c', 'd');\n\n// We can now iterate over our fake array!\nfor (var i = 0; i < fake.length; i += 1) {\n  console.log(i, fake[i]);\n}\n\n// And, we have access to the constructor\n// argument.\nconsole.log(fake.constructionLength);"
+    }, {
+      "title": "Array.prototype.copyWithin",
+      "description": "Copy elements in an array to other locations in the array.",
+      "code": "// Array manipulation in EMCAscript has always\n// consisted of boilerplate for loops. ES6 provides\n// some new ways to work with arrays and\n// array-like objects. \"copyWithin\" allows us to\n// now copy values in an array to another location\n// in the array.\nvar a;\n\n// \"copyWithin\" expects the target index as the\n// first argument, then the start from where we\n// want to copy, and an optional end argument.\n\n// Copy the first four elements to the last four\n// elements of the array.\na = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];\na.copyWithin(6, 0);\nconsole.log(a);\n\n// We can also specify negative indices to count\n// back from the end.\na = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];\na.copyWithin(-4, 0);\nconsole.log(a);\n\n// Finally, we can also specify an end. Here, we\n// will copy the values 7, 8, and 9 to the front\n// of the array.\na = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ];\na.copyWithin(0, -4, -1);\nconsole.log(a);"
+    }, {
+      "title": "Array.prototype.entries",
+      "description": "A method to generate a real array iterator object.",
+      "code": "// NOTE: This does not work in Safari 7.\n\n// Before ECMAscript 6, we had about three ways\n// to iterate over an array a:\n//  for (var i in a) loops\n//  for (var i = 0; i < a.length; i += 1) loops\n//  a.forEach(function (e, i) { ... }) callbacks\n\n// ECMAscript 6 now has a formal definition for\n// an array iterator that we can access through the\n// \"entries\" method. The iterator has a \"next\"\n// method that returns either\n//  { done: true }\n//  { value: [index, entry], done: false }\nvar a = [ 'Boris', new Date(), 1, true ],\n    iterator = a.entries();\n\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());"
+    }, {
+      "title": "Array.prototype.fill",
+      "description": "A method to fill the entries in an array (or part of an array) with a value.",
+      "code": "// Before ECMAscript 6, we initialized an array\n// by looping over it:\nvar a, i;\na = [ 1, 2, 3, 4, 5 ];\nfor (i = 0; i < a.length; i += 1) {\n  a[i] = 'curtis';\n}\nconsole.log(a);\n\n// ECMAscript 6 now gives us an optimized native\n// implementation to achieve the same thing.\na = [ 1, 2, 3, 4, 4 ];\na.fill('ES6');\nconsole.log(a);"
+    }, {
+      "title": "Array.prototype.find",
+      "description": "A method to fill the entries in an array (or part of an array) with a value.",
+      "code": "// The new find method of proper Array instances\n// allows you to provide a comparator function to\n// find the first value that matches the\n// comparator.\nvar a = [ 1, 'two', new Date(), null, {} ];\n\n// Always return the second index, if the array\n// is that long.\nfunction secondIndex(value, index) {\n  return index === 1;\n}\n\n// Never match anything. This will return\n// undefined.\nfunction nothing() {\n  return false;\n}\n\n// Always match. This will return the first entry.\nfunction always() {\n  return true;\n}\n\n// Find a Date object.\nfunction dateish(value) {\n  var s = Object.prototype.toString.call(value);\n  return s === '[object Date]';\n}\n\nconsole.log(a.find(secondIndex));\nconsole.log(a.find(nothing));\nconsole.log(a.find(always));\nconsole.log(a.find(dateish));"
+    }, {
+      "title": "Array.prototype.findIndex",
+      "description": "A method to fill the entries in an array (or part of an array) with a value.",
+      "code": "// The new findIndex method of proper Array\n// instances allows you to provide a comparator\n// function to find the index of the first value\n// that matches the comparator. This allows for a\n// looser comparison that indexOf which uses\n// strict equality.\nvar a = [ 1, 'two', new Date(), null, {} ];\n\n// Always return 1 if the array has at least two\n// values.\nfunction secondIndex(value, index) {\n  return index === 1;\n}\n\n// Never match anything. This will return -1.\nfunction nothing() {\n  return false;\n}\n\n// Always match. This will return 0 for non-empty\n// arrays.\nfunction always() {\n  return true;\n}\n\n// Find a Date object. For the sake of this\n// example, it will return 2.\nfunction dateish(value) {\n  var s = Object.prototype.toString.call(value);\n  return s === '[object Date]';\n}\n\nconsole.log(a.findIndex(secondIndex));\nconsole.log(a.findIndex(nothing));\nconsole.log(a.findIndex(always));\nconsole.log(a.findIndex(dateish));"
+    }, {
+      "title": "Array.prototype.keys",
+      "description": "Create an iterator over the keys of an array or array-like object.",
+      "code": "// NOTE: This does not work in Safari 7.\n\n// The new keys method returns an iterator over\n// the keys of an array. This returns the\n// indices as one would expect.\nvar a, iterator;\na = [ 1, 2, 3, 4, 5 ];\niterator = a.keys();\n\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\n\nconsole.log('----------------------')\n\n// More interestingly, though, we can attach the\n// keys method to any object with a \"length\"\n// property and get the same result.\na = { length: 5 };\na.keys = Array.prototype.keys;\niterator = a.keys();\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\n"
+    }, {
+      "title": "Array.prototype.values",
+      "description": "Create an iterator over the values of an array or array-like object.",
+      "code": "// NOTE: This does not work in Safari 7.\n\n// The new values method returns an iterator over\n// the values of an array. This returns the\n// indices as one would expect.\nvar a, iterator;\na = [ 1, 2, 4, 8, 16 ];\niterator = a.values();\n\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\n\nconsole.log('----------------------')\n\n// More interestingly, though, we can attach the\n// values method to any object with a \"length\"\n// property and get the same result. For the\n// corresponding indices that do not exist, the\n// iterator does not have a value key.\na = { '1': 1, '4': 16, length: 5 };\na.values = Array.prototype.values;\niterator = a.values();\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());"
+    }, {
+      "filename": "Array.prototype.Symbol.unscopables",
+      "title": "Array.prototype[Symbol.unscopables]",
+      "description": "?",
+      "code": ""
+    }]
+  }, {
+    "section": "Math extensions",
+    "features": [{
+      "key": "Math.acosh",
+      "title": "Math.acosh (inverse hyperbolic cosine)",
+      "description": "It's inverse hyperbolic cosine...",
+      "code": "// It's the inverse hyperbolic cosine.\n// What else is there to say?\nconsole.log(Math.acosh(-1));\nconsole.log(Math.acosh(0));\nconsole.log(Math.acosh(1));\nconsole.log(Math.acosh(2));"
+    }, {
+      "key": "Math.asinh",
+      "title": "Math.asinh (inverse hyperbolic sine)",
+      "description": "It's inverse hyperbolic sine...",
+      "code": "// It's the inverse hyperbolic sine.\n// What else it there to say?\nconsole.log(Math.asinh(-1));\nconsole.log(Math.asinh(0));\nconsole.log(Math.asinh(1));\nconsole.log(Math.asinh(2));"
+    }, {
+      "key": "Math.atanh",
+      "title": "Math.atanh (inverse hyperbolic tangent)",
+      "description": "It's inverse hyperbolic tangent...",
+      "code": "// It's the inverse hyperbolic tangent.\n// What else is there to say?\nconsole.log(Math.atanh(-1));\nconsole.log(Math.atanh(0));\nconsole.log(Math.atanh(1));\nconsole.log(Math.atanh(2));"
+    }, {
+      "key": "Math.cbrt",
+      "title": "Math.cbrt (cube root)",
+      "description": "It's a cube root...",
+      "code": "// It's the cube root.\n// What else it there to say?\nconsole.log(Math.cbrt(-8));\nconsole.log(Math.cbrt(-1));\nconsole.log(Math.cbrt(0));\nconsole.log(Math.cbrt(1));\nconsole.log(Math.cbrt(2));"
+    }, {
+      "key": "Math.clz32",
+      "title": "Math.clz32 (count leading zero bits)",
+      "description": "Count the leading zeroes in a 32-bit representation of a number.",
+      "code": "// With the addition of binary value handling in\n// ECMAscript, as well as applications such as\n// WebGL, more sophisticated bit operations need\n// to exist in ECMAscript. One of these is the\n// Count Leading Zeros (32-bit representation).\n// It has applications in converting integers to\n// floating-point numbers, fast data compression,\n// and managing overflows due to multiplication.\n\n// For 0, which we would represent as 32 zeroes\n// in a 32-bit representation, will return 32\n// for the CLZ operation.\nconsole.log(Math.clz32(0));\n\n// For 1, which would have the least significant\n// bit set to 1 and all others 0, will return 31.\nconsole.log(Math.clz32(1));\n\n// And so on for powers of 2, with each in the\n// series reducing the number of leading zeroes\n// by one.\nconsole.log(Math.clz32(2));\nconsole.log(Math.clz32(4));\nconsole.log(Math.clz32(8));\nconsole.log(Math.clz32(16));\nconsole.log(Math.clz32(32));\n\n// Negative numbers are converted to unsigned\n// integers, first. So, -1 is the same as the\n// maximum unsigned integer and, therefore, has\n// no leading zeroes.\nconsole.log(Math.clz32(-1));\n\n// The conversion of a floating-point number to\n// an unsigned integer involves truncating its\n// mantissa instead of rounding.\nconsole.log(Math.clz32(1));\nconsole.log(Math.clz32(1.999999));"
+    }, {
+      "key": "Math.cosh",
+      "title": "Math.cosh (hyperbolic cosine)",
+      "description": "It's hyperbolic cosine...",
+      "code": "// It's the hyperbolic cosine.\n// What else is there to say?\nconsole.log(Math.cosh(-1));\nconsole.log(Math.cosh(0));\nconsole.log(Math.cosh(1));\nconsole.log(Math.cosh(2));"
+    }, {
+      "key": "Math.expm1",
+      "title": "Math.expm1 (e<sup>x</sup> - 1)",
+      "description": "One less than the exponential function at a given value.",
+      "code": "// Now that ECMAscript becomes more and more a\n// so-called real programming language, it needs\n// better mathematical functions. Math.expm1(x)\n// provides better precision in its result for\n// values of x where -1 <= x <= 1. And, when it\n// comes to high-precision math, we need all the\n// help we can get.\nconsole.log(Math.exp(1) - 1);\nconsole.log(Math.expm1(1));\nconsole.log();\nconsole.log(Math.exp(-.00001) - 1);\nconsole.log(Math.expm1(-.00001));"
+    }, {
+      "key": "Math.fround",
+      "title": "Math.fround (float round)",
+      "description": "Returns the nearest IEEE 754 single-precision floating-point number.",
+      "code": "// Ok, so \"fround\" gives you the closest proper\n// single-precision floating-point number. I'm\n// not going to teach you about the IEEE 754\n// specification for that. If you want to know more,\n// then head over to:\n//   http://bit.ly/1vmnBck\n// which will take you to:\n//   http://en.wikipedia.org/wiki/Single-precision_floating-point_format\nconsole.log(Math.fround(1.1));\nconsole.log(Math.fround(1.375));"
+    }, {
+      "key": "Math.hypot",
+      "title": "Math.hypot (square root of the sum of squares)",
+      "description": "Calculate the square root of the sum of two squares.",
+      "code": "// Now that we need to use ECMAscript for\n// graphics, both 2D and 3D, it would make sweet\n// sense to have a fast implementation of \n// calculating the square root of the sum of two\n// squares. You know, the hypotenuse of a right\n// triangle. Which comes in handy with vectors and\n// distances and geometry exams.\nconsole.log(Math.hypot(1, 1), Math.sqrt(2));\nconsole.log(Math.hypot(3, 4));"
+    }, {
+      "key": "Math.imul",
+      "title": "Math.imul (integer multiplication)",
+      "description": "Safe integer multiplication with results in 32 bits",
+      "code": "// 32-bit integer multiplication with Math.imul\n// does not allow the representation of the product\n// to exceed a value outside of a 32-bit integer.\n\n// If we did not observe the 32-bit size of the\n// result, the two following statements should\n// print the same number. However, the integer\n// multiplication of Math.imul ignores the 33rd\n// bit and returns 32 0 bits which equals 0.\nconsole.log(Math.pow(2, 31) * 2);\nconsole.log(Math.imul(Math.pow(2, 31), 2));\n"
+    }, {
+      "key": "Math.log10",
+      "title": "Math.log10 (base-10 logarithm)",
+      "description": "It's just the base-10 logarithm...",
+      "code": "// It's just the base-10 logarithm.\n// What else is there to say?\nconsole.log(Math.log10(-1));\nconsole.log(Math.log10(0));\nconsole.log(Math.log10(1));\nconsole.log(Math.log10(2));\nconsole.log(Math.log10(10));\nconsole.log(Math.log10(75));\nconsole.log(Math.log10(100));\nconsole.log(Math.log10(Number.POSITIVE_INFINITY));"
+    }, {
+      "key": "Math.log1p",
+      "title": "Math.log1p (natural logarithm of 1 + x)",
+      "description": "Calculate the natural logarithm of the sum of 1 and x.",
+      "code": "// Sometimes, we want to calculate the value of a\n// logarithm when the argument is close to 0. Due\n// to the internal representation of floating-point\n// numbers, the computer can calculate the result\n// more precisely when we shift the argument by 1.\nconsole.log(Math.log(1.000001));\nconsole.log(Math.log1p(0.000001));"
+    }, {
+      "key": "Math.log2",
+      "title": "Math.log2 (base-2 logarithm)",
+      "description": "It's just the base-2 logarithm...",
+      "code": "// It's just the base-2 logarithm.\n// What else is there to say?\nconsole.log(Math.log2(-1));\nconsole.log(Math.log2(0));\nconsole.log(Math.log2(1));\nconsole.log(Math.log2(2));\nconsole.log(Math.log2(3));\nconsole.log(Math.log2(4));\nconsole.log(Math.log2(5));\nconsole.log(Math.log2(Number.POSITIVE_INFINITY));"
+    }, {
+      "key": "Math.sign",
+      "title": "Math.sign (the sign of a number)",
+      "description": "Get the sign of a number.",
+      "code": "// Get a -1 for a negative number.\n// Get a 0 for 0.\n// Get a 1 for a positive number.\nconsole.log(Math.sign(Number.NEGATIVE_INFINITY));\nconsole.log(Math.sign(0));\nconsole.log(Math.sign(1));"
+    }, {
+      "key": "Math.sinh",
+      "title": "Math.sinh (hyperbolic sine)",
+      "description": "It's hyperbolic sine...",
+      "code": "// It's the hyperbolic sine.\n// What else it there to say?\nconsole.log(Math.sinh(-1));\nconsole.log(Math.sinh(0));\nconsole.log(Math.sinh(1));\nconsole.log(Math.sinh(2));"
+    }, {
+      "key": "Math.tanh",
+      "title": "Math.tanh (hyperbolic tangent)",
+      "description": "It's hyperbolic tangent...",
+      "code": "// It's the hyperbolic tangent.\n// What else is there to say?\nconsole.log(Math.tanh(-1));\nconsole.log(Math.tanh(0));\nconsole.log(Math.tanh(1));\nconsole.log(Math.tanh(2));"
+    }, {
+      "key": "Math.trunc",
+      "title": "Math.trunc (truncation of the fraction part of a number)",
+      "description": "Get just the integer portion of a number without rounding.",
+      "code": "// Previous to ECMAscript 6, the language provided\n// Math.floor which rounded a number down to the\n// maximum integer less than or equal to the\n// argument. Now, ECMAscript has the Math.trunc\n// method that seemingly does the same thing.\nconsole.log(Math.floor(0.9), Math.trunc(0.9));\nconsole.log(Math.floor(1.0), Math.trunc(1.0));\nconsole.log(Math.floor(1.1), Math.trunc(1.1));\n\n// So, the differnce comes when we get to negative\n// numbers. Here we see that Math.floor(-0.9)\n// gets the next integer down, namely -1. On the\n// other hand, Math.trunc just gets rid of the .9\n// part which leaves -0 which is equal to 0.\nconsole.log(Math.floor(-0.9), Math.trunc(-0.9));\nconsole.log(Math.floor(-1.0), Math.trunc(-1.0));\nconsole.log(Math.floor(-1.1), Math.trunc(-1.1));\n"
+    }]
+  }, {
+    "section": "Number extensions",
+    "features": [{
+      "title": "Number.EPSILON",
+      "description": "As close as we can get to 0 without getting to 0.",
+      "code": "// Because the computer has limited space to store\n// the representation of floating-point numbers,\n// eventually we get to a value so small that its\n// representation is larger than can be stored.\nconsole.log(1 + .2);\nconsole.log(1 + .02);\nconsole.log(1 + .002);\nconsole.log(1 + .0002);\nconsole.log(1 + .00002);\nconsole.log(1 + .000002);\nconsole.log(1 + .0000002);\nconsole.log(1 + .00000002);\nconsole.log(1 + .000000002);\nconsole.log(1 + .0000000002);\nconsole.log(1 + .00000000002);\nconsole.log(1 + .000000000002);\nconsole.log(1 + .0000000000002);\nconsole.log(1 + .00000000000002);\nconsole.log(1 + .000000000000002);\nconsole.log(1 + .0000000000000002);\n\n// And, it's at this point that we get to a\n// number so small that adding it to 1 does\n// not change the value of 1.\nconsole.log(1 + .00000000000000002);\n\n// Until ECMAscript 6, we did not have access to\n// that number. And, now we do and it's called\n// EPSILON. It's the smallest number possible that,\n// when added to 1, we get a value not equal to 1.\nconsole.log(1 + Number.EPSILON);\n\n// So, let's check to see if EPSILON is greater\n// than the number on line 20.\nconsole.log(Number.EPSILON > .00000000000000002);"
+    }, {
+      "title": "Number.MAX_SAFE_INTEGER",
+      "description": "The largest integer to which you can add 1 and get an accurate answer.",
+      "code": "// Previous to ECMAscript 6, we had no easy way to\n// know the upper bounds of mathematical\n// calculations. Instead, you had to know the IEEE\n// specification that governs the representation\n// of the numbers and how that standard defined\n// all of the mathematical operations. With ES6,\n// we no longer have to know all that because it\n// provides a constant for us to know the largest\n// integer to which we can add 1 and get an\n// accurate calculation: Number.MAX_SAFE_INTEGER\n\n// With that in mind, we can confidently have\n// ECMAscript calculate the following sum.\nconsole.log(Number.MAX_SAFE_INTEGER + 1);\n\n// However, ECMAscript specifically informs us that\n// the following calculations will yield results\n// that we do not expect.\nconsole.log(Number.MAX_SAFE_INTEGER + 2);\nconsole.log(Number.MAX_SAFE_INTEGER + 3);\nconsole.log(Number.MAX_SAFE_INTEGER + 4);\nconsole.log(Number.MAX_SAFE_INTEGER + 5);\nconsole.log(Number.MAX_SAFE_INTEGER + 6);\n\n// On my computer, MAX_SAFE_INTEGER + 1 and\n// MAX_SAFE_INTEGER + 2 yield the same results!"
+    }, {
+      "title": "Number.MIN_SAFE_INTEGER",
+      "description": "The largest integer to which you can subtract 1 and get an accurate answer.",
+      "code": "// Previous to ECMAscript 6, we had no easy way to\n// know the lower bounds of mathematical\n// calculations. Instead, you had to know the IEEE\n// specification that governs the representation\n// of the numbers and how that standard defined\n// all of the mathematical operations. With ES6,\n// we no longer have to know all that because it\n// provides a constant for us to know the lowest\n// integer from which we can subtract 1 and get an\n// accurate calculation: Number.MIN_SAFE_INTEGER\n\n// With that in mind, we can confidently have\n// ECMAscript calculate the following sum.\nconsole.log(Number.MIN_SAFE_INTEGER - 1);\n\n// However, ECMAscript specifically informs us that\n// the following calculations will yield results\n// that we do not expect.\nconsole.log(Number.MIN_SAFE_INTEGER - 2);\nconsole.log(Number.MIN_SAFE_INTEGER - 3);\nconsole.log(Number.MIN_SAFE_INTEGER - 4);\nconsole.log(Number.MIN_SAFE_INTEGER - 5);\nconsole.log(Number.MIN_SAFE_INTEGER - 6);\n\n// On my computer, MIN_SAFE_INTEGER - 1 and\n// MIN_SAFE_INTEGER - 2 yield the same results!"
+    }, {
+      "title": "Number.isFinite",
+      "description": "Check to ensure that a number does not represent a kind of infinity.",
+      "code": "// This one is pretty straight forward.\n// I feel confident that you can figure it out.\nvar posInfinity = Number.POSITIVE_INFINITY;\nvar negInfinity = Number.NEGATIVE_INFINITY;\n\nconsole.log(Number.isFinite(0));\nconsole.log(Number.isFinite(1));\n\nconsole.log(Number.isFinite(1/0));\nconsole.log(Number.isFinite(posInfinity));\nconsole.log(Number.isFinite(negInfinity));"
+    }, {
+      "title": "Number.isInteger",
+      "description": "Check to ensure that a number represents an integer.",
+      "code": "// This one is pretty straight forward.\n// I feel confident that you can figure it out.\n// As long as you know what an integer is...\nvar posInfinity = Number.POSITIVE_INFINITY;\nvar negInfinity = Number.NEGATIVE_INFINITY;\n\nconsole.log(Number.isInteger(1));\nconsole.log(Number.isInteger(1.1));\nconsole.log(Number.isInteger(1.0));\n\nconsole.log(Number.isInteger(posInfinity));\nconsole.log(Number.isInteger(negInfinity));"
+    }, {
+      "title": "Number.isNaN",
+      "description": "Check to ensure that a number is not not-a-number.",
+      "code": "// If you've used ECMAscript for any period of\n// time for more than just DOM manipulation, then\n// you know about the numbers that are not\n// numbers: NaN values. In previous versions of\n// ECMAscript, we tested those with the function\n// \"isNaN\" defined on the global execution object.\n\n// ECMAscript 6 has moved it to a static method on\n// the Number object.\nconsole.log(isNaN(NaN), Number.isNaN(NaN));\nconsole.log(isNaN(5),   Number.isNaN(5));\n\n// It still works the same way with non-numerical\n// values, too.\nvar date = new Date();\nconsole.log(isNaN(null),    Number.isNaN(null));\nconsole.log(isNaN(date),    Number.isNaN(date));\nconsole.log(isNaN(false),   Number.isNaN(false));\n\n// What changes, though, is that the new version\n// returns false for values that are strings and\n// objects.\nconsole.log(isNaN({}),      Number.isNaN({}));\nconsole.log(isNaN('hello'), Number.isNaN('hello'));\n"
+    }, {
+      "title": "Number.isSafeInteger",
+      "description": "Check to ensure that a number represents a safe integer.",
+      "code": "var max = Number.MAX_SAFE_INTEGER;\nvar min = Number.MIN_SAFE_INTEGER;\n\nconsole.log(Number.isSafeInteger(max));\nconsole.log(Number.isSafeInteger(max + 1));\nconsole.log(Number.isSafeInteger(max + 2));\n\nconsole.log(Number.isSafeInteger(min));\nconsole.log(Number.isSafeInteger(min - 1));\nconsole.log(Number.isSafeInteger(min - 2));"
+    }]
+  }, {
+    "section": "Regular expression extensions",
+    "features": [{
+      "filename": "RegExp.u.flag",
+      "title": "RegExp \"u\" flag",
+      "description": "Searching multi-codepoint Unicode with regular expressions.",
+      "code": "// I'm not going to get all into Unicode because\n// I feel pretty certain that you would read for\n// hours and hours and hours and hours and ...\n\n// Suffice it to say, some Unicode characters\n// exist outside the Basic Multilingual Plane\n// and exist outside of the first 65,536 code\n// points. Because of that, we have to\n// specify two code points to make the character\n// like you can see in this string.\nvar s = 'I got the \\uD83D\\uDCA9 on me!';\n\n// Regular expressions through ECMAscript 5 fail\n// on understanding that one character could have\n// multiple code points. Because of that, the\n// following regular expression fails because the\n// dot operator, while supposedly matching a\n// single character, actually matches a single\n// code point.\nconsole.log(s.match(/I got the . on me!/));\n\n// Now, with the \"u\" flag, regular expressions\n// with character patters like \".\", \"?\", and\n// \"{}\" will correctly recognize multi-code-\n// point characters.\nconsole.log(s.match(/I got the . on me!/u));"
+    }, {
+      "title": "RegExp.prototype.compile",
+      "description": "Providing an implementation of ECMAscript little hints to go faster.",
+      "code": "// Why does RegExp.prototype.compile exist in\n// ECMAscript 6?\n\n// I think the standards committee put it in\n// the language spec because all of the browsers\n// support it. They've supported it for a while.\n// Microsoft Internet Explorer 6 introduced it\n// and all the other browsers over the past\n// decade have copied it as an informal standard.\n\n// Now TC39 put it in the language spec. If you\n// have used regular expressions in JavaScript,\n// then you've probably already run across this.\n\n// RegExp.prototype.compile just replaces the\n// current representation of the regular\n// expression with a new one.\nvar re = /abc/;\nre.compile('xyz', 'i');\n\nconsole.log('123abc456'.match(re));\nconsole.log('123XYZ456'.match(re));"
+    }, {
+      "title": "RegExp.prototype.match",
+      "description": "Matching a string from a regular expression.",
+      "code": ""
+    }, {
+      "title": "RegExp.prototype.replace",
+      "description": "Replace a match in a string from a regular expression.",
+      "code": ""
+    }, {
+      "title": "RegExp.prototype.search",
+      "description": "Search for a substring in a string from a regular expression.",
+      "code": ""
+    }, {
+      "title": "RegExp.prototype.split",
+      "description": "Split a string from a regular expression.",
+      "code": ""
+    }]
+  }, {
+    "section": "String handling",
+    "features": [{
+      "title": "String.fromCodePoint",
+      "description": "Create a string from Unicode code points.",
+      "code": "// In the days before Unicode, we had 2^8 = 256\n// characters and, then, 2^16 = 65,536 characters\n// in our character sets. We could represent each\n// of those characters as a number, or code, for\n// the specific character encoding we used in\n// our software. Pre-Unicode ECMAscript provides\n// the String.fromCharCode method to build strings\n// from those character codes.\n\n// This converts the code 72 to \"H\" and 105 to \"i\"\n// and concatenates them to form \"Hi\".\nconsole.log(String.fromCharCode(72, 105));\n\n// But, because we had a limit of 65,536\n// characters, the String.fromCharCode method\n// would modulo the argument to prevent those\n// pesky exceptions that early Web \"programmers\"\n// hated.\nconsole.log(String.fromCharCode(72 + 65536, 105));\n\n// Then, Unicode came along with its\n// Supplementary Multilingual Plane and its\n// Supplementary Ideographic Plane and more,\n// characters represented by more than one\n// character code which Unicode calls a \"code\n// point\". Now, String.fromCharCode doesn't work.\nconsole.log(String.fromCharCode(127776));\n\n// String.fromCodePoint exists to resolve the\n// values outside the Basic Multilingual Plane.\nconsole.log(String.fromCodePoint(127776));"
+    }, {
+      "filename": "String.prototype.HTML.methods",
+      "title": "String.prototype HTML methods",
+      "description": "Silly methods to generate HTML that no one will ever use.",
+      "code": "// Back in the days of Netscape Navigator, savvy\n// Web programmers would use the most evil method\n//   document.write\n// to inject dynamic HTML into the loading HTML\n// stream or replace the entire document. To make\n// HTML generation easier, the browser guys made\n// some convenience methods that, finally, just\n// made it into the spec. And, look! The methods\n// generate deprecated tags, too! Thank you, TC39!\n\nvar s = 'some text';\nconsole.logHTML(s.big());\nconsole.logHTML(s.blink());\nconsole.logHTML(s.bold());\nconsole.logHTML(s.fixed());\nconsole.logHTML(s.fontcolor('red'));\nconsole.logHTML(s.fontsize(10));\nconsole.logHTML(s.italics());\nconsole.logHTML(s.link('http://curtis.schlak.com'));\nconsole.logHTML(s.small());\nconsole.logHTML(s.strike());\nconsole.logHTML(s.sub());\nconsole.logHTML(s.sup());"
+    }, {
+      "title": "String.prototype.codePointAt",
+      "description": "Gets the Unicode code point in a string.",
+      "code": "// In the days before Unicode, we had 2^8 = 256\n// characters and, then, 2^16 = 65,536 characters\n// in our character sets. We could represent each\n// of those characters as a number, or code, for\n// the specific character encoding we used in\n// our software. Pre-Unicode ECMAscript provides\n// the String.prototype.charCodeAt method to\n// get the integer representations of a character\n// in a string.\nvar ascii = 'Hi, Curtis';\nvar charCode = ascii.charCodeAt(4);\nvar char = String.fromCharCode(charCode);\nconsole.log(charCode, char);\n\n// Then, Unicode came along with its\n// Supplementary Multilingual Plane and its\n// Supplementary Ideographic Plane and more,\n// characters represented by more than one\n// character code which Unicode calls a \"code\n// point\". Now, charCodeAt doesn't work because\n// it expects each character to fit into a\n// number less than 65,536.\nvar unicode = 'Hi, 🌠';\ncharCode = unicode.charCodeAt(4);\nchar = String.fromCharCode(charCode);\nconsole.log(charCode, char);\n\n// String.prototype.codePointAt exists to resolve\n// the values outside the Basic Multilingual Plane.\nvar codePoint = unicode.codePointAt(4);\nchar = String.fromCodePoint(codePoint);\nconsole.log(codePoint, char);"
+    }, {
+      "title": "String.prototype.contains",
+      "description": "Determine if a substring exists in a string.",
+      "code": "// We often want to know if a string contains\n// a substring. In older versions of\n// ECMAscript, we had to use the \"indexOf\"\n// method. But, that returns a -1 when not\n// found which, according to the implicit type\n// conversions in ECMAscript, means true. So,\n// we had to do a comparison to determine the\n// truthiness of a substring in a string.\nvar s = 'There is nothing to fear but me.';\nvar search = {\n  good: 'nothing',\n  bad: 'marsha'\n};\n\nconsole.log(s.indexOf(search.good) > -1);\nconsole.log(s.indexOf(search.bad) > -1);\n\n// As a convenience, ECMAscript 6 provides the\n// String.prototype.contains method to return\n// a Boolean value rather than an integer.\nconsole.log(s.contains(search.good));\nconsole.log(s.contains(search.bad));\n\n// Interestingly enough, ECMAscript 5 also has\n// the \"search\" method which uses a regular\n// expression to determine if a string contains\n// a pattern. It also returns an index and suffers\n// from the same truthiness problem as \"indexOf\".\nconsole.log(s.search(/to/) > -1);\n\n// The \"contains\" method will accept a regular\n// expression, too.\nconsole.log(s.contains(/to/));\n\n// Why is that false? When we pass the regular\n// expression into \"contains\", it calls toString\n// on the regular expression which yields a\n// a serialized version of the regular expression\n// that contains the boundary delimeters.\nconsole.log(/to/.toString());\n\n// This means that \"contains\" actually searches\n// for the substring \"/to/\" in the string.\nconsole.log('here /to/ there'.contains(/to/));"
+    }, {
+      "title": "String.prototype.endsWith",
+      "description": "Determine if a string ends with another string.",
+      "code": "// We often want to know if a string ends with\n// a substring. In older versions of\n// ECMAscript, we could use the \"lastIndexOf\"\n// method. So, to figure out if a string ended\n// with another string, we had to do some math.\nvar s = 'There is nothing to fear but me.';\nvar search = {\n  good: 'me.',\n  bad: 'you.'\n};\n\nfunction endsWith(str, search) {\n  var strLen = str.length;\n  var searchLen = search.length;\n  var index = str.lastIndexOf(search);\n  return index === strLen - searchLen;\n}\n\nconsole.log(endsWith(s, search.good));\nconsole.log(endsWith(s, search.bad));\n\n// A more convenient way was to use regular\n// expressions and the \"$\" terminal symbol.\nfunction endsWith(str, search) {\n  search = new RegExp(search + '$');\n  return str.search(search) > -1;\n}\n\nconsole.log(endsWith(s, search.good));\nconsole.log(endsWith(s, search.bad));\n\n// ECMAscript 6 now offers a convenience method\n// to do the same thing.\nconsole.log(s.endsWith(search.good));\nconsole.log(s.endsWith(search.bad));"
+    }, {
+      "title": "String.prototype.normalize",
+      "description": "Normalizing Unicode characters for search and comparison.",
+      "code": "// I am not going to teach you about Unicode\n// equivalence and normalization. Because, OMG,\n// huge topic. However, I will show some examples\n// which will let you understand why this\n// \"normalize\" method now exists for strings.\n\n// Here's some Unicode. The \"IX\" is a single\n// Unicode character (U+2168), the superscript\n// 5 is a single Unicode character (U+2075),\n// and the ffi ligature mark (U+FB03) is a single\n// Unicode character.\nvar raw = \"ϔ Ⅸ⁵ = 59049 ﬃ\";\n\n// Now, Unicode describes four ways to\n// normalize values.\nvar nfc = raw.normalize('NFC');\nvar nfd = raw.normalize('NFD');\nvar nfkc = raw.normalize('NFKC');\nvar nfkd = raw.normalize('NFKD');\n\n// What do they do?\n// This one does essentially nothing. NFC\n// normalization will do nothing if you\n// start with well-formed Unicode.\nconsole.log(nfc, nfc.length, nfc.codePointAt(0));\n\n// This one decomposes the \"ϔ\" into two characters:\n// the \"ϒ\" and the combining umlaut character.\nconsole.log(nfd, nfd.length, nfd.codePointAt(0));\n\n// This one decomposes by compatibility, changing\n// the \"Ⅸ\" to \"IX\", the \"⁵\" to \"5\", the \"ﬃ\" to\n// \"ffi\", and the \"ϔ\" to \"Ϋ\"\nconsole.log(nfkc, nfkc.length, nfkc.codePointAt(0));\n\n// This one decomposes by compatibility and\n// combining characters, changing the \"ϔ\" into\n// \"Y\" and an umlaut, the \"Ⅸ\" to \"IX\", the \"⁵\"\n// to \"5\", and the \"ﬃ\" to \"ffi\".\nconsole.log(nfkd, nfkd.length, nfkd.codePointAt(0));\n"
+    }, {
+      "title": "String.prototype.startsWith",
+      "description": "Determine if a string starts with another string.",
+      "code": "// We often want to know if a string starts with\n// another string. In older versions of\n// ECMAscript, we could use the \"indexOf\"\n// method and check to make sure the returned\n// index equalled 0.\nvar s = 'There is nothing to fear but me.';\nvar search = {\n  good: 'There',\n  bad: 'Cat'\n};\n\nconsole.log(s.indexOf(search.good) === 0);\nconsole.log(s.indexOf(search.bad) === 0);\n\n// We could also use regular expressions and\n// the \"^\" terminal, but meh.\nfunction startsWith(str, search) {\n  search = new RegExp('^' + search);\n  return str.search(search) > -1;\n}\n\nconsole.log(startsWith(s, search.good));\nconsole.log(startsWith(s, search.bad));\n\n// ECMAscript 6 now offers a convenience method\n// to do the same thing.\nconsole.log(s.startsWith(search.good));\nconsole.log(s.startsWith(search.bad));"
+    }, {
+      "filename": "Unicode.code.point.escapes",
+      "title": "Unicode code point escapes",
+      "description": "Shorter, easier-to-type escape sequences for Unicode.",
+      "code": "// In Unicode, some characters live in the big\n// number area that requires more than one\n// escape sequence to describe it.\n\n// You ask, \"Why so much typing? Isn't there a\n// better, shorter way to type that?\"\n\n// Yes, there now is with ES6 and the Unicode\n// code point escape sequence enables this.\nconsole.log('\\uD83D\\uDCA9', '\\u{1F4A9}');"
+    }]
+  }]
+}

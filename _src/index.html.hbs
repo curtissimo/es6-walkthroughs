@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>ECMAscript 6 Walkthroughs</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/global.css">
+
+    <script src="https://cdn.rawgit.com/jmcriffey/bower-traceur/0.0.72/traceur.js"></script>
+    <script src="https://cdn.rawgit.com/ModuleLoader/es6-module-loader/v0.9.4/dist/es6-module-loader.js"></script>
+    <script src="https://cdn.rawgit.com/systemjs/systemjs/0.9.3/dist/system.js"></script>
+    <script src="./assets/system.config.js"></script>
+
+    <script type="application/javascript;version=1.7" src="./assets/tests.js"></script>
+    <script>System.import('index');</script>
+  </head>
+  <body>
+    <div class="constrainer">
+      <header class="pure-g main">
+        <h1 class="pure-u-1-3">ES6 Walkthroughs</h1>
+        <h2 class="pure-u-2-3">
+          <p>
+            We dedicate this site to all the hardworking Web application
+            developers trying to stay ahead of the game in an ever-changing
+            landscape of chaos and fun.
+          </p>
+          <p>
+            Click a solid lime green box below to try out a new feature in
+            ECMAScript supported by either your browser or traceur.
+          </p>
+          <p>
+            Click the <span class="fa fa-external-link"></span> or the
+            <span class="fa fa-external-link-square"></span> next to the
+            walkthrough name to view the specification documentation.
+          </p>
+        </h2>
+      </header>
+      <section id="tools" class="pure-g">
+        <div class="pure-u-3-4">
+          <div class="pure-menu pure-menu-open pure-menu-horizontal">
+            <ul>
+              <li class="pure-menu-selected"><a href="#browser">What browser?</a></li>
+              <li><a href="#contributors">Contributors</a></li>
+              <li><a href="#why">Why did you make this?</a></li>
+              <li><a href="#thanks">Thanks to...</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="pure-u-1-4 tool-button">
+          <form class="pure-form" method="get" action="https://github.com/realistschuckle/es6-walkthroughs">
+            <button class="pure-button pure-button-primary">
+              <img src="assets/GitHub-Mark-Light-32px.png">
+              View me on GitHub
+            </button>
+          </form>
+        </div>
+      </section>
+      <div id="explanations">
+        <section id="browser" class="show">
+          <div>
+            <div class="pure-g">
+              <div class="pure-u-1-4">
+                <h2>Firefox Nightly</h2>
+                <p>
+                  At the moment,
+                  <a href="https://nightly.mozilla.org">Firefox Nightly</a> has
+                  the best support for ES6 with <strong>75%</strong> of the ES6
+                  features implemented. Go get it.
+                </p>
+              </div>
+              <div class="pure-u-1-4">
+                <h2>Chrome Canary</h2>
+                <p>
+                  The next best recommendation is
+                  <a href="http://www.google.com/intl/en/chrome/browser/canary.html">Chrome Canary</a>
+                  with <strong>65%</strong> of ES6 features implemented.
+                </p>
+              </div>
+              <div class="pure-u-1-4">
+                <h2>Firefox and Chrome</h2>
+                <p>
+                  Right behind the bleeding edge options are
+                  <a target="_blank" href="http://getfirefox.com">Firefox Stable</a>
+                  at <strong>64%</strong> and
+                  <a target="_blank" href="http://getfirefox.com">Chrome Stable</a>
+                  at <strong>59%</strong> of ES6 features implemented.
+                </p>
+              </div>
+              <div class="pure-u-1-4">
+                <h2 class="ignore">IE 11</h2>
+                <p>
+                  Not worth your time with only <strong>11%</strong> of ES6
+                  features implemented. Maybe IE 12 in Windows
+                  <span class="ignore">9</span> 10 will have better support.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="why">
+          <div class="three-column">
+            <p>
+              I recently gave a talk to some fine developers at the Houston
+              TechFest 2014. I did not know that I had time allotted to me to
+              talk and, therefore, had not prepared any material.
+            </p>
+            <p>
+              When I arrived at the lectern, I looked out over the room and
+              mentioned my unpreparedness. While I plugged in my laptop to the
+              projector, I thought about all the cool stuff I had learned and
+              used recently. When I said that I did not
+              know what to talk about, someone called out "JavaScript"! I asked
+              why I should talk about that; the audience member replied,
+              "Because we're in the JavaScript room!"
+            </p>
+            <p>
+              Being no stranger to JavaScript, I asked how many people had heard
+              of ECMAscript 6, ECMAscript Harmony, or the like. Only one person
+              raised their hand! I talked about the features in the
+              upcoming version of ES and saw that a lot of the audience appeared
+              interested in the topic. The following week, I started asking some
+              of my coworkers if they knew about ES6 and the cool stuff in it. I
+              found very few that did.
+            </p>
+            <p>
+              I searched around the World Wide Web to find some tutorials from
+              which my friends and coworkers could learn. I found a few,
+              sprinkled around the Internet, containing some pretty dated
+              material. So, I have tried to bring it all together in one place.
+              I hope you get some use out of it.
+            </p>
+            <p class="signature">Curtis Schlak</p>
+          </div>
+        </section>
+        <section id="thanks">
+          <div>
+            <div class="pure-g">
+              <div class="pure-u-1-4">
+                I want to thank others that have put together resources that this
+                site uses.
+              </div>
+              <div class="pure-u-3-8">
+                <h2>ECMAscript support</h2>
+                <dl>
+                  <dt>
+                    <a target="_blank" href="https://github.com/kangax/compat-table">@kangax</a>
+                  </dt>
+                  <dd>
+                    kangax maintains the ECMAscript compatibility tables over on
+                    GitHub. This site specifically uses the
+                    <code>data-es6.js</code> for information about ES6 features
+                    and the tests that demonstrate that.
+                  </dd>
+                  <dt>
+                    <a target="_blank" href="http://ace.c9.io">Ace code editor</a>
+                  </dt>
+                  <dd>
+                    Used in all of the example pages. Thanks, Ace guys.
+                  </dd>
+                  <dt>
+                    <a target="_blank" href="https://github.com/google/traceur-compiler/wiki/GettingStarted">traceur</a>
+                  </dt>
+                  <dd>
+                    For those browsers that do not support some of the ES6
+                    features, traceur allows you to polyfill some of the
+                    upcoming functionality. You can see the support in the
+                    right-most column.
+                  </dd>
+                  <dt>
+                    <a target="_blank" href="http://craig.is/killing/mice">Mousetrap</a>
+                  </dt>
+                  <dd>
+                    Used for keybindings on the editor pages.
+                  </dd>
+                </dl>
+              </div>
+              <div class="pure-u-3-8">
+                <h2>CSS support</h2>
+                <dl>
+                  <dt>
+                    <a target="_blank" href="http://purecss.io">Pure CSS</a>
+                  </dt>
+                  <dd>
+                    A lightweight CSS library. Lightweight as in it does very
+                    little for you and, in as much, has few opinions about
+                    things.
+                  </dd>
+                  <dt>
+                    <a target="_blank" href="http://fontawesome.io">Font Awesome</a>
+                  </dt>
+                  <dd>
+                    Awesome font glyphs.
+                  </dd>
+                </dl>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section id="contributors">
+          <div>
+            <div class="pure-g">
+              <div class="pure-u-1-3">
+                <img src="http://www.gravatar.com/avatar/7b6c3840cd471a49351ac1f4e189a6be?s=200">
+                <h2><a href="http://github.com/realistschuckle" target="_blank">@realistschuckle</a></h2>
+              </div>
+              <div class="pure-u-1-3">
+                <img src="http://www.gravatar.com/avatar/0cfd7d1dcae7c63f063a08dbae0e154f?s=200">
+                <h2><a href="http://github.com/bryansray" target="_blank">@bryansray</a></h2>
+              </div>
+              <div class="pure-u-1-3">
+                <img src="http://www.gravatar.com/avatar/7869dd725d1584ef1d6f0d2c84d2ac41?s=200">
+                <h2><a href="http://github.com/davehimself" target="_blank">@davehimself</a></h2>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+      <section id="toc">
+        <table id="interesting">
+          <colgroup>
+            <col class="toc-group">
+            <col class="toc-walkthrough">
+            <col class="toc-native-support">
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="2" class="toc-group-walkthrough">Interesting narrated walkthroughs</th>
+              <th class="toc-native-support">Supported by...?</th>
+            </tr>
+          </thead>
+          {{#each interesting}}
+            <tbody>
+              {{#if title}}
+                <tr class="not-ready" data-test="{{keys}}">
+                  <td colspan="2">{{{title}}}</td>
+                  <td></td>
+                </tr>
+              {{else}}
+                {{#each features}}
+                  {{#if @index}}
+                    <tr class="not-ready" data-test="{{keys}}">
+                      <td>{{{title}}}</td>
+                      <td></td>
+                    </tr>
+                  {{else}}
+                    <tr class="not-ready" data-test="{{keys}}">
+                      <th rowspan="{{../../features.length}}">{{../../section}}</th>
+                      <td>{{{title}}}</td>
+                      <td></td>
+                    </tr>
+                  {{/if}}
+                {{/each}}
+              {{/if}}
+            </tbody>
+          {{/each}}
+        </table>
+        <table id="boring">
+          <colgroup>
+            <col class="toc-group">
+            <col class="toc-walkthrough">
+            <col class="toc-native-support">
+          </colgroup>
+          <thead>
+            <tr>
+              <th colspan="2">Boring text-only experiences</th>
+              <th>Supported by...?</th>
+            </tr>
+          </thead>
+          {{#each boring}}
+            <tbody>
+              {{#each features}}
+                {{#if @index}}
+                  <tr data-test="{{key}}" data-href="./simple-walkthroughs/{{filename}}.html">
+                    <td>{{{title}}}</td>
+                    <td></td>
+                  </tr>
+                {{else}}
+                  <tr data-test="{{key}}" data-href="./simple-walkthroughs/{{filename}}.html">
+                    <th rowspan="{{../../features.length}}">{{../../section}}</th>
+                    <td>{{{title}}}</td>
+                    <td></td>
+                  </tr>
+                {{/if}}
+              {{/each}}
+            </tbody>
+          {{/each}}
+        </table>
+      </section>
+    <footer>
+      Copyright 2014 by <a href="http://curtissimo.com">curtissimo</a>.
+      All rights reserved.
+    </footer>
+    </div>
+  </body>
+</html>

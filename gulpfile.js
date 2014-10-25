@@ -1,46 +1,27 @@
-var del, gulp, rename, traceur;
+var fs, gulp, handlebars, mkdir, path, rename, traceur;
 
-del = require('del');
+fs = require('fs');
 gulp = require('gulp');
+handlebars = require('handlebars');
+mkdir = require('mkdirp');
+path = require('path');
 rename = require('gulp-rename');
 traceur = require('gulp-traceur');
 
-gulp.task('clean', function (cb) {
-  var targets = [
-    './assets/tests.js',
-    './assets/index.js',
-    './assets/setup.js',
-    './assets/dom-console.js',
-    './assets/repl.js'
-  ];
-  del(targets, cb);
-});
-
 gulp.task('default', [
-  'tests',
-  'index',
-  'simple-walkthrough-setup',
-  'dom-console',
-  'repl'
+  'build-modules',
+  'build-index',
+  'build-simple-walkthroughs'
 ]);
 
 gulp.task('dev', [ 'default' ], function () {
-  gulp.watch('_assets/*', [ 'default' ]);
+  gulp.watch('_src/modules/*', [ 'build-modules' ]);
+  gulp.watch('_src/index.*', [ 'build-index' ]);
+  gulp.watch([ '_src/simple*', '_src/index.json' ], [ 'build-simple-walkthroughs' ]);
 });
 
-gulp.task('tests', function () {
-  return gulp.src('_assets/tests.js')
-    .pipe(traceur({
-      experimental: true,
-      modules: 'instantiate',
-      moduleName: true
-    }))
-    .pipe(rename('tests.js'))
-    .pipe(gulp.dest('./assets'));
-});
-
-gulp.task('index', function () {
-  return gulp.src('_assets/index.js')
+gulp.task('build-modules', function () {
+  return gulp.src('_src/modules/*.js')
     .pipe(traceur({
       experimental: true,
       modules: 'instantiate',
@@ -49,32 +30,60 @@ gulp.task('index', function () {
     .pipe(gulp.dest('./assets'));
 });
 
-gulp.task('simple-walkthrough-setup', function () {
-  return gulp.src('_assets/simple-walkthrough-setup.js')
-    .pipe(traceur({
-      experimental: true,
-      modules: 'instantiate',
-      moduleName: true
-    }))
-    .pipe(gulp.dest('./assets'));
+gulp.task('build-index', function (cb) {
+  fs.readFile('./_src/index.html.hbs', 'utf8', function (sourceerr, source) {
+    var template = handlebars.compile(source)
+    fs.readFile('./_src/index.json', function (dataerr, data) {
+      var i, j, section, features, content;
+      data = JSON.parse(data);
+      for (i = 0; i < data.boring.length; i += 1) {
+        section = data.boring[i];
+        for (j = 0; j < section.features.length; j += 1) {
+          feature = section.features[j];
+          if (feature.key === undefined) {
+            feature.key = feature.title;
+          }
+          if (feature.filename === undefined) {
+            feature.filename = feature.key;
+          }
+        }
+      }
+      content = template(data).replace('<head>', '<head>\n    <meta name="generator" content="Handlebars - do not edit">')
+      fs.writeFile('./index.html', content, 'utf8', cb);
+    });
+  });
 });
 
-gulp.task('dom-console', function () {
-  return gulp.src('_assets/dom-console.js')
-    .pipe(traceur({
-      experimental: true,
-      modules: 'instantiate',
-      moduleName: true
-    }))
-    .pipe(gulp.dest('./assets'));
-});
-
-gulp.task('repl', function () {
-  return gulp.src('_assets/repl.js')
-    .pipe(traceur({
-      experimental: true,
-      modules: 'instantiate',
-      moduleName: true
-    }))
-    .pipe(gulp.dest('./assets'));
+gulp.task('build-simple-walkthroughs', function (cb) {
+  mkdir('./simple-walkthroughs', function (e) {
+    if (e) {
+      return cb(e);
+    }
+    fs.readFile('./_src/simple-walkthrough-template.html.hbs', 'utf8', function (sourceerr, source) {
+      var template = handlebars.compile(source)
+      fs.readFile('./_src/index.json', function (dataerr, data) {
+        var i, j, section, features, content;
+        data = JSON.parse(data);
+        try {
+          for (i = 0; i < data.boring.length; i += 1) {
+            section = data.boring[i];
+            for (j = 0; j < section.features.length; j += 1) {
+              feature = section.features[j];
+              if (feature.key === undefined) {
+                feature.key = feature.title;
+              }
+              if (feature.filename === undefined) {
+                feature.filename = feature.key;
+              }
+              content = template(feature).replace('<head>', '<head>\n    <meta name="generator" content="Handlebars - do not edit">')
+              fs.writeFileSync(path.join('./simple-walkthroughs', feature.filename + '.html'), content, 'utf8');
+            }
+          }
+        } catch (e) {
+          return cb(e);
+        }
+        cb();
+      });
+    });
+  })
 });
