@@ -13,6 +13,17 @@ Local Testing
 
 A simple static server has been included and requires nodejs. A package.json has been included for installing dependencies. To install and run:
 
-1. npm install
-2. node server.js
+```shell
+git clone https://github.com/realistschuckle/es6-walkthroughs.git
+npm install
+gulp dev
+```
 
+In another shell...
+
+```shell
+npm start
+```
+Change ES6 modules in `_assets` and **gulp** will build the ES5 versions and
+put them in `assets`. When you commit, commit the changes in both `_assets` and
+`assets` so GitHub pages will work appropriately.
