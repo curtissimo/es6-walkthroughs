@@ -36,6 +36,25 @@ gulp.task('build-index', function (cb) {
     fs.readFile('./_src/index.json', function (dataerr, data) {
       var i, j, section, features, content;
       data = JSON.parse(data);
+      for (i = 0; i < data.interesting.length; i += 1) {
+        section = data.interesting[i];
+        if (section.features) {
+          for (j = 0; j < section.features.length; j += 1) {
+            feature = section.features[j];
+            if (feature.key === undefined) {
+              feature.key = feature.title;
+            }
+            if (feature.filename === undefined) {
+              feature.filename = feature.key;
+            }
+            if (feature.state === undefined) {
+              feature.state = '';
+            }
+          }
+        } else if (section.state === undefined) {
+          section.state = '';
+        }
+      }
       for (i = 0; i < data.boring.length; i += 1) {
         section = data.boring[i];
         for (j = 0; j < section.features.length; j += 1) {

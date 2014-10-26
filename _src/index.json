@@ -1,138 +1,175 @@
 {
   "interesting": [{
     "title": "<code>let</code> and <code>const</code>",
-    "keys": [ "let", "const" ]
+    "keys": [ "let", "const" ],
+    "state": "not-ready"
   }, {
     "title": "<code>class</code> and <code>super</code>",
-    "keys": [ "class", "super" ]
+    "keys": [ "class", "super" ],
+    "state": "not-ready"
   }, {
     "title": "Syntactic sugar for property and method declarations",
-    "keys": [ "shorthand methods", "shorthand properties" ]
+    "keys": [ "shorthand methods", "shorthand properties" ],
+    "state": "not-ready"
   }, {
     "title": "Arrow functions",
-    "keys": [ "arrow functions" ]
+    "keys": [ "arrow functions" ],
+    "state": "not-ready"
   }, {
     "title": "Promises",
-    "keys": [ "Promise" ]
+    "keys": [ "Promise" ],
+    "state": "not-ready"
   }, {
     "title": "Proxy objects",
-    "keys": [ "Proxy" ]
+    "keys": [ "Proxy" ],
+    "state": "not-ready"
   }, {
     "title": "Reflection methods",
-    "keys": [ "Reflect" ]
+    "keys": [ "Reflect" ],
+    "state": "not-ready"
   }, {
     "title": "\"Spreading\", otherwise known as splicing, arrays and strings into other arrays and function calls",
-    "keys": [ "spread array (...) operator", "spread call (...) operator", "string spreading" ]
+    "keys": [ "spread array (...) operator", "spread call (...) operator", "string spreading" ],
+    "state": "not-ready"
   }, {
     "title": "Sticky regular expressions",
-    "keys": [ "RegExp \"y\" flag" ]
+    "keys": [ "RegExp \"y\" flag" ],
+    "state": "not-ready"
   }, {
     "section": "Collections",
     "features": [{
       "title": "Native non-Array collections",
-      "keys": [ "Map", "Set" ]
+      "keys": [ "Map", "Set" ],
+      "state": "not-ready"
     }, {
       "title": "Weak native non-Array collections",
-      "keys": [ "WeakMap", "WeakSet" ]
+      "keys": [ "WeakMap", "WeakSet" ],
+      "state": "not-ready"
     }, {
       "title": "Strongly-typed Arrays",
-      "keys": [ "typed arrays" ]
+      "keys": [ "typed arrays" ],
+      "state": "not-ready"
     }, {
       "title": "Views into strongly-typed Arrays",
-      "keys": [ "typed arrays (DataView)" ]
+      "keys": [ "typed arrays (DataView)" ],
+      "state": "not-ready"
     }]
   }, {
     "section": "Destructuring",
     "features": [{
       "title": "Complex direct assignments",
-      "keys": [ "destructuring" ]
+      "keys": [ "destructuring" ],
+      "state": "not-ready"
     }, {
       "title": "Complex assignments of default parameters",
-      "keys": [ "destructuring defaults" ]
+      "keys": [ "destructuring defaults" ],
+      "state": "not-ready"
     }, {
       "title": "Complex assignments of parameter values",
-      "keys": [ "destructuring parameters" ]
+      "keys": [ "destructuring parameters" ],
+      "state": "not-ready"
     }, {
       "title": "Complex assignment to a spread",
-      "keys": [ "destructuring rest" ]
+      "keys": [ "destructuring rest" ],
+      "state": "not-ready"
     }]
   }, {
     "section": "Flow control",
     "features": [{
       "title": "<code>for..of</code> loops (instead of <code>for..in</code>)",
-      "keys": [ "for..of loops" ]
+      "keys": [ "for..of loops" ],
+      "state": "not-ready"
     }, {
       "title": "Generator functions (and the <code>yield</code> keyword)",
-      "keys": [ "generators (yield)" ]
+      "keys": [ "generators (yield)" ],
+      "state": "not-ready"
     }]
   }, {
     "section": "Functions",
     "features": [{
       "title": "Turning functions into methods",
-      "keys": [ "Function.prototype.toMethod" ]
+      "keys": [ "Function.prototype.toMethod" ],
+      "state": "not-ready"
     }, {
       "title": "Default function parameters",
-      "keys": [ "default function parameters" ]
+      "keys": [ "default function parameters" ],
+      "state": "not-ready"
     }, {
       "title": "Binding the remaining parameters of a function to a single variable",
-      "keys": [ "rest parameters" ]
+      "keys": [ "rest parameters" ],
+      "state": "not-ready"
     }, {
       "title": "Name property of functions",
-      "keys": [ "function \"name\" property" ]
+      "keys": [ "function \"name\" property" ],
+      "state": "not-ready"
     }, {
       "title": "Tail-call recursion",
-      "keys": [ "proper tail calls (tail call optimisation)" ]
+      "keys": [ "proper tail calls (tail call optimisation)" ],
+      "state": "not-ready"
     }, {
       "title": "Block-level scoping of function declarations",
-      "keys": [ "block-level function declaration" ]
+      "keys": [ "block-level function declaration" ],
+      "state": "not-ready"
     }]
   }, {
     "section": "Metaprogramming",
     "features": [{
       "title": "Computed properties",
-      "keys": [ "computed properties" ]
+      "keys": [ "computed properties" ],
+      "state": "not-ready"
     }, {
       "title": "Getter and setter prototype property",
-      "keys": [ "Object.prototype.__proto__", "__proto__ in object literals" ]
+      "keys": [ "Object.prototype.__proto__", "__proto__ in object literals" ],
+      "state": "not-ready"
     }, {
       "title": "Mixin properties of other objects",
-      "keys": [ "Object.assign" ]
+      "keys": [ "Object.assign" ],
+      "state": "not-ready"
     }, {
       "title": "Use a function to set the prototype of an object",
-      "keys": [ "Object.setPrototypeOf" ]
+      "keys": [ "Object.setPrototypeOf" ],
+      "state": "not-ready"
     }]
   }, {
     "section": "Modules",
     "features": [{
       "title": "<code>export</code> keyword",
-      "keys": [ "modules" ]
+      "keys": [ "modules" ],
+      "state": "not-ready"
     }, {
       "title": "Module loader",
-      "keys": [ "Reflect.Loader" ]
+      "keys": [ "Reflect.Loader" ],
+      "state": "not-ready"
     }]
   }, {
     "section": "String handling",
     "features": [{
       "title": "Template strings",
-      "keys": [ "template strings" ]
+      "keys": [ "template strings" ],
+      "state": "not-ready"
     }, {
       "title": "Destructuring template strings",
-      "keys": [ "tagged template strings" ]
+      "keys": [ "tagged template strings" ],
+      "state": "not-ready"
     }, {
       "title": "New string from repeating a single string",
-      "keys": [ "String.prototype.repeat" ]
+      "keys": [ "String.prototype.repeat" ],
+      "state": "not-ready"
     }, {
       "title": "Programmatic substitution in template strings",
-      "keys": [ "String.raw" ]
+      "keys": [ "String.raw" ],
+      "state": "not-ready"
     }]
   }, {
     "section": "Symbols",
     "features": [{
       "title": "Simple symbols as properties",
-      "keys": [ "Global symbol registry", "Symbol", "Object.getOwnPropertySymbols" ]
+      "keys": [ "Global symbol registry", "Symbol", "Object.getOwnPropertySymbols" ],
+      "state": "not-ready"
     }, {
       "title": "Advanced symbols for conversion",
-      "keys": [ "Symbol.hasInstance", "Symbol.isConcatSpreadable", "Symbol.isRegExp", "Symbol.iterator", "Symbol.toPrimitive", "Symbol.toStringTag", "Symbol.unscopables" ]
+      "keys": [ "Symbol.hasInstance", "Symbol.isConcatSpreadable", "Symbol.isRegExp", "Symbol.iterator", "Symbol.toPrimitive", "Symbol.toStringTag", "Symbol.unscopables" ],
+      "state": "not-ready"
     }]
   }],
   "boring": [{

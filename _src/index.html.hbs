@@ -232,19 +232,19 @@
           {{#each interesting}}
             <tbody>
               {{#if title}}
-                <tr class="not-ready" data-test="{{keys}}">
+                <tr class="{{state}}" data-test="{{keys}}">
                   <td colspan="2">{{{title}}}</td>
                   <td></td>
                 </tr>
               {{else}}
                 {{#each features}}
                   {{#if @index}}
-                    <tr class="not-ready" data-test="{{keys}}">
+                    <tr class="{{state}}" data-test="{{keys}}">
                       <td>{{{title}}}</td>
                       <td></td>
                     </tr>
                   {{else}}
-                    <tr class="not-ready" data-test="{{keys}}">
+                    <tr class="{{state}}" data-test="{{keys}}">
                       <th rowspan="{{../../features.length}}">{{../../section}}</th>
                       <td>{{{title}}}</td>
                       <td></td>
