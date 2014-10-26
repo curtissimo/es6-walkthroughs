@@ -232,19 +232,19 @@
           {{#each interesting}}
             <tbody>
               {{#if title}}
-                <tr class="{{state}}" data-test="{{keys}}">
+                <tr class="{{state}}" data-test="{{keys}}" data-href="./narrated-walkthroughs/{{filename}}">
                   <td colspan="2">{{{title}}}</td>
                   <td></td>
                 </tr>
               {{else}}
                 {{#each features}}
                   {{#if @index}}
-                    <tr class="{{state}}" data-test="{{keys}}">
+                    <tr class="{{state}}" data-test="{{keys}}" data-href="./narrated-walkthroughs/{{filename}}">
                       <td>{{{title}}}</td>
                       <td></td>
                     </tr>
                   {{else}}
-                    <tr class="{{state}}" data-test="{{keys}}">
+                    <tr class="{{state}}" data-test="{{keys}}" data-href="./narrated-walkthroughs/{{filename}}">
                       <th rowspan="{{../../features.length}}">{{../../section}}</th>
                       <td>{{{title}}}</td>
                       <td></td>
