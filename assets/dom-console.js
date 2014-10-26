@@ -83,6 +83,7 @@ System.register("dom-console", [], function($__export) {
       });
       console.log = log;
       console.error = error;
+      console.logHTML = logHTML;
     }
   };
 });

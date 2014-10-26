@@ -79,3 +79,4 @@ export let cons = {
 
 console.log = log;
 console.error = error;
+console.logHTML = logHTML;
