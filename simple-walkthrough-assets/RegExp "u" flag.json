@@ -1,5 +1,0 @@
-{
-  "title": "RegExp \"u\" flag",
-  "description": "Searching multi-codepoint Unicode with regular expressions.",
-  "code": "// I'm not going to get all into Unicode because\n// I feel pretty certain that you would read for\n// hours and hours and hours and hours and ...\n\n// Suffice it to say, some Unicode characters\n// exist outside the Basic Multilingual Plane\n// and exist outside of the first 65,536 code\n// points. Because of that, we have to\n// specify two code points to make the character\n// like you can see in this string.\nvar s = 'I got the \\uD83D\\uDCA9 on me!';\n\n// Regular expressions through ECMAscript 5 fail\n// on understanding that one character could have\n// multiple code points. Because of that, the\n// following regular expression fails because the\n// dot operator, while supposedly matching a\n// single character, actually matches a single\n// code point.\nconsole.log(s.match(/I got the . on me!/));\n\n// Now, with the \"u\" flag, regular expressions\n// with character patters like \".\", \"?\", and\n// \"{}\" will correctly recognize multi-code-\n// point characters.\nconsole.log(s.match(/I got the . on me!/u));"
-}

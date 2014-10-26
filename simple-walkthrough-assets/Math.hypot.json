@@ -1,5 +1,0 @@
-{
-  "title": "Math.hypot",
-  "description": "Calculate the square root of the sum of two squares.",
-  "code": "// Now that we need to use ECMAscript for\n// graphics, both 2D and 3D, it would make sweet\n// sense to have a fast implementation of \n// calculating the square root of the sum of two\n// squares. You know, the hypotenuse of a right\n// triangle. Which comes in handy with vectors and\n// distances and geometry exams.\nconsole.log(Math.hypot(1, 1), Math.sqrt(2));\nconsole.log(Math.hypot(3, 4));"
-}

@@ -1,5 +1,0 @@
-{
-  "title": "Array.prototype.keys",
-  "description": "Create an iterator over the keys of an array or array-like object.",
-  "code": "// NOTE: This does not work in Safari 7.\n\n// The new keys method returns an iterator over\n// the keys of an array. This returns the\n// indices as one would expect.\nvar a, iterator;\na = [ 1, 2, 3, 4, 5 ];\niterator = a.keys();\n\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\n\nconsole.log('----------------------')\n\n// More interestingly, though, we can attach the\n// keys method to any object with a \"length\"\n// property and get the same result.\na = { length: 5 };\na.keys = Array.prototype.keys;\niterator = a.keys();\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\n"
-}

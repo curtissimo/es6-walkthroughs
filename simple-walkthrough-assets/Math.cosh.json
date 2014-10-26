@@ -1,5 +1,0 @@
-{
-  "title": "Math.cosh (hyperbolic cosine)",
-  "description": "It's hyperbolic cosine...",
-  "code": "// It's the hyperbolic cosine.\n// What else is there to say?\nconsole.log(Math.cosh(-1));\nconsole.log(Math.cosh(0));\nconsole.log(Math.cosh(1));\nconsole.log(Math.cosh(2));"
-}

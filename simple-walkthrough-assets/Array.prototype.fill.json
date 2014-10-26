@@ -1,5 +1,0 @@
-{
-  "title": "Array.prototype.fill",
-  "description": "A method to fill the entries in an array (or part of an array) with a value.",
-  "code": "// Before ECMAscript 6, we initialized an array\n// by looping over it:\nvar a, i;\na = [ 1, 2, 3, 4, 5 ];\nfor (i = 0; i < a.length; i += 1) {\n  a[i] = 'curtis';\n}\nconsole.log(a);\n\n// ECMAscript 6 now gives us an optimized native\n// implementation to achieve the same thing.\na = [ 1, 2, 3, 4, 4 ];\na.fill('ES6');\nconsole.log(a);"
-}

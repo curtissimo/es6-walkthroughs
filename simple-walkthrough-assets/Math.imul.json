@@ -1,5 +1,0 @@
-{
-  "title": "Math.imul",
-  "description": "Safe integer multiplication with results in 32 bits",
-  "code": "// 32-bit integer multiplication with Math.imul\n// does not allow the representation of the product\n// to exceed a value outside of a 32-bit integer.\n\n// If we did not observe the 32-bit size of the\n// result, the two following statements should\n// print the same number. However, the integer\n// multiplication of Math.imul ignores the 33rd\n// bit and returns 32 0 bits which equals 0.\nconsole.log(Math.pow(2, 31) * 2);\nconsole.log(Math.imul(Math.pow(2, 31), 2));\n"
-}

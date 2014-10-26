@@ -1,5 +1,0 @@
-{
-  "title": "String.prototype.startsWith",
-  "description": "Determine if a string starts with another string.",
-  "code": "// We often want to know if a string starts with\n// another string. In older versions of\n// ECMAscript, we could use the \"indexOf\"\n// method and check to make sure the returned\n// index equalled 0.\nvar s = 'There is nothing to fear but me.';\nvar search = {\n  good: 'There',\n  bad: 'Cat'\n};\n\nconsole.log(s.indexOf(search.good) === 0);\nconsole.log(s.indexOf(search.bad) === 0);\n\n// We could also use regular expressions and\n// the \"^\" terminal, but meh.\nfunction startsWith(str, search) {\n  search = new RegExp('^' + search);\n  return str.search(search) > -1;\n}\n\nconsole.log(startsWith(s, search.good));\nconsole.log(startsWith(s, search.bad));\n\n// ECMAscript 6 now offers a convenience method\n// to do the same thing.\nconsole.log(s.startsWith(search.good));\nconsole.log(s.startsWith(search.bad));"
-}

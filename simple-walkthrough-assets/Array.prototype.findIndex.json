@@ -1,5 +1,0 @@
-{
-  "title": "Array.prototype.findIndex",
-  "description": "A method to fill the entries in an array (or part of an array) with a value.",
-  "code": "// The new findIndex method of proper Array\n// instances allows you to provide a comparator\n// function to find the index of the first value\n// that matches the comparator. This allows for a\n// looser comparison that indexOf which uses\n// strict equality.\nvar a = [ 1, 'two', new Date(), null, {} ];\n\n// Always return 1 if the array has at least two\n// values.\nfunction secondIndex(value, index) {\n  return index === 1;\n}\n\n// Never match anything. This will return -1.\nfunction nothing() {\n  return false;\n}\n\n// Always match. This will return 0 for non-empty\n// arrays.\nfunction always() {\n  return true;\n}\n\n// Find a Date object. For the sake of this\n// example, it will return 2.\nfunction dateish(value) {\n  var s = Object.prototype.toString.call(value);\n  return s === '[object Date]';\n}\n\nconsole.log(a.findIndex(secondIndex));\nconsole.log(a.findIndex(nothing));\nconsole.log(a.findIndex(always));\nconsole.log(a.findIndex(dateish));"
-}

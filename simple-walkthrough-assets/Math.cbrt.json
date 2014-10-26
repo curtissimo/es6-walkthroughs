@@ -1,5 +1,0 @@
-{
-  "title": "Math.cbrt (cube root)",
-  "description": "It's a cube root...",
-  "code": "// It's the cube root.\n// What else it there to say?\nconsole.log(Math.cbrt(-8));\nconsole.log(Math.cbrt(-1));\nconsole.log(Math.cbrt(0));\nconsole.log(Math.cbrt(1));\nconsole.log(Math.cbrt(2));"
-}

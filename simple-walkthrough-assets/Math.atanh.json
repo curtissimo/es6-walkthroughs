@@ -1,5 +1,0 @@
-{
-  "title": "Math.atanh (inverse hyperbolic tangent)",
-  "description": "It's inverse hyperbolic tangent...",
-  "code": "// It's the inverse hyperbolic tangent.\n// What else is there to say?\nconsole.log(Math.atanh(-1));\nconsole.log(Math.atanh(0));\nconsole.log(Math.atanh(1));\nconsole.log(Math.atanh(2));"
-}

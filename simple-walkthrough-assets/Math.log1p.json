@@ -1,5 +1,0 @@
-{
-  "title": "Math.log1p",
-  "description": "Calculate the natural logarithm of the sum of 1 and x.",
-  "code": "// Sometimes, we want to calculate the value of a\n// logarithm when the argument is close to 0. Due\n// to the internal representation of floating-point\n// numbers, the computer can calculate the result\n// more precisely when we shift the argument by 1.\nconsole.log(Math.log(1.000001));\nconsole.log(Math.log1p(0.000001));"
-}

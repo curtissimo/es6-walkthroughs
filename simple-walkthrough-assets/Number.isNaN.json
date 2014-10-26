@@ -1,5 +1,0 @@
-{
-  "title": "Number.isNaN",
-  "description": "Check to ensure that a number is not not-a-number.",
-  "code": "// If you've used ECMAscript for any period of\n// time for more than just DOM manipulation, then\n// you know about the numbers that are not\n// numbers: NaN values. In previous versions of\n// ECMAscript, we tested those with the function\n// \"isNaN\" defined on the global execution object.\n\n// ECMAscript 6 has moved it to a static method on\n// the Number object.\nconsole.log(isNaN(NaN), Number.isNaN(NaN));\nconsole.log(isNaN(5),   Number.isNaN(5));\n\n// It still works the same way with non-numerical\n// values, too.\nvar date = new Date();\nconsole.log(isNaN(null),    Number.isNaN(null));\nconsole.log(isNaN(date),    Number.isNaN(date));\nconsole.log(isNaN(false),   Number.isNaN(false));\n\n// What changes, though, is that the new version\n// returns false for values that are strings and\n// objects.\nconsole.log(isNaN({}),      Number.isNaN({}));\nconsole.log(isNaN('hello'), Number.isNaN('hello'));\n"
-}

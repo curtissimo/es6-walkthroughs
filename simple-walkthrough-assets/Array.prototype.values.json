@@ -1,5 +1,0 @@
-{
-  "title": "Array.prototype.values",
-  "description": "Create an iterator over the values of an array or array-like object.",
-  "code": "// NOTE: This does not work in Safari 7.\n\n// The new values method returns an iterator over\n// the values of an array. This returns the\n// indices as one would expect.\nvar a, iterator;\na = [ 1, 2, 4, 8, 16 ];\niterator = a.values();\n\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\n\nconsole.log('----------------------')\n\n// More interestingly, though, we can attach the\n// values method to any object with a \"length\"\n// property and get the same result. For the\n// corresponding indices that do not exist, the\n// iterator does not have a value key.\na = { '1': 1, '4': 16, length: 5 };\na.values = Array.prototype.values;\niterator = a.values();\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());"
-}

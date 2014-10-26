@@ -1,5 +1,0 @@
-{
-  "title": "Array.prototype.entries",
-  "description": "A method to generate a real array iterator object.",
-  "code": "// NOTE: This does not work in Safari 7.\n\n// Before ECMAscript 6, we had about three ways\n// to iterate over an array a:\n//  for (var i in a) loops\n//  for (var i = 0; i < a.length; i += 1) loops\n//  a.forEach(function (e, i) { ... }) callbacks\n\n// ECMAscript 6 now has a formal definition for\n// an array iterator that we can access through the\n// \"entries\" method. The iterator has a \"next\"\n// method that returns either\n//  { done: true }\n//  { value: [index, entry], done: false }\nvar a = [ 'Boris', new Date(), 1, true ],\n    iterator = a.entries();\n\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());\nconsole.log(iterator.next());"
-}

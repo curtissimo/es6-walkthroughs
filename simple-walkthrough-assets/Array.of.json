@@ -1,5 +1,0 @@
-{
-  "title": "Array.of",
-  "description": "A generic factory method for creating array-like objects.",
-  "code": "// Array.of will create an array from a list of\n// items, like a literal.\nvar a1 = [ 'a', 'b', 'c', 'd' ];\nvar a2 = Array.of('a', 'b', 'c', 'd');\nconsole.log(a1, a2);\n\n// That doesn't really buy us much. The cool part\n// is that the \"of\" method is bindable to any\n// \"this\" that can be constructed. Now we can\n// create our own array-like objects!\n\n// Define a constructable thing.\nfunction FakeArray(len) {\n  this.constructionLength = len;\n  return this;\n}\n\n// Bind the \"of\" method to the FakeArray\nFakeArray.of = Array.of;\n\n// Use the factory method to create the object\nvar fake = FakeArray.of('a', 'b', 'c', 'd');\n\n// We can now iterate over our fake array!\nfor (var i = 0; i < fake.length; i += 1) {\n  console.log(i, fake[i]);\n}\n\n// And, we have access to the constructor\n// argument.\nconsole.log(fake.constructionLength);"
-}

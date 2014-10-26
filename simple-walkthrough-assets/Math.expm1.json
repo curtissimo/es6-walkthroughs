@@ -1,5 +1,0 @@
-{
-  "title": "Math.expm1",
-  "description": "One less than the exponential function at a given value.",
-  "code": "// Now that ECMAscript becomes more and more a\n// so-called real programming language, it needs\n// better mathematical functions. Math.expm1(x)\n// provides better precision in its result for\n// values of x where -1 <= x <= 1. And, when it\n// comes to high-precision math, we need all the\n// help we can get.\nconsole.log(Math.exp(1) - 1);\nconsole.log(Math.expm1(1));\nconsole.log();\nconsole.log(Math.exp(-.00001) - 1);\nconsole.log(Math.expm1(-.00001));"
-}
