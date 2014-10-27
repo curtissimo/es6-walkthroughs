@@ -9,7 +9,8 @@ System.register("simple-walkthrough-setup", ["repl", "dom-console"], function($_
       forms,
       editor,
       handlers,
-      run;
+      run,
+      interval;
   return {
     setters: [function(m) {
       factory = m.factory;
@@ -73,6 +74,16 @@ System.register("simple-walkthrough-setup", ["repl", "dom-console"], function($_
       if (window.navigator.platform.indexOf('Mac') < 0) {
         run.innerHTML = '<span class="fa fa-play"></span> Run (Ctrl+S)';
       }
+      interval = setInterval((function() {
+        if (document.getElementById('editor').className.contains('ace-twilight')) {
+          clearInterval(interval);
+          setTimeout((function() {
+            document.getElementById('workspace').style.opacity = 1;
+            document.getElementById('loader').style.opacity = 0;
+            handlers.resize();
+          }), 500);
+        }
+      }), 500);
     }
   };
 });

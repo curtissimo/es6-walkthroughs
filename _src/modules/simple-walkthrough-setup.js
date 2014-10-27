@@ -65,3 +65,20 @@ run.addEventListener('click', handlers.save);
 if (window.navigator.platform.indexOf('Mac') < 0) {
   run.innerHTML = '<span class="fa fa-play"></span> Run (Ctrl+S)';
 }
+
+let interval = setInterval(() => {
+  if (document.getElementById('editor').className.contains('ace-twilight')) {
+    clearInterval(interval);
+    setTimeout(() => {
+      document
+        .getElementById('workspace')
+        .style.opacity = 1;
+
+      document
+        .getElementById('loader')
+        .style.opacity = 0;
+
+      handlers.resize();
+    }, 500);
+  }
+}, 500);

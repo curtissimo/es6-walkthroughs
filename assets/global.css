@@ -19,6 +19,33 @@ html, body {
   margin-left: 1em;
 }
 
+#loader {
+  position: absolute;
+  width: 95%;
+  height: 50%;
+  margin: auto;
+  text-align: center;
+  padding: 1em;
+  margin: 0 auto 1em;
+  display: inline-block;
+  vertical-align: top;
+  -webkit-transition: all .5s;
+  -moz-transition: all .5s;
+  transition: all .5s;
+}
+
+svg path,
+svg rect {
+  fill: #FF6700;
+}
+
+#workspace {
+  opacity: 0;
+  -webkit-transition: all 1s;
+  -moz-transition: all 1s;
+  transition: all 1s;
+}
+
 #editor {
   position: absolute;
   top: 0;
