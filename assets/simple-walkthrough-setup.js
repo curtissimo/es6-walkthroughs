@@ -80,6 +80,14 @@ System.register("simple-walkthrough-setup", ["repl", "dom-console"], function($_
           setTimeout((function() {
             document.getElementById('workspace').style.opacity = 1;
             document.getElementById('loader').style.opacity = 0;
+            interval = setInterval((function() {
+              var opacity = parseInt(window.getComputedStyle(document.getElementById('loader'), null).getPropertyValue('opacity'), 10);
+              if (opacity === 0) {
+                clearInterval(interval);
+                var loader = document.getElementById('loader');
+                loader.parentNode.removeChild(loader);
+              }
+            }), 500);
             handlers.resize();
           }), 500);
         }

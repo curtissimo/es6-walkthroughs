@@ -78,6 +78,15 @@ let interval = setInterval(() => {
         .getElementById('loader')
         .style.opacity = 0;
 
+      interval = setInterval(() => {
+        let opacity = parseInt(window.getComputedStyle(document.getElementById('loader'), null).getPropertyValue('opacity'), 10);
+        if (opacity === 0) {
+          clearInterval(interval);
+          let loader = document.getElementById('loader');
+          loader.parentNode.removeChild(loader);
+        }
+      }, 500);
+
       handlers.resize();
     }, 500);
   }
