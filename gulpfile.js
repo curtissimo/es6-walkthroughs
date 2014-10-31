@@ -1,4 +1,4 @@
-var fs, gulp, handlebars, mkdir, path, rename, traceur;
+var fs, gulp, handlebars, mkdir, path, rename, traceur, web;
 
 fs = require('fs');
 gulp = require('gulp');
@@ -7,6 +7,7 @@ mkdir = require('mkdirp');
 path = require('path');
 rename = require('gulp-rename');
 traceur = require('gulp-traceur');
+web = require('gulp-webserver');
 
 gulp.task('default', [
   'build-modules',
@@ -14,10 +15,17 @@ gulp.task('default', [
   'build-simple-walkthroughs'
 ]);
 
-gulp.task('dev', [ 'default' ], function () {
+gulp.task('dev', [ 'default', 'serve' ], function () {
   gulp.watch('_src/modules/*', [ 'build-modules' ]);
   gulp.watch('_src/index.*', [ 'build-index' ]);
   gulp.watch([ '_src/simple*', '_src/index.json' ], [ 'build-simple-walkthroughs' ]);
+});
+
+gulp.task('serve', function () {
+  return gulp.src('.')
+    .pipe(web({
+      port: 8081
+    }));
 });
 
 gulp.task('build-modules', function () {
