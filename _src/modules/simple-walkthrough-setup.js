@@ -1,5 +1,6 @@
 import { factory } from 'repl';
 import { cons } from 'dom-console';
+import loader from 'loader';
 
 cons.install('#console');
 
@@ -19,15 +20,15 @@ editor.setTheme('ace/theme/twilight');
 editor.getSession().setTabSize(2);
 editor.getSession().setMode('ace/mode/javascript');
 editor.container.getElementsByTagName('textarea')[0].addEventListener('keydown', e => {
-  if (e.which === 83 && (e.metaKey || e.ctrlKey)) {
-    handlers.save(e);
+  if (e.which === 69 && (e.metaKey || e.ctrlKey)) {
+    handlers.evaluate(e);
   } else if (e.which === 27) {
     handlers.clear(e);
   }
 });
 
 let handlers = {
-  save(e) {
+  evaluate(e) {
     e.preventDefault();
     evaluator(editor.getValue(), e => {
       if(e) {
@@ -52,42 +53,20 @@ let handlers = {
 window.addEventListener('resize', handlers.resize);
 handlers.resize();
 
-Mousetrap.bind([ 'ctrl+s', 'command+s' ], handlers.save);
+Mousetrap.bind([ 'ctrl+e', 'command+e' ], handlers.evaluate);
 Mousetrap.bind('esc', handlers.clear);
 
 document
   .getElementById('clear-console')
   .addEventListener('click', handlers.clear);
 
-let run = document.getElementById('run');
-run.addEventListener('click', handlers.save);
+let run = document.getElementById('evaluate');
+run.addEventListener('click', handlers.evaluate);
 
 if (window.navigator.platform.indexOf('Mac') < 0) {
-  run.innerHTML = '<span class="fa fa-play"></span> Run (Ctrl+S)';
+  run.innerHTML = '<span class="fa fa-play"></span> Evaluate (Ctrl+S)';
 }
 
-let interval = setInterval(() => {
-  if (document.getElementById('editor').className.contains('ace-twilight')) {
-    clearInterval(interval);
-    setTimeout(() => {
-      document
-        .getElementById('workspace')
-        .style.opacity = 1;
-
-      document
-        .getElementById('loader')
-        .style.opacity = 0;
-
-      interval = setInterval(() => {
-        let opacity = parseInt(window.getComputedStyle(document.getElementById('loader'), null).getPropertyValue('opacity'), 10);
-        if (opacity === 0) {
-          clearInterval(interval);
-          let loader = document.getElementById('loader');
-          loader.parentNode.removeChild(loader);
-        }
-      }, 500);
-
-      handlers.resize();
-    }, 500);
-  }
-}, 500);
+let test = () => document.getElementById('editor').className.contains('ace-twilight');
+let cb = () => handlers.resize();
+loader('workspace', 'loader', test, cb);

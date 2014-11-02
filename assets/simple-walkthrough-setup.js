@@ -1,8 +1,9 @@
-System.register("simple-walkthrough-setup", ["repl", "dom-console"], function($__export) {
+System.register("simple-walkthrough-setup", ["repl", "dom-console", "loader"], function($__export) {
   "use strict";
   var __moduleName = "simple-walkthrough-setup";
   var factory,
       cons,
+      loader,
       evaluator,
       install,
       assetLocation,
@@ -10,12 +11,15 @@ System.register("simple-walkthrough-setup", ["repl", "dom-console"], function($_
       editor,
       handlers,
       run,
-      interval;
+      test,
+      cb;
   return {
     setters: [function(m) {
       factory = m.factory;
     }, function(m) {
       cons = m.cons;
+    }, function(m) {
+      loader = m.default;
     }],
     execute: function() {
       cons.install('#console');
@@ -38,14 +42,14 @@ System.register("simple-walkthrough-setup", ["repl", "dom-console"], function($_
       editor.getSession().setTabSize(2);
       editor.getSession().setMode('ace/mode/javascript');
       editor.container.getElementsByTagName('textarea')[0].addEventListener('keydown', (function(e) {
-        if (e.which === 83 && (e.metaKey || e.ctrlKey)) {
-          handlers.save(e);
+        if (e.which === 69 && (e.metaKey || e.ctrlKey)) {
+          handlers.evaluate(e);
         } else if (e.which === 27) {
           handlers.clear(e);
         }
       }));
       handlers = {
-        save: function(e) {
+        evaluate: function(e) {
           e.preventDefault();
           evaluator(editor.getValue(), (function(e) {
             if (e) {
@@ -66,32 +70,21 @@ System.register("simple-walkthrough-setup", ["repl", "dom-console"], function($_
       };
       window.addEventListener('resize', handlers.resize);
       handlers.resize();
-      Mousetrap.bind(['ctrl+s', 'command+s'], handlers.save);
+      Mousetrap.bind(['ctrl+e', 'command+e'], handlers.evaluate);
       Mousetrap.bind('esc', handlers.clear);
       document.getElementById('clear-console').addEventListener('click', handlers.clear);
-      run = document.getElementById('run');
-      run.addEventListener('click', handlers.save);
+      run = document.getElementById('evaluate');
+      run.addEventListener('click', handlers.evaluate);
       if (window.navigator.platform.indexOf('Mac') < 0) {
-        run.innerHTML = '<span class="fa fa-play"></span> Run (Ctrl+S)';
+        run.innerHTML = '<span class="fa fa-play"></span> Evaluate (Ctrl+S)';
       }
-      interval = setInterval((function() {
-        if (document.getElementById('editor').className.contains('ace-twilight')) {
-          clearInterval(interval);
-          setTimeout((function() {
-            document.getElementById('workspace').style.opacity = 1;
-            document.getElementById('loader').style.opacity = 0;
-            interval = setInterval((function() {
-              var opacity = parseInt(window.getComputedStyle(document.getElementById('loader'), null).getPropertyValue('opacity'), 10);
-              if (opacity === 0) {
-                clearInterval(interval);
-                var loader = document.getElementById('loader');
-                loader.parentNode.removeChild(loader);
-              }
-            }), 500);
-            handlers.resize();
-          }), 500);
-        }
-      }), 500);
+      test = (function() {
+        return document.getElementById('editor').className.contains('ace-twilight');
+      });
+      cb = (function() {
+        return handlers.resize();
+      });
+      loader('workspace', 'loader', test, cb);
     }
   };
 });
