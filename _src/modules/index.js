@@ -30,6 +30,7 @@ function wirePage () {
 
     tables.forEach(function (table) {
       if (scrollTop < table.offsetTop && table.tHead.className.length) {
+        table.tBodies[0].deleteRow(0);
         table.tHead.className = '';
       } else if(scrollTop > table.offsetTop && !table.tHead.className.length) {
         table.tHead.style.width = table.offsetWidth + 'px';
@@ -39,6 +40,9 @@ function wirePage () {
           header.style.width = window.getComputedStyle(header, null).getPropertyValue('width');
         }
         table.tHead.className = 'fixed';
+        let row = table.tBodies[0].insertRow(0);
+        let cell = row.insertCell(0);
+        cell.innerHTML = 'This is a hidden row.';
       }
     });
   });

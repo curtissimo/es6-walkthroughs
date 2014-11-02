@@ -32,6 +32,7 @@ System.register("index", ["tests"], function($__export) {
       scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
       tables.forEach(function(table) {
         if (scrollTop < table.offsetTop && table.tHead.className.length) {
+          table.tBodies[0].deleteRow(0);
           table.tHead.className = '';
         } else if (scrollTop > table.offsetTop && !table.tHead.className.length) {
           table.tHead.style.width = table.offsetWidth + 'px';
@@ -41,6 +42,9 @@ System.register("index", ["tests"], function($__export) {
             header.style.width = window.getComputedStyle(header, null).getPropertyValue('width');
           }
           table.tHead.className = 'fixed';
+          var row = table.tBodies[0].insertRow(0);
+          var cell = row.insertCell(0);
+          cell.innerHTML = 'This is a hidden row.';
         }
       });
     });
