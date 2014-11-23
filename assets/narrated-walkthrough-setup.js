@@ -1,6 +1,9 @@
 System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
   "use strict";
   var __moduleName = "narrated-walkthrough-setup";
+  function require(path) {
+    return $traceurRuntime.require("narrated-walkthrough-setup", path);
+  }
   var loader,
       handlers,
       test,

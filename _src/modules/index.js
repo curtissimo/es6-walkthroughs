@@ -47,6 +47,7 @@ function wirePage () {
     });
   });
 
+  let totalNativeSupport = 0;
   for (var i = 0; i < rows.length; i += 1) {
     let row = rows[i];
     let nativeSupport = true;
@@ -65,6 +66,7 @@ function wirePage () {
 
     if (nativeSupport) {
       nativeCell.className = 'good native';
+      totalNativeSupport += 1;
     } else if(traceurSupport) {
       nativeCell.className = 'good traceur';
     } else {
@@ -77,6 +79,8 @@ function wirePage () {
       contentCell.innerHTML = '<a class="fa fa-external-link-square" target="_blank" href="#"></a>' + contentCell.innerHTML;
     }
   }
+  totalNativeSupport = Math.floor(totalNativeSupport * 100 / rows.length);
+  document.getElementById('support').innerHTML = totalNativeSupport;
 
   let links = document.querySelectorAll('#tools a');
   for(i = 0; i < links.length; i += 1) {

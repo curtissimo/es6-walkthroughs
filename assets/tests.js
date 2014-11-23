@@ -1,6 +1,9 @@
 System.register("tests", ["data-es6"], function($__export) {
   "use strict";
   var __moduleName = "tests";
+  function require(path) {
+    return $traceurRuntime.require("tests", path);
+  }
   var data,
       tests,
       Test,
@@ -31,7 +34,7 @@ System.register("tests", ["data-es6"], function($__export) {
         };
         return ($traceurRuntime.createClass)(Test, {}, {});
       }());
-      for (var $__1 = data.tests[Symbol.iterator](),
+      for (var $__1 = data.tests[$traceurRuntime.toProperty(Symbol.iterator)](),
           $__2; !($__2 = $__1.next()).done; ) {
         test = $__2.value;
         {

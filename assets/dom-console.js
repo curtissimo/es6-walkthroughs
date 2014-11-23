@@ -1,6 +1,9 @@
 System.register("dom-console", [], function($__export) {
   "use strict";
   var __moduleName = "dom-console";
+  function require(path) {
+    return $traceurRuntime.require("dom-console", path);
+  }
   var output,
       _log,
       _error,

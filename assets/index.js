@@ -1,6 +1,9 @@
 System.register("index", ["tests"], function($__export) {
   "use strict";
   var __moduleName = "index";
+  function require(path) {
+    return $traceurRuntime.require("index", path);
+  }
   var tests;
   function wirePage() {
     var toc = document.getElementById('toc');
@@ -48,6 +51,7 @@ System.register("index", ["tests"], function($__export) {
         }
       });
     });
+    var totalNativeSupport = 0;
     var $__0 = function() {
       var row = rows[i];
       var nativeSupport = true;
@@ -63,6 +67,7 @@ System.register("index", ["tests"], function($__export) {
       var nativeCell = cells[cells.length - 1];
       if (nativeSupport) {
         nativeCell.className = 'good native';
+        totalNativeSupport += 1;
       } else if (traceurSupport) {
         nativeCell.className = 'good traceur';
       } else {
@@ -77,6 +82,8 @@ System.register("index", ["tests"], function($__export) {
     for (var i = 0; i < rows.length; i += 1) {
       $__0();
     }
+    totalNativeSupport = Math.floor(totalNativeSupport * 100 / rows.length);
+    document.getElementById('support').innerHTML = totalNativeSupport;
     var links = document.querySelectorAll('#tools a');
     for (i = 0; i < links.length; i += 1) {
       links[i].addEventListener('click', function(e) {

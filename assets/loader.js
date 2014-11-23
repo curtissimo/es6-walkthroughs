@@ -1,6 +1,9 @@
 System.register("loader", [], function($__export) {
   "use strict";
   var __moduleName = "loader";
+  function require(path) {
+    return $traceurRuntime.require("loader", path);
+  }
   return {
     setters: [],
     execute: function() {
