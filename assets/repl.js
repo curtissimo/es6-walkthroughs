@@ -1,6 +1,9 @@
 System.register("repl", ["tests"], function($__export) {
   "use strict";
   var __moduleName = "repl";
+  function require(path) {
+    return $traceurRuntime.require("repl", path);
+  }
   var tests,
       factory;
   function nativeEval(content, cb) {

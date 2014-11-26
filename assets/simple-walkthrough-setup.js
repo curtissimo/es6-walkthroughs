@@ -1,6 +1,9 @@
 System.register("simple-walkthrough-setup", ["repl", "dom-console", "loader"], function($__export) {
   "use strict";
   var __moduleName = "simple-walkthrough-setup";
+  function require(path) {
+    return $traceurRuntime.require("simple-walkthrough-setup", path);
+  }
   var factory,
       cons,
       loader,
@@ -28,7 +31,7 @@ System.register("simple-walkthrough-setup", ["repl", "dom-console", "loader"], f
       }));
       assetLocation = document.body.getAttribute('data-asset-location');
       forms = Array.from(document.querySelectorAll('form.unsubmitable'));
-      for (var $__0 = forms[Symbol.iterator](),
+      for (var $__0 = forms[$traceurRuntime.toProperty(Symbol.iterator)](),
           $__1; !($__1 = $__0.next()).done; ) {
         var form = $__1.value;
         {

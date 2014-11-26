@@ -1,6 +1,9 @@
 System.register("index", ["tests"], function($__export) {
   "use strict";
   var __moduleName = "index";
+  function require(path) {
+    return $traceurRuntime.require("index", path);
+  }
   var tests;
   function wirePage() {
     var toc = document.getElementById('toc');
