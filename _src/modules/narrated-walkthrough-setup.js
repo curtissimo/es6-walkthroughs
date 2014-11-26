@@ -7,6 +7,31 @@ let keystops = [ 0 ];
 let lowerTime = 0;
 let upperTime = 0;
 let upperTimeIndex = 0;
+let click = {
+  audios: [
+    document.getElementById('click1')
+  ],
+  index: 0,
+  play() {
+    this.audios[this.index].play();
+    this.index += 1;
+    this.index = this.index % this.audios.length;
+  }
+};
+
+function intervalTyper (move, text) {
+  move();
+  let i = 0;
+  let typeInterval = setInterval(function () {
+    if (i >= text.length) {
+      clearInterval(typeInterval);
+      return;
+    }
+    click.play();
+    editor.insert(text[i]);
+    i += 1;
+  }, 35);
+}
 
 let handlers = {
   markerChanged(e) {
@@ -21,19 +46,16 @@ let handlers = {
     time.innerHTML = minutes + ":" + seconds;
 
     if (totalSeconds < upperTime && totalSeconds >= lowerTime) {
+      let mover = () => editor.setValue('');
       switch(keyframes[lowerTime].position) {
         case -1:
-          editor.navigateFileStart();
+          mover = () => editor.navigateFileStart();
           break;
         case 1:
-          editor.navigateFileEnd();
-          break;
-        case 0:
-          editor.setValue('');
+          mover = () => editor.navigateFileEnd();
           break;
       }
-      editor.insert(keyframes[lowerTime].text);
-      editor.clearSelection();
+      intervalTyper(mover, keyframes[lowerTime].text);
       lowerTime = upperTime;
       upperTime = keystops[upperTimeIndex];
       upperTimeIndex += 1;

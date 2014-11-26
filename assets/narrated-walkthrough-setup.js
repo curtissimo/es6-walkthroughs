@@ -11,11 +11,25 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
       lowerTime,
       upperTime,
       upperTimeIndex,
+      click,
       handlers,
       test,
       cb,
       editor,
       install;
+  function intervalTyper(move, text) {
+    move();
+    var i = 0;
+    var typeInterval = setInterval(function() {
+      if (i >= text.length) {
+        clearInterval(typeInterval);
+        return;
+      }
+      click.play();
+      editor.insert(text[i]);
+      i += 1;
+    }, 35);
+  }
   return {
     setters: [function(m) {
       loader = m.default;
@@ -27,6 +41,15 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
       lowerTime = 0;
       upperTime = 0;
       upperTimeIndex = 0;
+      click = {
+        audios: [document.getElementById('click1')],
+        index: 0,
+        play: function() {
+          this.audios[this.index].play();
+          this.index += 1;
+          this.index = this.index % this.audios.length;
+        }
+      };
       handlers = {
         markerChanged: function(e) {
           var narration = document.getElementById('narration');
@@ -39,19 +62,22 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
           }
           time.innerHTML = minutes + ":" + seconds;
           if (totalSeconds < upperTime && totalSeconds >= lowerTime) {
+            var mover = (function() {
+              return editor.setValue('');
+            });
             switch (keyframes[lowerTime].position) {
               case -1:
-                editor.navigateFileStart();
+                mover = (function() {
+                  return editor.navigateFileStart();
+                });
                 break;
               case 1:
-                editor.navigateFileEnd();
-                break;
-              case 0:
-                editor.setValue('');
+                mover = (function() {
+                  return editor.navigateFileEnd();
+                });
                 break;
             }
-            editor.insert(keyframes[lowerTime].text);
-            editor.clearSelection();
+            intervalTyper(mover, keyframes[lowerTime].text);
             lowerTime = upperTime;
             upperTime = keystops[upperTimeIndex];
             upperTimeIndex += 1;
