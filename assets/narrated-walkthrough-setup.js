@@ -17,18 +17,35 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
       cb,
       editor,
       install;
-  function intervalTyper(move, text) {
+  function intervalTyper(move, text, cb) {
     move();
     var i = 0;
     var typeInterval = setInterval(function() {
       if (i >= text.length) {
         clearInterval(typeInterval);
+        setTimeout(cb, 0);
         return;
       }
       click.play();
       editor.insert(text[i]);
       i += 1;
     }, 35);
+  }
+  function replActionEvaluator(actions) {
+    for (var $__0 = actions[$traceurRuntime.toProperty(Symbol.iterator)](),
+        $__1; !($__1 = $__0.next()).done; ) {
+      var action = $__1.value;
+      {
+        switch (action) {
+          case 'clear':
+            handlers.clear();
+            break;
+          case 'execute':
+            handlers.evaluate();
+            break;
+        }
+      }
+    }
   }
   return {
     setters: [function(m) {
@@ -51,7 +68,25 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
         }
       };
       handlers = {
-        markerChanged: function(e) {
+        clear: function(e) {
+          e = e || {preventDefault: (function() {
+              return true;
+            })};
+          e.preventDefault();
+          cons.clear();
+        },
+        evaluate: function(e) {
+          e = e || {preventDefault: (function() {
+              return true;
+            })};
+          e.preventDefault();
+          evaluator(editor.getValue(), (function(e) {
+            if (e) {
+              cons.error(e);
+            }
+          }));
+        },
+        markerChanged: function() {
           var narration = document.getElementById('narration');
           var time = document.querySelector('#play .time');
           var totalSeconds = narration.currentTime;
@@ -77,7 +112,9 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
                 });
                 break;
             }
-            intervalTyper(mover, keyframes[lowerTime].text);
+            intervalTyper(mover, keyframes[lowerTime].text, (function() {
+              replActionEvaluator(keyframes[lowerTime].replActions);
+            }));
             lowerTime = upperTime;
             upperTime = keystops[upperTimeIndex];
             upperTimeIndex += 1;
@@ -137,6 +174,9 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
           }
         },
         togglePlay: function(e) {
+          e = e || {preventDefault: (function() {
+              return true;
+            })};
           e.preventDefault();
           var narration = document.getElementById('narration');
           if (narration.paused) {
@@ -163,7 +203,8 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
           if (typeof kf[k] === 'string') {
             kf[k] = {
               text: kf[k],
-              position: 1
+              position: 1,
+              replActions: ['execute']
             };
           }
           if (kf[k].position === 'end') {
@@ -173,6 +214,7 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
           } else if (kf[k].position === 'replace') {
             kf[k].position = 0;
           }
+          kf[k].replActions = kf[k].replActions || [];
           keystops.push(k - 0);
         }));
         keyframes = kf;

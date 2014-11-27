@@ -65,14 +65,16 @@ and you will change it to look like this:
   },
   "audioSources": [ "walkthrough.ogg", "walkthrough.mp3" ],
   "keyframes": {
-    "2": "The tutorial will append this text to the content of the editor after two seconds elapses.",
+    "2": "The tutorial will append this text to the content of the editor after two seconds elapses and execute the contents of the editor.",
     "8.43": {
-      "text": "The tutorial will insert this text at the beginning after 8.43 seconds elapses.",
-      "position": "start"
+      "text": "The tutorial will insert this text at the beginning after 8.43 seconds elapses and do nothing afterward.",
+      "position": "start",
+      "replActions": []
     },
     "90": {
-      "text": "After a minute and a half, this text will replace the entire content of the editor",
+      "text": "After a minute and a half, this text will replace the entire content of the editor, clear the console, and execute the contents of the editor.",
       "position": "replace"
+      "replActions": [ "clear", "execute" ]
     }
   }
 }

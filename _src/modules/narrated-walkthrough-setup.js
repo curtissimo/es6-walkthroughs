@@ -19,12 +19,13 @@ let click = {
   }
 };
 
-function intervalTyper (move, text) {
+function intervalTyper (move, text, cb) {
   move();
   let i = 0;
   let typeInterval = setInterval(function () {
     if (i >= text.length) {
       clearInterval(typeInterval);
+      setTimeout(cb, 0);
       return;
     }
     click.play();
@@ -33,8 +34,35 @@ function intervalTyper (move, text) {
   }, 35);
 }
 
+function replActionEvaluator(actions) {
+  for (var action of actions) {
+    switch (action) {
+      case 'clear':
+        handlers.clear();
+        break;
+      case 'execute':
+        handlers.evaluate();
+        break;
+    }
+  }
+}
+
 let handlers = {
-  markerChanged(e) {
+  clear(e) {
+    e = e || { preventDefault: () => true };
+    e.preventDefault();
+    cons.clear();
+  },
+  evaluate(e) {
+    e = e || { preventDefault: () => true };
+    e.preventDefault();
+    evaluator(editor.getValue(), e => {
+      if(e) {
+        cons.error(e);
+      }
+    });
+  },
+  markerChanged() {
     let narration = document.getElementById('narration');
     let time = document.querySelector('#play .time');
     let totalSeconds = narration.currentTime;
@@ -55,7 +83,9 @@ let handlers = {
           mover = () => editor.navigateFileEnd();
           break;
       }
-      intervalTyper(mover, keyframes[lowerTime].text);
+      intervalTyper(mover, keyframes[lowerTime].text, () => {
+        replActionEvaluator(keyframes[lowerTime].replActions);
+      });
       lowerTime = upperTime;
       upperTime = keystops[upperTimeIndex];
       upperTimeIndex += 1;
@@ -125,6 +155,7 @@ let handlers = {
     }
   },
   togglePlay(e) {
+    e = e || { preventDefault: () => true };
     e.preventDefault();
     let narration = document.getElementById('narration');
     if (narration.paused) {
@@ -154,7 +185,7 @@ handlers.resize();
 export let install = (kf, keys) => {
   Object.keys(kf).forEach(k => {
     if (typeof kf[k] === 'string') {
-      kf[k] = { text: kf[k], position: 1 };
+      kf[k] = { text: kf[k], position: 1, replActions: [ 'execute' ] };
     }
     if (kf[k].position === 'end') {
       kf[k].position = 1;
@@ -163,6 +194,7 @@ export let install = (kf, keys) => {
     } else if (kf[k].position === 'replace') {
       kf[k].position = 0;
     }
+    kf[k].replActions = kf[k].replActions || [];
     keystops.push(k - 0);
   });
   keyframes = kf;
