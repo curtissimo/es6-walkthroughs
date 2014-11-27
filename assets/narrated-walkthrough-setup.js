@@ -16,6 +16,7 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
       test,
       cb,
       editor,
+      run,
       install;
   function intervalTyper(move, text, cb) {
     move();
@@ -98,17 +99,17 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
           time.innerHTML = minutes + ":" + seconds;
           if (totalSeconds < upperTime && totalSeconds >= lowerTime) {
             var mover = (function() {
-              return editor.setValue('');
+              return editor.navigateFileEnd();
             });
             switch (keyframes[lowerTime].position) {
-              case -1:
+              case 'start':
                 mover = (function() {
                   return editor.navigateFileStart();
                 });
                 break;
-              case 1:
+              case 'replace':
                 mover = (function() {
-                  return editor.navigateFileEnd();
+                  return editor.setValue('');
                 });
                 break;
             }
@@ -198,21 +199,22 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
       editor.getSession().setMode('ace/mode/javascript');
       window.addEventListener('resize', handlers.resize);
       handlers.resize();
+      Mousetrap.bind(['ctrl+e', 'command+e'], handlers.evaluate);
+      Mousetrap.bind('esc', handlers.clear);
+      document.getElementById('clear-console').addEventListener('click', handlers.clear);
+      run = document.getElementById('evaluate');
+      run.addEventListener('click', handlers.evaluate);
+      if (window.navigator.platform.indexOf('Mac') < 0) {
+        run.innerHTML = '<span class="fa fa-play"></span> Evaluate (Ctrl+S)';
+      }
       install = $__export("install", (function(kf, keys) {
         Object.keys(kf).forEach((function(k) {
           if (typeof kf[k] === 'string') {
             kf[k] = {
               text: kf[k],
-              position: 1,
+              position: 'end',
               replActions: ['execute']
             };
-          }
-          if (kf[k].position === 'end') {
-            kf[k].position = 1;
-          } else if (kf[k].position === 'start') {
-            kf[k].position = -1;
-          } else if (kf[k].position === 'replace') {
-            kf[k].position = 0;
           }
           kf[k].replActions = kf[k].replActions || [];
           keystops.push(k - 0);
@@ -220,11 +222,11 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
         keyframes = kf;
         keyframes['0'] = {
           text: '',
-          position: 0
+          position: 'start'
         };
         keyframes['600'] = {
           text: '',
-          position: -1
+          position: 'start'
         };
         keystops.push(600);
         keystops.sort((function(a, b) {

@@ -74,13 +74,13 @@ let handlers = {
     time.innerHTML = minutes + ":" + seconds;
 
     if (totalSeconds < upperTime && totalSeconds >= lowerTime) {
-      let mover = () => editor.setValue('');
+      let mover = () => editor.navigateFileEnd();
       switch(keyframes[lowerTime].position) {
-        case -1:
+        case 'start':
           mover = () => editor.navigateFileStart();
           break;
-        case 1:
-          mover = () => editor.navigateFileEnd();
+        case 'replace':
+          mover = () => editor.setValue('');
           break;
       }
       intervalTyper(mover, keyframes[lowerTime].text, () => {
@@ -182,24 +182,32 @@ editor.getSession().setMode('ace/mode/javascript');
 window.addEventListener('resize', handlers.resize);
 handlers.resize();
 
+Mousetrap.bind([ 'ctrl+e', 'command+e' ], handlers.evaluate);
+Mousetrap.bind('esc', handlers.clear);
+
+document
+  .getElementById('clear-console')
+  .addEventListener('click', handlers.clear);
+
+let run = document.getElementById('evaluate');
+run.addEventListener('click', handlers.evaluate);
+
+if (window.navigator.platform.indexOf('Mac') < 0) {
+  run.innerHTML = '<span class="fa fa-play"></span> Evaluate (Ctrl+S)';
+}
+
 export let install = (kf, keys) => {
   Object.keys(kf).forEach(k => {
     if (typeof kf[k] === 'string') {
-      kf[k] = { text: kf[k], position: 1, replActions: [ 'execute' ] };
+      kf[k] = { text: kf[k], position: 'end', replActions: [ 'execute' ] };
     }
-    if (kf[k].position === 'end') {
-      kf[k].position = 1;
-    } else if (kf[k].position === 'start') {
-      kf[k].position = -1;
-    } else if (kf[k].position === 'replace') {
-      kf[k].position = 0;
-    }
+
     kf[k].replActions = kf[k].replActions || [];
     keystops.push(k - 0);
   });
   keyframes = kf;
-  keyframes['0'] = { text: '', position: 0 };
-  keyframes['600'] = { text: '', position: -1 };
+  keyframes['0'] = { text: '', position: 'start' };
+  keyframes['600'] = { text: '', position: 'start' };
   keystops.push(600);
   keystops.sort((a, b) => a - b);
 };
