@@ -1,3 +1,6 @@
+I, Curtis Schlak, license this script under the
+Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+
 Welcome to the narrated walkthrough regarding the keywords in ECMAscript 6,
 "let" and "const", two new keywords that allow you to define new variables
 differently.

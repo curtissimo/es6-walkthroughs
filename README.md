@@ -19,6 +19,7 @@ ensure that you refer to it by its real name.
 1. Write a script for the walkthrough and include the text "I, [your name],
    license this script under the Attribution-NonCommercial-ShareAlike 4.0
    International (CC BY-NC-SA 4.0)"
+1. Save the script into the _scripts subdirectory.
 1. Record the script, perform any post-production work to make it sound really
    good, and save it in two formats with the base file name equivalent to the
    file name of the tutorial (found in the `index.json`):
