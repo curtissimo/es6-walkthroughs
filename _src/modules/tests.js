@@ -18,9 +18,15 @@ class Test {
       criterion = 'function(){return [].entries && [].entries().next;}';
     }
 
+    this._criterion = criterion;
+  }
+
+  get nativeSupport() {
     try {
-      this.nativeSupport = eval('(' + criterion + ')()');
-    } catch(e) {}
+      return eval('(' + this._criterion + ')()');
+    } catch (e) {
+      return false;
+    }
   }
 }
 

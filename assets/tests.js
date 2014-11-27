@@ -28,11 +28,15 @@ System.register("tests", ["data-es6"], function($__export) {
           } else if (this.name === 'Array.prototype.entries') {
             criterion = 'function(){return [].entries && [].entries().next;}';
           }
-          try {
-            this.nativeSupport = eval('(' + criterion + ')()');
-          } catch (e) {}
+          this._criterion = criterion;
         };
-        return ($traceurRuntime.createClass)(Test, {}, {});
+        return ($traceurRuntime.createClass)(Test, {get nativeSupport() {
+            try {
+              return eval('(' + this._criterion + ')()');
+            } catch (e) {
+              return false;
+            }
+          }}, {});
       }());
       for (var $__1 = data.tests[$traceurRuntime.toProperty(Symbol.iterator)](),
           $__2; !($__2 = $__1.next()).done; ) {
