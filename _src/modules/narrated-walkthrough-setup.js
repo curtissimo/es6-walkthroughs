@@ -40,7 +40,7 @@ function replActionEvaluator(actions) {
       case 'clear':
         handlers.clear();
         break;
-      case 'execute':
+      case 'evaluate':
         handlers.evaluate();
         break;
     }
@@ -199,10 +199,10 @@ if (window.navigator.platform.indexOf('Mac') < 0) {
 export let install = (kf, keys) => {
   Object.keys(kf).forEach(k => {
     if (typeof kf[k] === 'string') {
-      kf[k] = { text: kf[k], position: 'end', replActions: [ 'execute' ] };
+      kf[k] = { text: kf[k], position: 'end', replActions: [ 'clear', 'evaluate' ] };
     }
 
-    kf[k].replActions = kf[k].replActions || [];
+    kf[k].replActions = kf[k].replActions || [ 'clear', 'evaluate' ];
     keystops.push(k - 0);
   });
   keyframes = kf;

@@ -1,0 +1,148 @@
+Welcome to the narrated walkthrough regarding the keywords in ECMAscript 6,
+"let" and "const", two new keywords that allow you to define new variables
+differently.
+
+In ECMAscript 5, the version of the language that most of us use, we have two
+ways of creating new variables.
+
+  globalVariable = "global to the current execution context";
+
+  function fn() {
+    anotherGlobalVariable = ":(";
+  }
+
+  function printGlobals() {
+    console.log('globalVariable value:', globalVariable);
+    console.log('anotherGlobalVariable value:', anotherGlobalVariable);
+  }
+
+  printGlobals();
+
+First up, global variables. When we have an assignment expression with a new
+identifier on the left-hand side and some value on the right-hand side, the
+execution context creates that new variable name in the current execution
+context. For browsers, the current execution context is the window object to
+which all scripts have access, be they in script tags in the HTML or loaded from
+external ECMAscript files. That means one external ECMAscript file could define
+a variable and another external ECMAscript file could rely on that variable's
+presence. Think about how we use jQuery and its dollar-sign alias, today.
+
+  var globalVariable = "still a global variable.";
+
+  if (false) {
+    var anotherGlobal = "still global...";
+  }
+
+  function fn() {
+    var localVariable = "only inside fn!";
+  }
+
+  function printAccess() {
+    console.log('globalVariable value:', globalVariable);
+    console.log('anotherGlobal value:', anotherGlobal);
+    try {
+      console.log('localVariable value:', localVariable);
+    } catch (e) {
+      console.error(String(e));
+    }
+  }
+
+  printAccess();
+
+  «replace»
+
+We have another way in ECMAscript 5 to declare variables: we use the var 
+keyword. When used at the top-level of the script source, it still creates a
+global variable to the execution context. Even if we put that var declaration
+inside an if statement, like on line 4 for the "anotherGlobal" variable,
+ECMAscript still creates that variable in the execution context and allows us
+to access it as we ses on line 13. However, the variable declared on line 8 in
+the function "fn", gets scoped to the function. When the script attempts to
+access it on line 15, the interpreter raises an error because "localVariable"
+does not exist in the scope of the function "printAccess", only in the scope of
+the function "fn" on line 7.
+
+  console.log('x has value', x);
+
+  var x = 2.3;
+
+  console.log('x has value', x);
+
+  «replace»
+  [ "clear" ]
+
+Finally, let's look at an oddity of the use of the var keyword. In most
+programming languages, we would expect some kind of failure with this code
+because the code on line 1 uses the "x" variable though it doesn't get
+declared until line 3. However, when we
+
+  [ "evaluate" ]
+
+run this example, we see that x does have a value, a value of "undefined"!
+That's because of a little-known aspect of ECMAscript called "variable
+hoisting". This code that we see here, when interpreted, actually gets converted
+to something equivalent to
+
+  var x;
+
+  console.log('x has value', x);
+
+  x = 2.3;
+
+  console.log('x has value', x);
+
+  «replace»
+
+  [ "evaluate" ]
+
+The interpreter literally splits the declaration and initialization of the
+variable, x in this case, to the top of the current execution context. While
+many find this convenient, side-effects introduced by an interpreter or
+compiler lead to an inexact understanding of a language especially when
+programmers from other languages first come to ECMAscript. So, that's the "var"
+keyword. ECMAscript 6 gives us different options. Options that make more sense
+for tightening the behavior of a language.
+
+  const CANNOT_CHANGE = 1;
+  console.log('CANNOT_CHANGE has value', CANNOT_CHANGE);
+
+  «replace»
+
+First up, the "const" keyword which allows us to declare constants. You can see
+that we can use the "const" keyword just like the "var" keyword from earlier
+versions of ECMAscript.
+
+  CANNOT_CHANGE = 2;
+
+The real affect from the "const" keyword comes when you try to change that
+constants value. According to the standard, if we attempt to do this, then we
+should get a TypeError if our script evalutes in strict mode; otherwise, it
+just continues on its merry way without changing the value. Almost all browsers
+have some implementation of the "const" keyword; most of those implementations
+do not comply with the meaning of const in ECMAscript 6. In Firefox, for
+example, this evaluation raises a SyntaxError rather than a TypeError.
+Safari treats const like var and lets us change the value rendering the point
+of the const keyword meaningless. Your mileage may vary on this one. Now, let's
+talk about let.
+
+  let globalVariable = "I can see globalVariable.";
+
+  if (true) {
+    console.log("if block says", globalVariable);
+  }
+
+  console.log("top-level says", globalVariable);
+
+  function print() {
+    console.log("function print says", globalVariable);
+  }
+
+  print();
+
+  «replace»
+
+Let's start out nice and slow. Here we declare a variable named "globalVariable"
+in the top-level of the script. When we run this, we see that the console.log
+statements all succeed in printing the value of "globalVariable". This acts no
+differently than if we had used the var keyword in our script. Now, let's move
+that declaration.

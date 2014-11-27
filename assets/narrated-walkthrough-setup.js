@@ -41,7 +41,7 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
           case 'clear':
             handlers.clear();
             break;
-          case 'execute':
+          case 'evaluate':
             handlers.evaluate();
             break;
         }
@@ -213,10 +213,10 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
             kf[k] = {
               text: kf[k],
               position: 'end',
-              replActions: ['execute']
+              replActions: ['clear', 'evaluate']
             };
           }
-          kf[k].replActions = kf[k].replActions || [];
+          kf[k].replActions = kf[k].replActions || ['clear', 'evaluate'];
           keystops.push(k - 0);
         }));
         keyframes = kf;

@@ -74,11 +74,28 @@ and you will change it to look like this:
     "90": {
       "text": "After a minute and a half, this text will replace the entire content of the editor, clear the console, and execute the contents of the editor.",
       "position": "replace"
-      "replActions": [ "clear", "execute" ]
+      "replActions": [ "clear", "evaluate" ]
     }
   }
 }
 ```
+
+### Available values for "position"
+
+You can use any of the following values for "position" in your keyframes. The
+default value is "end".
+
+* "start"
+* "end"
+* "replace"
+
+### Available values for "replActions"
+
+You can use any of the following values in the "replActions" list. The default
+value is [ "clear", "evaluate" ].
+
+* "clear"
+* "evaluate"
 
 ## Local testing
 
