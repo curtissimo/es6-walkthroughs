@@ -64,7 +64,7 @@ and you will change it to look like this:
   "keyframes": {
     "2": "The tutorial will append this text to the content of the editor after two seconds elapses.",
     "8.43": {
-      "text": "The tutorial will insert this text at the beginning after 8.43 seconds elapses."
+      "text": "The tutorial will insert this text at the beginning after 8.43 seconds elapses.",
       "position": "start"
     },
     "90": {
