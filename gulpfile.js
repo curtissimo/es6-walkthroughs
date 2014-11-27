@@ -9,6 +9,8 @@ rename = require('gulp-rename');
 traceur = require('gulp-traceur');
 web = require('gulp-webserver');
 
+handlebars.registerHelper('json', JSON.stringify);
+
 gulp.task('default', [
   'build-modules',
   'build-index',
