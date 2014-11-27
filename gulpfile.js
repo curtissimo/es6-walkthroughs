@@ -53,18 +53,13 @@ gulp.task('build-index', function (cb) {
         if (section.features) {
           for (j = 0; j < section.features.length; j += 1) {
             feature = section.features[j];
-            if (feature.key === undefined) {
-              feature.key = feature.title;
-            }
-            if (feature.filename === undefined) {
-              feature.filename = feature.key;
-            }
-            if (feature.state === undefined) {
-              feature.state = '';
-            }
+            feature.key = feature.key || feature.title;
+            feature.filename = feature.filename || 'redirect';
+            feature.state = feature.state || '';
           }
-        } else if (section.state === undefined) {
-          section.state = '';
+        } else {
+          section.state = section.state || '';
+          section.filename = section.filename || 'redirect';
         }
       }
       for (i = 0; i < data.boring.length; i += 1) {
