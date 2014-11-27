@@ -9,7 +9,7 @@ let upperTime = 0;
 let upperTimeIndex = 0;
 let click = {
   audios: [
-    document.getElementById('click1')
+    document.getElementById('click')
   ],
   index: 0,
   play() {

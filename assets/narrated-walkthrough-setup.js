@@ -42,7 +42,7 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
       upperTime = 0;
       upperTimeIndex = 0;
       click = {
-        audios: [document.getElementById('click1')],
+        audios: [document.getElementById('click')],
         index: 0,
         play: function() {
           this.audios[this.index].play();
