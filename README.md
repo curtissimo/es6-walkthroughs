@@ -4,6 +4,9 @@ Contains a collection of walkthroughs and examples for the new and upcoming feat
 
 ## How to contribute a narrated tutorial
 
+Remember that we provide content about *ECMAscript*, not "*JavaScript*". Please
+ensure that you refer to it by its real name.
+
 1. Choose a tutorial that you want to create from the list of open issues and
    assign yourself to the task (if you're on the team) or comment that you want
    to provide the content.
