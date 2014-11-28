@@ -74,7 +74,7 @@ and you will change it to look like this:
     },
     "90": {
       "text": "After a minute and a half, this text will replace the entire content of the editor, clear the console, and execute the contents of the editor.",
-      "position": "replace"
+      "position": "replace",
       "replActions": [ "clear", "evaluate" ]
     }
   }
