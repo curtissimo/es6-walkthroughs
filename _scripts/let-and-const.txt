@@ -1,12 +1,18 @@
 I, Curtis Schlak, license this script under the
 Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
-
-Welcome to the narrated walkthrough regarding the keywords in ECMAscript 6,
-"let" and "const", two new keywords that allow you to define new variables
-differently.
+--------------------------------------------------------------------------------
+Welcome to the narrated walkthrough for "let" and "const", two new keywords in
+ECMAscript 6 that allows us to define new variables
+differently. At any time during this presentation, you can click the pause
+button in the upper-lefthand corner which will pause this narration. It will
+enable the editor, the evaluate button, and the clear console button. You can
+resume by clicking the button, again. You can also rewind the walkthrough by
+clicking the rewind button. Now, on with the walkthrough!
 
 In ECMAscript 5, the version of the language that most of us use, we have two
 ways of creating new variables.
+
+  @32.15
 
   globalVariable = "global to the current execution context";
 
@@ -29,6 +35,8 @@ which all scripts have access, be they in script tags in the HTML or loaded from
 external ECMAscript files. That means one external ECMAscript file could define
 a variable and another external ECMAscript file could rely on that variable's
 presence. Think about how we use jQuery and its dollar-sign alias, today.
+
+  @68.20
 
   var globalVariable = "still a global variable.";
 
@@ -65,6 +73,8 @@ access it on line 15, the interpreter raises an error because "localVariable"
 does not exist in the scope of the function "printAccess", only in the scope of
 the function "fn" on line 7.
 
+  @114.15
+
   console.log('x has value', x);
 
   var x = 2.3;
@@ -79,12 +89,16 @@ programming languages, we would expect some kind of failure with this code
 because the code on line 1 uses the "x" variable though it doesn't get
 declared until line 3. However, when we
 
+  @130.15
+
   [ "evaluate" ]
 
 run this example, we see that x does have a value, a value of "undefined"!
 That's because of a little-known aspect of ECMAscript called "variable
 hoisting". This code that we see here, when interpreted, actually gets converted
 to something equivalent to
+
+  @147.10
 
   var x;
 
@@ -102,23 +116,29 @@ The interpreter literally splits the declaration and initialization of the
 variable, x in this case, to the top of the current execution context. While
 many find this convenient, side-effects introduced by an interpreter or
 compiler lead to an inexact understanding of a language especially when
-programmers from other languages first come to ECMAscript. So, that's the "var"
-keyword. ECMAscript 6 gives us different options. Options that make more sense
-for tightening the behavior of a language.
+programmers from other languages first come to ECMAscript. 
+
+That concludes a review of variable declaration in ECMAscript 5 and before.
+Now, let's turn to the future and the new declaration syntaxes for ECMAscript
+6.
+
+  @181.01
 
   const CANNOT_CHANGE = 1;
   console.log('CANNOT_CHANGE has value', CANNOT_CHANGE);
 
   «replace»
 
-First up, the "const" keyword which allows us to declare constants. You can see
+First let's look at "const" which allows us to declare constants. You can see
 that we can use the "const" keyword just like the "var" keyword from earlier
 versions of ECMAscript.
+
+  @192.03
 
   CANNOT_CHANGE = 2;
 
 The real affect from the "const" keyword comes when you try to change that
-constants value. According to the standard, if we attempt to do this, then we
+constant's value. According to the standard, if we attempt to do this, then we
 should get a TypeError if our script evalutes in strict mode; otherwise, it
 just continues on its merry way without changing the value. Almost all browsers
 have some implementation of the "const" keyword; most of those implementations
@@ -128,16 +148,30 @@ Safari treats const like var and lets us change the value rendering the point
 of the const keyword meaningless. Your mileage may vary on this one. Now, let's
 talk about let.
 
+  @235.19
+
   let globalVariable = "I can see globalVariable.";
 
-  if (true) {
-    console.log("if block says", globalVariable);
+  try {
+    console.log("top-level says", globalVariable);
+  } catch (e) {
+    console.log('globalVariable not defined at top-level!')
   }
 
-  console.log("top-level says", globalVariable);
+  if (true) {
+    try {
+      console.log("if block says", globalVariable);
+    } catch (e) {
+      console.log('globalVariable not defined in if block!')
+    }
+  }
 
   function print() {
-    console.log("function print says", globalVariable);
+    try {
+      console.log("function says", globalVariable);
+    } catch (e) {
+      console.log('globalVariable not defined in function!')
+    }
   }
 
   print();
@@ -145,7 +179,122 @@ talk about let.
   «replace»
 
 Let's start out nice and slow. Here we declare a variable named "globalVariable"
-in the top-level of the script. When we run this, we see that the console.log
-statements all succeed in printing the value of "globalVariable". This acts no
-differently than if we had used the var keyword in our script. Now, let's move
-that declaration.
+in the top-level of the script.
+
+  @244.26
+
+  [ "evaluate" ]
+
+When we run this, we see that the console.log statements all succeed in printing
+the value of "globalVariable". This acts no differently than if we had used the
+var keyword in our script. Now, let's move that declaration.
+
+  @258.29
+
+  try {
+    console.log("top-level says", globalVariable);
+  } catch (e) {
+    console.log('globalVariable not defined at top-level!')
+  }
+
+  let globalVariable = "I can see globalVariable.";
+
+  if (true) {
+    try {
+      console.log("if block says", globalVariable);
+    } catch (e) {
+      console.log('globalVariable not defined in if block!')
+    }
+  }
+
+  function print() {
+    try {
+      console.log("function says", globalVariable);
+    } catch (e) {
+      console.log('globalVariable not defined in function!')
+    }
+  }
+
+  print();
+
+  «replace»
+
+Now, we've moved the declaration to after the first use of it.
+
+  @283.12
+
+  [ "evaluate" ]
+
+When we run this, we now see that the access to "globalVariable" fails in the
+very first try block. This is very different from using the var keyword which
+hoisted the variable to the top of the execution context. Now, accessing the
+globalVariable raises an error rather than just returning an undefined value.
+So, let only defines a variable after the let statement executes. This isn't
+the only difference.
+
+  @292.26
+
+  try {
+    let globalVariable = "I can see globalVariable.";
+
+    console.log("top-level says", globalVariable);
+  } catch (e) {
+    console.log('globalVariable not defined at top-level!')
+  }
+
+  if (true) {
+    try {
+      console.log("if block says", globalVariable);
+    } catch (e) {
+      console.log('globalVariable not defined in if block!')
+    }
+  }
+
+  function print() {
+    try {
+      console.log("function says", globalVariable);
+    } catch (e) {
+      console.log('globalVariable not defined in function!')
+    }
+  }
+
+  print();
+
+  «replace»
+
+Now, we've moved the declaration of globalVariable to inside the try block.
+When we run this,
+
+  @298.28
+
+  [ "evaluate" ]
+
+we see that the globalVariable isn't global, anymore. The declaration only
+exists inside the try block, similar to the way we see variable declarations
+work in C, C++, Java, C#, and other Algol-inspred languages. This would be the
+same if we moved the declaration into the if block. You can pause this and try
+moving it around, too, to see how it affects the execution of the script.
+
+  @274.14
+
+  /*
+   *  let allows you to declare:
+   *    variables that only exist after the let statement gets evaluated
+   *    variables that exist only between the curly braces that contain the
+   *      let statement.
+   *
+   *  const allows you to define values that should not change.
+   */
+
+So, to wrap it up, let allows you to declare variables like the var keyword,
+except that the variable doesn't exist until after the let statement executes
+and only exists inside the curly braces in which its defined. const allows you
+to define values that should not change and will throw errors if in strict
+mode.
+
+Thanks for joining me on this brief review of the new "let" and "const"
+keywords in ECMAscript 6. If you liked or disliked this, please record your
+opinion in the upper-right corner of the page. You can also leave a short
+message containing feedback that you think would make this walkthrough more
+helpful.
+
