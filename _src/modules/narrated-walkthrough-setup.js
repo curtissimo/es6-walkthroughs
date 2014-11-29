@@ -1,12 +1,19 @@
+import { factory } from 'repl';
+import { cons } from 'dom-console';
 import loader from 'loader';
 
 const HAVE_ENOUGH_DATA = 4;
 
+cons.install('#console');
+
 let keyframes = {};
-let keystops = [ 0 ];
+let keystops = [];
 let lowerTime = 0;
 let upperTime = 0;
 let upperTimeIndex = 0;
+let evaluator = function () { throw "NO EVALUATOR!"; };
+let pausedText = "";
+
 let click = {
   audios: [
     document.getElementById('click')
@@ -31,7 +38,7 @@ function intervalTyper (move, text, cb) {
     click.play();
     editor.insert(text[i]);
     i += 1;
-  }, 35);
+  }, 10);
 }
 
 function replActionEvaluator(actions) {
@@ -74,8 +81,10 @@ let handlers = {
     time.innerHTML = minutes + ":" + seconds;
 
     if (totalSeconds < upperTime && totalSeconds >= lowerTime) {
+      let frame = keyframes[lowerTime];
+
       let mover = () => editor.navigateFileEnd();
-      switch(keyframes[lowerTime].position) {
+      switch(frame.position) {
         case 'start':
           mover = () => editor.navigateFileStart();
           break;
@@ -83,9 +92,11 @@ let handlers = {
           mover = () => editor.setValue('');
           break;
       }
-      intervalTyper(mover, keyframes[lowerTime].text, () => {
-        replActionEvaluator(keyframes[lowerTime].replActions);
+
+      intervalTyper(mover, frame.text, () => {
+        replActionEvaluator(frame.replActions);
       });
+
       lowerTime = upperTime;
       upperTime = keystops[upperTimeIndex];
       upperTimeIndex += 1;
@@ -99,6 +110,10 @@ let handlers = {
     let playButton = document.getElementById('play');
     playButton.disabled = false;
     playButton.addEventListener('click', handlers.togglePlay);
+
+    let stepForward = document.getElementById('step-forward');
+    stepForward.disabled = false;
+    stepForward.addEventListener('click', handlers.stepForward);
 
     let narration = document.getElementById('narration');
     narration.addEventListener('playing', handlers.played);
@@ -123,6 +138,16 @@ let handlers = {
 
     let label = document.querySelector('#play .label');
     label.innerHTML = 'Play';
+
+    let evaluate = document.getElementById('evaluate');
+    evaluate.disabled = false;
+
+    let clearConsole = document.getElementById('clear-console');
+    clearConsole.disabled = false;
+
+    pausedText = editor.getValue();
+    editor.setBehavioursEnabled(true);
+    editor.setReadOnly(false);
   },
   played() {
     let icon = document.querySelector('#play .fa');
@@ -130,6 +155,16 @@ let handlers = {
 
     let label = document.querySelector('#play .label');
     label.innerHTML = 'Pause';
+
+    let evaluate = document.getElementById('evaluate');
+    evaluate.disabled = true;
+
+    let clearConsole = document.getElementById('clear-console');
+    clearConsole.disabled = true;
+
+    editor.setReadOnly(true);
+    editor.setBehavioursEnabled(false);
+    editor.setValue(pausedText);
   },
   resize() {
     let height = window.innerHeight - 2 * document.querySelector('form.unsubmitable').offsetHeight - 10;
@@ -154,6 +189,12 @@ let handlers = {
       upperTimeIndex += 1;
     }
   },
+  stepForward(e) {
+    e = e || { preventDefault: () => true };
+    e.preventDefault();
+    let narration = document.getElementById('narration');
+    narration.currentTime += 5;
+  },
   togglePlay(e) {
     e = e || { preventDefault: () => true };
     e.preventDefault();
@@ -174,10 +215,22 @@ let cb = handlers.pageReady;
 loader('workspace', 'loader', test, cb);
 
 let editor = ace.edit('editor');
+let oldSessionNewLine = editor.getSession().getDocument().isNewLine;
+editor.setBehavioursEnabled(false);
 editor.setReadOnly(true);
 editor.setTheme('ace/theme/twilight');
 editor.getSession().setTabSize(2);
 editor.getSession().setMode('ace/mode/javascript');
+editor.getSession().getDocument().isNewLine = function () {
+  return false;
+};
+editor.container.getElementsByTagName('textarea')[0].addEventListener('keydown', e => {
+  if (e.which === 69 && (e.metaKey || e.ctrlKey)) {
+    handlers.evaluate(e);
+  } else if (e.which === 27) {
+    handlers.clear(e);
+  }
+});
 
 window.addEventListener('resize', handlers.resize);
 handlers.resize();
@@ -196,18 +249,23 @@ if (window.navigator.platform.indexOf('Mac') < 0) {
   run.innerHTML = '<span class="fa fa-play"></span> Evaluate (Ctrl+S)';
 }
 
-export let install = (kf, keys) => {
+export let install = (kf, tests) => {
+  if (kf['0'] === undefined) {
+    kf['0'] = { text: '', position: 'replace', replActions: [] };
+  }
+  kf['600'] = { text: '', position: 'start', replActions: [] };
   Object.keys(kf).forEach(k => {
     if (typeof kf[k] === 'string') {
       kf[k] = { text: kf[k], position: 'end', replActions: [ 'clear', 'evaluate' ] };
     }
 
+    kf[k].text = kf[k].text || '';
+    kf[k].position = kf[k].position || 'end';
     kf[k].replActions = kf[k].replActions || [ 'clear', 'evaluate' ];
     keystops.push(k - 0);
   });
   keyframes = kf;
-  keyframes['0'] = { text: '', position: 'start' };
-  keyframes['600'] = { text: '', position: 'start' };
-  keystops.push(600);
   keystops.sort((a, b) => a - b);
+
+  evaluator = factory(tests);
 };

@@ -221,7 +221,7 @@ var keyword in our script. Now, let's move that declaration.
 
 Now, we've moved the declaration to after the first use of it.
 
-  @283.12
+  @263.12
 
   [ "evaluate" ]
 
@@ -275,7 +275,7 @@ work in C, C++, Java, C#, and other Algol-inspred languages. This would be the
 same if we moved the declaration into the if block. You can pause this and try
 moving it around, too, to see how it affects the execution of the script.
 
-  @274.14
+  @324.14
 
   /*
    *  let allows you to declare:

@@ -27,11 +27,22 @@ function traceurEval (content, cb) {
 }
 
 export let factory = function (testName) {
-  let test = tests[testName];
+  if (!Array.isArray(testName)) {
+    testName = [ testName ];
+  }
+  let nativeSupport = true;
+  let traceurSupport = true;
 
-  if (test === undefined || test.nativeSupport) {
+  for(var name of testName) {
+    let test = tests[name];
+
+    nativeSupport = nativeSupport && test.nativeSupport;
+    traceurSupport = traceurSupport && test.traceurSupport;
+  }
+
+  if (nativeSupport) {
     return nativeEval;
-  } else if (test.traceurSupport) {
+  } else if (traceurSupport) {
     return traceurEval;
   } else {
     return noopEval;

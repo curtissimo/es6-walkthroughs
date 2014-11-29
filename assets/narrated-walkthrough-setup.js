@@ -1,21 +1,26 @@
-System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
+System.register("narrated-walkthrough-setup", ["repl", "dom-console", "loader"], function($__export) {
   "use strict";
   var __moduleName = "narrated-walkthrough-setup";
   function require(path) {
     return $traceurRuntime.require("narrated-walkthrough-setup", path);
   }
-  var loader,
+  var factory,
+      cons,
+      loader,
       HAVE_ENOUGH_DATA,
       keyframes,
       keystops,
       lowerTime,
       upperTime,
       upperTimeIndex,
+      evaluator,
+      pausedText,
       click,
       handlers,
       test,
       cb,
       editor,
+      oldSessionNewLine,
       run,
       install;
   function intervalTyper(move, text, cb) {
@@ -30,7 +35,7 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
       click.play();
       editor.insert(text[i]);
       i += 1;
-    }, 35);
+    }, 10);
   }
   function replActionEvaluator(actions) {
     for (var $__0 = actions[$traceurRuntime.toProperty(Symbol.iterator)](),
@@ -50,15 +55,24 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
   }
   return {
     setters: [function(m) {
+      factory = m.factory;
+    }, function(m) {
+      cons = m.cons;
+    }, function(m) {
       loader = m.default;
     }],
     execute: function() {
       HAVE_ENOUGH_DATA = 4;
+      cons.install('#console');
       keyframes = {};
-      keystops = [0];
+      keystops = [];
       lowerTime = 0;
       upperTime = 0;
       upperTimeIndex = 0;
+      evaluator = function() {
+        throw "NO EVALUATOR!";
+      };
+      pausedText = "";
       click = {
         audios: [document.getElementById('click')],
         index: 0,
@@ -98,10 +112,11 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
           }
           time.innerHTML = minutes + ":" + seconds;
           if (totalSeconds < upperTime && totalSeconds >= lowerTime) {
+            var frame = keyframes[lowerTime];
             var mover = (function() {
               return editor.navigateFileEnd();
             });
-            switch (keyframes[lowerTime].position) {
+            switch (frame.position) {
               case 'start':
                 mover = (function() {
                   return editor.navigateFileStart();
@@ -113,8 +128,8 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
                 });
                 break;
             }
-            intervalTyper(mover, keyframes[lowerTime].text, (function() {
-              replActionEvaluator(keyframes[lowerTime].replActions);
+            intervalTyper(mover, frame.text, (function() {
+              replActionEvaluator(frame.replActions);
             }));
             lowerTime = upperTime;
             upperTime = keystops[upperTimeIndex];
@@ -128,6 +143,9 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
           var playButton = document.getElementById('play');
           playButton.disabled = false;
           playButton.addEventListener('click', handlers.togglePlay);
+          var stepForward = document.getElementById('step-forward');
+          stepForward.disabled = false;
+          stepForward.addEventListener('click', handlers.stepForward);
           var narration = document.getElementById('narration');
           narration.addEventListener('playing', handlers.played);
           narration.addEventListener('pause', handlers.paused);
@@ -146,12 +164,26 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
           icon.className = 'fa fa-play';
           var label = document.querySelector('#play .label');
           label.innerHTML = 'Play';
+          var evaluate = document.getElementById('evaluate');
+          evaluate.disabled = false;
+          var clearConsole = document.getElementById('clear-console');
+          clearConsole.disabled = false;
+          pausedText = editor.getValue();
+          editor.setBehavioursEnabled(true);
+          editor.setReadOnly(false);
         },
         played: function() {
           var icon = document.querySelector('#play .fa');
           icon.className = 'fa fa-pause';
           var label = document.querySelector('#play .label');
           label.innerHTML = 'Pause';
+          var evaluate = document.getElementById('evaluate');
+          evaluate.disabled = true;
+          var clearConsole = document.getElementById('clear-console');
+          clearConsole.disabled = true;
+          editor.setReadOnly(true);
+          editor.setBehavioursEnabled(false);
+          editor.setValue(pausedText);
         },
         resize: function() {
           var height = window.innerHeight - 2 * document.querySelector('form.unsubmitable').offsetHeight - 10;
@@ -174,6 +206,14 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
             upperTimeIndex += 1;
           }
         },
+        stepForward: function(e) {
+          e = e || {preventDefault: (function() {
+              return true;
+            })};
+          e.preventDefault();
+          var narration = document.getElementById('narration');
+          narration.currentTime += 5;
+        },
         togglePlay: function(e) {
           e = e || {preventDefault: (function() {
               return true;
@@ -193,10 +233,22 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
       cb = handlers.pageReady;
       loader('workspace', 'loader', test, cb);
       editor = ace.edit('editor');
+      oldSessionNewLine = editor.getSession().getDocument().isNewLine;
+      editor.setBehavioursEnabled(false);
       editor.setReadOnly(true);
       editor.setTheme('ace/theme/twilight');
       editor.getSession().setTabSize(2);
       editor.getSession().setMode('ace/mode/javascript');
+      editor.getSession().getDocument().isNewLine = function() {
+        return false;
+      };
+      editor.container.getElementsByTagName('textarea')[0].addEventListener('keydown', (function(e) {
+        if (e.which === 69 && (e.metaKey || e.ctrlKey)) {
+          handlers.evaluate(e);
+        } else if (e.which === 27) {
+          handlers.clear(e);
+        }
+      }));
       window.addEventListener('resize', handlers.resize);
       handlers.resize();
       Mousetrap.bind(['ctrl+e', 'command+e'], handlers.evaluate);
@@ -207,7 +259,19 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
       if (window.navigator.platform.indexOf('Mac') < 0) {
         run.innerHTML = '<span class="fa fa-play"></span> Evaluate (Ctrl+S)';
       }
-      install = $__export("install", (function(kf, keys) {
+      install = $__export("install", (function(kf, tests) {
+        if (kf['0'] === undefined) {
+          kf['0'] = {
+            text: '',
+            position: 'replace',
+            replActions: []
+          };
+        }
+        kf['600'] = {
+          text: '',
+          position: 'start',
+          replActions: []
+        };
         Object.keys(kf).forEach((function(k) {
           if (typeof kf[k] === 'string') {
             kf[k] = {
@@ -216,22 +280,16 @@ System.register("narrated-walkthrough-setup", ["loader"], function($__export) {
               replActions: ['clear', 'evaluate']
             };
           }
+          kf[k].text = kf[k].text || '';
+          kf[k].position = kf[k].position || 'end';
           kf[k].replActions = kf[k].replActions || ['clear', 'evaluate'];
           keystops.push(k - 0);
         }));
         keyframes = kf;
-        keyframes['0'] = {
-          text: '',
-          position: 'start'
-        };
-        keyframes['600'] = {
-          text: '',
-          position: 'start'
-        };
-        keystops.push(600);
         keystops.sort((function(a, b) {
           return a - b;
         }));
+        evaluator = factory(tests);
       }));
     }
   };

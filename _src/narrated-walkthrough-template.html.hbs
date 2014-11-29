@@ -31,6 +31,7 @@
           <fieldset>
             <button id="rewind" class="pure-button pure-button-primary" disabled><span class="fa fa-backward"></span></button>
             <button id="play" class="pure-button pure-button-primary" disabled><span class="fa fa-play"></span> <span class="label">Play</span> [<span class="time">0:00</span>]</button>
+            <button id="step-forward" class="pure-button pure-button-primary" disabled><span class="fa fa-step-forward"></span></button>
             <button id="evaluate" class="pure-button pure-button-primary" disabled><span class="fa fa-cog"></span> Evaluate (⌘+E)</button>
           </fieldset>
         </form>
@@ -41,7 +42,7 @@
       <div class="pure-u-1-2">
         <form class="pure-form unsubmitable">
           <fieldset>
-            <button id="clear-console" class="pure-button pure-button-primary"><span class="fa fa-circle-o"></span> Clear console (ESC)</button>
+            <button id="clear-console" class="pure-button pure-button-primary" disabled><span class="fa fa-circle-o"></span> Clear console (ESC)</button>
           </fieldset>
         </form>
         <div id="console"></div>
@@ -64,6 +65,7 @@
     <script src="https://cdn.rawgit.com/systemjs/systemjs/0.10.1/dist/system.js"></script>
     <script src="../assets/simple-walkthrough.system.config.js"></script>
 
+    <script type="application/javascript;version=1.7" src="../assets/tests.js"></script>
     <script type="application/javascript;version=1.7" src="../assets/repl.js"></script>
     <script>
       System.import('narrated-walkthrough-setup').then(function (m) { m.install({{{json keyframes}}}, {{{json keys}}}); });

@@ -37,10 +37,23 @@ System.register("repl", ["tests"], function($__export) {
     }],
     execute: function() {
       factory = $__export("factory", function(testName) {
-        var test = tests[testName];
-        if (test === undefined || test.nativeSupport) {
+        if (!Array.isArray(testName)) {
+          testName = [testName];
+        }
+        var nativeSupport = true;
+        var traceurSupport = true;
+        for (var $__0 = testName[$traceurRuntime.toProperty(Symbol.iterator)](),
+            $__1; !($__1 = $__0.next()).done; ) {
+          var name = $__1.value;
+          {
+            var test = tests[name];
+            nativeSupport = nativeSupport && test.nativeSupport;
+            traceurSupport = traceurSupport && test.traceurSupport;
+          }
+        }
+        if (nativeSupport) {
           return nativeEval;
-        } else if (test.traceurSupport) {
+        } else if (traceurSupport) {
           return traceurEval;
         } else {
           return noopEval;

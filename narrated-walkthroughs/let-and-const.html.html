@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="generator" content="Handlebars - do not edit">
+    <meta charset="utf-8">
+    <title>&lt;code&gt;let&lt;/code&gt; and &lt;code&gt;const&lt;/code&gt;</title>
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/pure/0.5.0/pure-min.css">
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/global.css">
+  </head>
+  <body data-asset-location="../simple-walkthrough-assets/">
+    <div id="loader">
+      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="160px" height="160px" viewBox="0 0 40 40" enable-background="new 0 0 40 40" xml:space="preserve">
+        <path opacity="0.2" fill="#000" d="M20.201,5.169c-8.254,0-14.946,6.692-14.946,14.946c0,8.255,6.692,14.946,14.946,14.946 s14.946-6.691,14.946-14.946C35.146,11.861,28.455,5.169,20.201,5.169z M20.201,31.749c-6.425,0-11.634-5.208-11.634-11.634 c0-6.425,5.209-11.634,11.634-11.634c6.425,0,11.633,5.209,11.633,11.634C31.834,26.541,26.626,31.749,20.201,31.749z"></path>
+        <path fill="#000" d="M26.013,10.047l1.654-2.866c-2.198-1.272-4.743-2.012-7.466-2.012h0v3.312h0 C22.32,8.481,24.301,9.057,26.013,10.047z">
+          <animateTransform attributeType="xml" attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="0.5s" repeatCount="indefinite"></animateTransform>
+        </path>
+      </svg>
+    </div>
+    <audio id="click" preload="auto">
+      <source src="./click.ogg">
+      <source src="./click.mp3">
+    </audio>
+    <audio id="narration" preload="auto">
+        <source src="./let-and-const.ogg">
+        <source src="./let-and-const.mp3">
+    </audio>
+    <div id="workspace" class="pure-g">
+      <div class="pure-u-1-2">
+        <form class="pure-form unsubmitable">
+          <fieldset>
+            <button id="rewind" class="pure-button pure-button-primary" disabled><span class="fa fa-backward"></span></button>
+            <button id="play" class="pure-button pure-button-primary" disabled><span class="fa fa-play"></span> <span class="label">Play</span> [<span class="time">0:00</span>]</button>
+            <button id="evaluate" class="pure-button pure-button-primary" disabled><span class="fa fa-cog"></span> Evaluate (⌘+E)</button>
+          </fieldset>
+        </form>
+        <div class="editor-holder">
+          <div id="editor"></div>
+        </div>
+      </div>
+      <div class="pure-u-1-2">
+        <form class="pure-form unsubmitable">
+          <fieldset>
+            <button id="clear-console" class="pure-button pure-button-primary" disabled><span class="fa fa-circle-o"></span> Clear console (ESC)</button>
+          </fieldset>
+        </form>
+        <div id="console"></div>
+      </div>
+    </div>
+
+    <form class="pure-form" method="get" action="../index.html">
+      <footer>
+        <button class="pure-button">Back to table of contents</button>
+        Copyright 2014 by <a href="http://curtissimo.com">curtissimo</a>
+        licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC A-NC-SA 4.0 International License</a>.
+      </footer>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mousetrap/1.4.6/mousetrap.min.js"></script>
+
+    <script src="https://cdn.rawgit.com/jmcriffey/bower-traceur/0.0.74/traceur.min.js"></script>
+    <script src="https://cdn.rawgit.com/ModuleLoader/es6-module-loader/v0.10.0/dist/es6-module-loader.js"></script>
+    <script src="https://cdn.rawgit.com/systemjs/systemjs/0.10.1/dist/system.js"></script>
+    <script src="../assets/simple-walkthrough.system.config.js"></script>
+
+    <script type="application/javascript;version=1.7" src="../assets/tests.js"></script>
+    <script type="application/javascript;version=1.7" src="../assets/repl.js"></script>
+    <script>
+      System.import('narrated-walkthrough-setup').then(function (m) { m.install({"0.01":"                                       \n |  _ _|_    _ __  _|    _  _ __  _ _|_\n | (/_ |_   (_|| |(_|   (_ (_)| |_>  |_","32.15":{"text":"globalVariable = \"global to the current execution context\";\n\nfunction fn() {\n  anotherGlobalVariable = \":(\";\n}\n\nfunction printGlobals() {\n  console.log('globalVariable value:', globalVariable);\n  console.log('anotherGlobalVariable value:', anotherGlobalVariable);\n}\n\nprintGlobals();","position":"replace"},"68.20":{"text":"var globalVariable = \"still a global variable.\";\n\nif (false) {\n  var anotherGlobal = \"still global...\";\n}\n\nfunction fn() {\n  var localVariable = \"only inside fn!\";\n}\n\nfunction printAccess() {\n  console.log('globalVariable value:', globalVariable);\n  console.log('anotherGlobal value:', anotherGlobal);\n  try {\n    console.log('localVariable value:', localVariable);\n  } catch (e) {\n    console.error(String(e));\n  }\n}\n\nprintAccess();\n","position":"replace"},"114.15":{"text":"console.log('x has value', x);\n\nvar x = 2.3;\n\nconsole.log('x has value', x);\n","position":"replace","replActions":["clear"]},"130.15":{"replActions":["evaluate"]},"147.10":{"text":"var x;\n\nconsole.log('x has value', x);\n\nx = 2.3;\n\nconsole.log('x has value', x);\n\n«replace»\n","position":"replace"},"181.01":{"text":"const CANNOT_CHANGE = 1;\nconsole.log('CANNOT_CHANGE has value', CANNOT_CHANGE);\n","position":"replace"},"192.03":"\nCANNOT_CHANGE = 2;\n","235.19":{"text":"let globalVariable = \"I can see globalVariable.\";\n\ntry {\n  console.log(\"top-level says\", globalVariable);\n} catch (e) {\n  console.log('globalVariable not defined at top-level!')\n}\n\nif (true) {\n  try {\n    console.log(\"if block says\", globalVariable);\n  } catch (e) {\n    console.log('globalVariable not defined in if block!')\n  }\n}\n\nfunction print() {\n  try {\n    console.log(\"function says\", globalVariable);\n  } catch (e) {\n    console.log('globalVariable not defined in function!')\n  }\n}\n\nprint();\n","position":"replace","replActions":[]},"244.26":{"replActions":["evaluate"]},"258.29":{"text":"try {\n  console.log(\"top-level says\", globalVariable);\n} catch (e) {\n  console.log('globalVariable not defined at top-level!')\n}\n\nlet globalVariable = \"I can see globalVariable.\";\n\nif (true) {\n  try {\n    console.log(\"if block says\", globalVariable);\n  } catch (e) {\n    console.log('globalVariable not defined in if block!')\n  }\n}\n\nfunction print() {\n  try {\n    console.log(\"function says\", globalVariable);\n  } catch (e) {\n    console.log('globalVariable not defined in function!')\n  }\n}\n\nprint();\n","position":"replace","replActions":["clear"]},"263.12":{"replActions":["evaluate"]},"292.26":{"text":"try {\n  let globalVariable = \"I can see globalVariable.\";\n\n  console.log(\"top-level says\", globalVariable);\n} catch (e) {\n  console.log('globalVariable not defined at top-level!')\n}\n\nif (true) {\n  try {\n    console.log(\"if block says\", globalVariable);\n  } catch (e) {\n    console.log('globalVariable not defined in if block!')\n  }\n}\n\nfunction print() {\n  try {\n    console.log(\"function says\", globalVariable);\n  } catch (e) {\n    console.log('globalVariable not defined in function!')\n  }\n}\n\nprint();\n","position":"replace","replActions":["clear"]},"298.28":{"replActions":["evaluate"]},"324.14":{"text":"/*\n *  let allows you to declare:\n *    variables that only exist after the let statement gets evaluated\n *    variables that exist only between the curly braces that contain the\n *      let statement.\n *\n *  const allows you to define values that should not change.\n */\n","position":"replace","replActions":[]}}, ["let","const"]); });
+    </script>
+  </body>
+</html>
