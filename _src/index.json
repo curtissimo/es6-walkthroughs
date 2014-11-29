@@ -38,7 +38,7 @@
       "235.19": {
         "text": "let globalVariable = \"I can see globalVariable.\";\n\ntry {\n  console.log(\"top-level says\", globalVariable);\n} catch (e) {\n  console.error('globalVariable not defined at top-level!')\n}\n\nif (true) {\n  try {\n    console.log(\"if block says\", globalVariable);\n  } catch (e) {\n    console.error('globalVariable not defined in if block!')\n  }\n}\n\nfunction print() {\n  try {\n    console.log(\"function says\", globalVariable);\n  } catch (e) {\n    console.error('globalVariable not defined in function!')\n  }\n}\n\nprint();\n",
         "position": "replace",
-        "replActions": []
+        "replActions": [ "clear" ]
       },
       "244.26": {
         "replActions": [ "evaluate" ]
