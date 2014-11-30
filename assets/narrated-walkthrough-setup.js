@@ -15,8 +15,10 @@ System.register("narrated-walkthrough-setup", ["repl", "dom-console", "loader"],
       upperTimeIndex,
       evaluator,
       pausedText,
+      flushIntervalTyper,
       click,
       handlers,
+      forms,
       test,
       cb,
       editor,
@@ -27,6 +29,11 @@ System.register("narrated-walkthrough-setup", ["repl", "dom-console", "loader"],
     move();
     var i = 0;
     var typeInterval = setInterval(function() {
+      if (flushIntervalTyper) {
+        flushIntervalTyper = false;
+        editor.insert(text.substring(i));
+        i = text.length;
+      }
       if (i >= text.length) {
         clearInterval(typeInterval);
         setTimeout(cb, 0);
@@ -73,6 +80,7 @@ System.register("narrated-walkthrough-setup", ["repl", "dom-console", "loader"],
         throw "NO EVALUATOR!";
       };
       pausedText = "";
+      flushIntervalTyper = false;
       click = {
         audios: [document.getElementById('click')],
         index: 0,
@@ -100,6 +108,14 @@ System.register("narrated-walkthrough-setup", ["repl", "dom-console", "loader"],
               cons.error(e);
             }
           }));
+        },
+        feedback: function(e) {
+          var feedbackPanel = document.getElementById('feedback-panel');
+          if (feedbackPanel.classList.contains('show')) {
+            feedbackPanel.classList.remove('show');
+          } else {
+            feedbackPanel.classList.add('show');
+          }
         },
         markerChanged: function() {
           var narration = document.getElementById('narration');
@@ -184,6 +200,7 @@ System.register("narrated-walkthrough-setup", ["repl", "dom-console", "loader"],
           editor.setReadOnly(true);
           editor.setBehavioursEnabled(false);
           editor.setValue(pausedText);
+          editor.navigateFileEnd();
         },
         resize: function() {
           var height = window.innerHeight - 2 * document.querySelector('form.unsubmitable').offsetHeight - 10;
@@ -227,6 +244,16 @@ System.register("narrated-walkthrough-setup", ["repl", "dom-console", "loader"],
           }
         }
       };
+      forms = Array.from(document.querySelectorAll('form.unsubmitable'));
+      for (var $__0 = forms[$traceurRuntime.toProperty(Symbol.iterator)](),
+          $__1; !($__1 = $__0.next()).done; ) {
+        var form = $__1.value;
+        {
+          form.addEventListener('submit', function(e) {
+            e.preventDefault();
+          });
+        }
+      }
       test = (function() {
         return document.getElementById('editor').className.contains('ace-twilight') && document.getElementById('narration').readyState === HAVE_ENOUGH_DATA;
       });
@@ -254,6 +281,7 @@ System.register("narrated-walkthrough-setup", ["repl", "dom-console", "loader"],
       Mousetrap.bind(['ctrl+e', 'command+e'], handlers.evaluate);
       Mousetrap.bind('esc', handlers.clear);
       document.getElementById('clear-console').addEventListener('click', handlers.clear);
+      document.getElementById('feedback').addEventListener('click', handlers.feedback);
       run = document.getElementById('evaluate');
       run.addEventListener('click', handlers.evaluate);
       if (window.navigator.platform.indexOf('Mac') < 0) {

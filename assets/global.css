@@ -444,3 +444,50 @@ form footer {
   width: 100%;
   z-index: 1000;
 }
+
+.button-success {
+  background: rgb(28, 184, 65);
+  color: #141414;
+}
+
+.center {
+  text-align: center;
+}
+
+.feedback-panel {
+  display: none;
+  position: absolute;
+  top: 41px;
+  right: 0;
+  text-align: left;
+  width: 612px;
+  background-color: white;
+  color: #141414;
+  padding: 10px;
+  border: 4px solid rgb(28, 184, 65);
+  border-radius: 2px;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
+}
+
+.feedback-comments {
+  width: 100%;
+  height: 96px;
+}
+
+.feedback-panel .tool-button {
+  margin-top: 8px;
+}
+
+.feedback-panel .fa {
+  font-size: 3em;
+}
+
+.feedback-panel .fa.disabled {
+  color: #AAA;
+  cursor: not-allowed;
+}
+
+.feedback-panel.show {
+  display: block;
+}

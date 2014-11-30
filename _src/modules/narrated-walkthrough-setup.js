@@ -13,6 +13,7 @@ let upperTime = 0;
 let upperTimeIndex = 0;
 let evaluator = function () { throw "NO EVALUATOR!"; };
 let pausedText = "";
+let flushIntervalTyper = false;
 
 let click = {
   audios: [
@@ -30,6 +31,11 @@ function intervalTyper (move, text, cb) {
   move();
   let i = 0;
   let typeInterval = setInterval(function () {
+    if (flushIntervalTyper) {
+      flushIntervalTyper = false;
+      editor.insert(text.substring(i));
+      i = text.length;
+    }
     if (i >= text.length) {
       clearInterval(typeInterval);
       setTimeout(cb, 0);
@@ -68,6 +74,14 @@ let handlers = {
         cons.error(e);
       }
     });
+  },
+  feedback(e) {
+    let feedbackPanel = document.getElementById('feedback-panel');
+    if (feedbackPanel.classList.contains('show')) {
+      feedbackPanel.classList.remove('show');
+    } else {
+      feedbackPanel.classList.add('show');
+    }
   },
   markerChanged() {
     let narration = document.getElementById('narration');
@@ -165,6 +179,7 @@ let handlers = {
     editor.setReadOnly(true);
     editor.setBehavioursEnabled(false);
     editor.setValue(pausedText);
+    editor.navigateFileEnd();
   },
   resize() {
     let height = window.innerHeight - 2 * document.querySelector('form.unsubmitable').offsetHeight - 10;
@@ -207,6 +222,13 @@ let handlers = {
   }
 }
 
+let forms = Array.from(document.querySelectorAll('form.unsubmitable'));
+for (let form of forms) {
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+  });
+}
+
 let test = () => {
   return document.getElementById('editor').className.contains('ace-twilight')
       && document.getElementById('narration').readyState === HAVE_ENOUGH_DATA;
@@ -241,6 +263,10 @@ Mousetrap.bind('esc', handlers.clear);
 document
   .getElementById('clear-console')
   .addEventListener('click', handlers.clear);
+
+document
+  .getElementById('feedback')
+  .addEventListener('click', handlers.feedback);
 
 let run = document.getElementById('evaluate');
 run.addEventListener('click', handlers.evaluate);

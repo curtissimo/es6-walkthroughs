@@ -52,6 +52,10 @@ System.register("simple-walkthrough-setup", ["repl", "dom-console", "loader"], f
         }
       }));
       handlers = {
+        clear: function(e) {
+          e.preventDefault();
+          cons.clear();
+        },
         evaluate: function(e) {
           e.preventDefault();
           evaluator(editor.getValue(), (function(e) {
@@ -60,9 +64,13 @@ System.register("simple-walkthrough-setup", ["repl", "dom-console", "loader"], f
             }
           }));
         },
-        clear: function(e) {
-          e.preventDefault();
-          cons.clear();
+        feedback: function(e) {
+          var feedbackPanel = document.getElementById('feedback-panel');
+          if (feedbackPanel.classList.contains('show')) {
+            feedbackPanel.classList.remove('show');
+          } else {
+            feedbackPanel.classList.add('show');
+          }
         },
         resize: function() {
           var height = window.innerHeight - 2 * document.querySelector('form.unsubmitable').offsetHeight - 10;
@@ -76,6 +84,7 @@ System.register("simple-walkthrough-setup", ["repl", "dom-console", "loader"], f
       Mousetrap.bind(['ctrl+e', 'command+e'], handlers.evaluate);
       Mousetrap.bind('esc', handlers.clear);
       document.getElementById('clear-console').addEventListener('click', handlers.clear);
+      document.getElementById('feedback').addEventListener('click', handlers.feedback);
       run = document.getElementById('evaluate');
       run.addEventListener('click', handlers.evaluate);
       if (window.navigator.platform.indexOf('Mac') < 0) {

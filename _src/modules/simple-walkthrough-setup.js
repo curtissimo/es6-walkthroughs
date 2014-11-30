@@ -28,6 +28,11 @@ editor.container.getElementsByTagName('textarea')[0].addEventListener('keydown',
 });
 
 let handlers = {
+  clear(e) {
+    e.preventDefault();
+    cons.clear();
+  },
+
   evaluate(e) {
     e.preventDefault();
     evaluator(editor.getValue(), e => {
@@ -37,9 +42,13 @@ let handlers = {
     });
   },
 
-  clear(e) {
-    e.preventDefault();
-    cons.clear();
+  feedback(e) {
+    let feedbackPanel = document.getElementById('feedback-panel');
+    if (feedbackPanel.classList.contains('show')) {
+      feedbackPanel.classList.remove('show');
+    } else {
+      feedbackPanel.classList.add('show');
+    }
   },
 
   resize() {
@@ -59,6 +68,10 @@ Mousetrap.bind('esc', handlers.clear);
 document
   .getElementById('clear-console')
   .addEventListener('click', handlers.clear);
+
+document
+  .getElementById('feedback')
+  .addEventListener('click', handlers.feedback);
 
 let run = document.getElementById('evaluate');
 run.addEventListener('click', handlers.evaluate);
