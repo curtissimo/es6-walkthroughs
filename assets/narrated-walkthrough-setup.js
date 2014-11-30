@@ -81,6 +81,7 @@ System.register("narrated-walkthrough-setup", ["repl", "dom-console", "loader"],
       };
       pausedText = "";
       flushIntervalTyper = false;
+      document.getElementById('click').volume = .25;
       click = {
         audios: [document.getElementById('click')],
         index: 0,

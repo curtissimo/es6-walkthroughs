@@ -15,6 +15,7 @@ let evaluator = function () { throw "NO EVALUATOR!"; };
 let pausedText = "";
 let flushIntervalTyper = false;
 
+document.getElementById('click').volume = .25;
 let click = {
   audios: [
     document.getElementById('click')
